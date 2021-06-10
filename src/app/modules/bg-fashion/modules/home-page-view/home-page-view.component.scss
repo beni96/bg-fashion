@@ -1,0 +1,131 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
+:host {
+  @extend %flex-align-center;
+
+  flex-direction: column;
+  font-size: 32px;
+  width: 100%;
+}
+
+img {
+  border-radius: 6px;
+  width: 100%;
+}
+
+.back-to-life-wrapper {
+  color: colors.$white;
+  display: flex;
+  font-family: fonts.$font-montserrat;
+  position: relative;
+  width: 100%;
+
+  img {
+    border-radius: unset;
+    max-height: 982px;
+  }
+
+  .back-to-life-title {
+    display: flex;
+    flex-direction: column;
+    font-size: 3.5em;
+    font-weight: 300;
+    left: 56px;
+    letter-spacing: 0.5px;
+    position: absolute;
+    top: 56px;
+    word-spacing: 16px;
+  }
+
+  .shop-now {
+    background-color: rgba(32, 32, 32, 0.4);
+    border-radius: 4px;
+    border: 4px solid colors.$white;
+    bottom: 40px;
+    font-size: 1em;
+    font-weight: 500;
+    left: 0;
+    margin: auto;
+    padding: 0.75em;
+    position: absolute;
+    right: 0;
+    width: max-content;
+  }
+}
+
+.shop-by-category-wrapper {
+  @extend %flex-align-center;
+
+  color: colors.$black;
+  flex-direction: column;
+  margin: 54px 0;
+
+  .shop-by-category-title {
+    font-family: fonts.$font-montserrat;
+    font-size: 1em;
+    font-weight: 400;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .categories-wrapper {
+    display: flex;
+    font-family: fonts.$font-rubik;
+    font-size: 0.75em;
+    font-weight: 400;
+
+    .category {
+      @extend %flex-align-center;
+
+      flex: 1;
+      flex-direction: column;
+
+      img {
+        height: 100%;
+        max-height: 572px;
+      }
+
+      &:not(:last-child) {
+        margin-inline-end: 8px;
+      }
+
+      .category-title {
+        margin-top: 24px;
+      }
+    }
+  }
+}
+
+.more-categories-wrapper {
+  display: flex;
+
+  .category {
+    flex: 1;
+    position: relative;
+
+    &:not(:last-child) {
+      margin-inline-end: 8px;
+    }
+
+    .category-title {
+      color: colors.$white;
+      font-family: fonts.$font-montserrat;
+      font-size: 2.5em;
+      font-weight: 300;
+      left: 64px;
+      letter-spacing: 0.5px;
+      position: absolute;
+      top: 54px;
+      word-spacing: 16px;
+    }
+
+    &:first-child .category-title {
+      left: 0;
+      margin: auto;
+      right: 0;
+      text-align: center;
+    }
+  }
+}

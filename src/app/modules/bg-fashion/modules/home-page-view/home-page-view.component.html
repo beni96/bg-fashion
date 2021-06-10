@@ -1,0 +1,22 @@
+<a class="back-to-life-wrapper">
+  <img src="assets/images/back-to-life.jpg" />
+  <span class="back-to-life-title">BACK TO LIFE</span>
+  <span class="shop-now">SHOP NOW</span>
+</a>
+
+<div class="shop-by-category-wrapper">
+  <span class="shop-by-category-title">SHOP BY CATEGORY</span>
+  <div class="categories-wrapper">
+    <a class="category" *ngFor="let category of categories">
+      <img [src]="category.imageUrl" />
+      <span class="category-title">{{ category.title }}</span>
+    </a>
+  </div>
+</div>
+
+<div class="more-categories-wrapper">
+  <a class="category" *ngFor="let category of moreCategories">
+    <img [src]="category.imageUrl" />
+    <span class="category-title">{{ category.title }}</span>
+  </a>
+</div>
