@@ -1,0 +1,8 @@
+<div *ngIf="isScrolled" class="header-sticky-background"></div>
+<div class="header" [ngClass]="{ sticky: isScrolled }">
+  <span class="logo">BG Fashion</span>
+  <div class="pages-wrapper">
+    <span *ngFor="let page of pages" class="page">{{ page }}</span>
+  </div>
+  <i class="fas fa-shopping-cart"></i>
+</div>
