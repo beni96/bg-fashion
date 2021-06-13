@@ -1,0 +1,35 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
+:host {
+  @extend %flex-space-between;
+
+  background-color: colors.$secondary-color;
+  height: 224px;
+  position: fixed;
+  width: 100%;
+}
+
+.categories-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-flow: column wrap;
+  padding: 24px;
+
+  .category {
+    color: colors.$primary-color;
+    font-family: fonts.$font-rubik;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0 28px 16px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+img {
+  height: 100%;
+}

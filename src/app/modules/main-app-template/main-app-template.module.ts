@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 import { MainAppTemplateComponent } from './main-app-template.component';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
+import { HeaderMenuComponent } from './components/header-menu/header-menu.component';
 
 @NgModule({
-  declarations: [MainAppTemplateComponent, HeaderComponent],
+  declarations: [MainAppTemplateComponent, HeaderComponent, HeaderMenuComponent],
   imports: [BrowserModule, CommonModule, RouterModule],
   exports: [MainAppTemplateComponent],
 })

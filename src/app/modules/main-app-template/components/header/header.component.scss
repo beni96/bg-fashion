@@ -50,39 +50,71 @@
     }
   }
 
-  .logo {
-    color: colors.$primary-color;
-    cursor: pointer;
+  .logo-wrapper {
     flex: 1;
-    font-family: fonts.$font-montserrat;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 32px;
-  }
 
-  .page {
-    color: colors.$primary-color;
-    cursor: pointer;
-    font-family: fonts.$font-rubik;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 32px;
-
-    &:not(:last-of-type) {
-      margin-inline-end: 48px;
-    }
-
-    &:hover {
-      text-decoration: underline;
+    .logo {
+      color: colors.$primary-color;
+      cursor: pointer;
+      font-family: fonts.$font-montserrat;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 32px;
     }
   }
 
-  .fa-shopping-cart {
+  .pages-wrapper {
+    @extend %flex-align-center;
+
+    height: variables.$header-height;
+
+    .page {
+      color: colors.$primary-color;
+      cursor: pointer;
+      font-family: fonts.$font-rubik;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 32px;
+      padding: 4px;
+
+      &:not(:last-of-type) {
+        margin-inline-end: 36px;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .cart-wrapper {
     display: flex;
-    color: colors.$primary-color;
-    cursor: pointer;
     flex: 1;
-    font-size: 24px;
     justify-content: flex-end;
+
+    .fa-shopping-cart {
+      color: colors.$primary-color;
+      cursor: pointer;
+      font-size: 24px;
+    }
   }
+}
+
+app-header-menu {
+  left: 0;
+  position: absolute;
+  top: variables.$header-height;;
+}
+
+.black-overlay {
+  background-color: colors.$black;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  opacity: 0.6;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: z-indexes.$black-overlay-z-index;
 }

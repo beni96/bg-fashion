@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { HEADER_CATEGORIES } from '../../common/header-categories';
+import { HeaderCategory, HeaderMenuCategories } from '../../interfaces/header-category';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   isScrolled = false;
-  pages: string[] = ['Clothes', 'Shoes', 'Accessories', 'Sale'];
+  pages: HeaderCategory[] = HEADER_CATEGORIES;
+  currentHoveredPage: HeaderCategory;
 
   ngOnInit() {
     document.addEventListener('scroll', () => {
       return (this.isScrolled = window.pageYOffset > 0);
     });
+  }
+
+  onMouseEnter(page: HeaderCategory) {
+    this.currentHoveredPage = page;
+  }
+
+  onMouseLeave() {
+    this.currentHoveredPage = null;
   }
 }

@@ -1,8 +1,21 @@
 <div *ngIf="isScrolled" class="header-sticky-background"></div>
 <div class="header" [ngClass]="{ sticky: isScrolled }">
-  <span class="logo">BG Fashion</span>
-  <div class="pages-wrapper">
-    <span *ngFor="let page of pages" class="page">{{ page }}</span>
+  <div class="logo-wrapper">
+    <span class="logo">BG Fashion</span>
   </div>
-  <i class="fas fa-shopping-cart"></i>
+
+  <div class="pages-wrapper" (mouseleave)="onMouseLeave()">
+    <span *ngFor="let page of pages" class="page" (mouseenter)="onMouseEnter(page)">{{ page.title }}</span>
+    <app-header-menu
+      *ngIf="currentHoveredPage?.menuCategories?.length"
+      [categories]="currentHoveredPage.menuCategories"
+      [imageUrl]="currentHoveredPage.menuImageUrl"
+    ></app-header-menu>
+  </div>
+
+  <div class="cart-wrapper">
+    <i class="fas fa-shopping-cart"></i>
+  </div>
 </div>
+
+<div *ngIf="currentHoveredPage?.menuCategories?.length" class="black-overlay"></div>
