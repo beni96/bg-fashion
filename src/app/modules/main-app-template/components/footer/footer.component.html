@@ -1,0 +1,20 @@
+<div class="logo-wrapper">
+  <span class="logo">BG Fashion</span>
+</div>
+
+<div class="links-wrapper">
+  <div class="links-list">
+    <span class="title">General</span>
+    <a *ngFor="let generalLink of generalLinks" class="link">
+      <span>{{ generalLink.title }}</span>
+    </a>
+  </div>
+
+  <div class="links-list">
+    <span class="title">Social</span>
+    <a *ngFor="let socialLink of socialLinks" class="link">
+      <i class="icon {{ socialLink.icon }}"></i>
+      <span>{{ socialLink.title }}</span>
+    </a>
+  </div>
+</div>

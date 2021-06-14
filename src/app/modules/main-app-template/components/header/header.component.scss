@@ -67,6 +67,7 @@
     @extend %flex-align-center;
 
     height: variables.$header-height;
+    z-index: z-indexes.$header-z-index + 1;
 
     .page {
       color: colors.$primary-color;
@@ -103,7 +104,7 @@
 app-header-menu {
   left: 0;
   position: absolute;
-  top: variables.$header-height;;
+  top: variables.$header-height;
 }
 
 .black-overlay {

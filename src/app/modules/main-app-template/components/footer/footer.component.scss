@@ -1,0 +1,74 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
+:host {
+  @extend %flex-align-center;
+
+  background-color: colors.$primary-color-strong;
+  box-sizing: border-box;
+  color: colors.$secondary-color;
+  padding: 48px 48px 64px;
+  width: 100%;
+}
+
+.logo-wrapper {
+  flex: 1;
+
+  .logo {
+    display: flex;
+    font-family: fonts.$font-montserrat;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    line-height: 64px;
+    margin-inline-end: 48px;
+    width: min-content;
+  }
+}
+
+.links-wrapper {
+  display: flex;
+  flex: 2;
+
+  .links-list {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    font-family: fonts.$font-rubik;
+    margin-inline-end: 48px;
+
+    &:last-of-type {
+      flex: 2;
+      margin-inline-end: 0;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 32px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .link {
+      @extend %flex-align-center;
+
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      line-height: 24px;
+      margin-bottom: 12px;
+      word-spacing: 2px;
+
+      &:hover span {
+        text-decoration: underline;
+      }
+
+      .icon {
+        font-size: 20px;
+        margin-inline-end: 8px;
+      }
+    }
+  }
+}
