@@ -7,8 +7,6 @@ const CLOTHES_MENU_CATEGORIES: HeaderMenuCategories[] = [
   { title: 'Shorts', linkUrl: '/' },
   { title: 'Dresses', linkUrl: '/' },
   { title: 'Jackets', linkUrl: '/' },
-  { title: 'Coats', linkUrl: '/' },
-  { title: 'Blazers', linkUrl: '/' },
 ];
 
 const SHOES_MENU_CATEGORIES: HeaderMenuCategories[] = [
