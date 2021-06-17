@@ -11,13 +11,13 @@
   width: 100%;
 }
 
-.categories-wrapper {
+.subcategories-wrapper {
   display: flex;
   flex-direction: column;
   flex-flow: column wrap;
   padding: 24px;
 
-  .category {
+  .subcategory {
     color: colors.$primary-color;
     font-family: fonts.$font-rubik;
     font-size: 20px;

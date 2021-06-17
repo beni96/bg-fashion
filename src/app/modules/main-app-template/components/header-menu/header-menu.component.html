@@ -1,4 +1,6 @@
-<div class="categories-wrapper">
-  <a class="category" *ngFor="let category of categories">{{ category.title }}</a>
+<div class="subcategories-wrapper">
+  <a class="subcategory" *ngFor="let subcategory of subcategories" [routerLink]="getLink(subcategory)" routerLinkActive="is-active">
+    {{ subcategory | titlecase }}
+  </a>
 </div>
-<img [src]="imageUrl" />
+<img *ngIf="imageUrl" [src]="imageUrl" />

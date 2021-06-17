@@ -15,7 +15,7 @@ img {
   width: 100%;
 }
 
-.back-to-life-wrapper {
+.home-image-wrapper {
   color: colors.$white;
   display: flex;
   font-family: fonts.$font-montserrat;
@@ -27,7 +27,7 @@ img {
     max-height: 982px;
   }
 
-  .back-to-life-title {
+  .home-image-title {
     display: flex;
     flex-direction: column;
     font-size: 3.5em;

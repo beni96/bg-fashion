@@ -5,14 +5,14 @@
 <div class="links-wrapper">
   <div class="links-list">
     <span class="title">General</span>
-    <a *ngFor="let generalLink of generalLinks" class="link">
+    <a *ngFor="let generalLink of generalLinks" class="link" [routerLink]="generalLink.linkUrl" routerLinkActive="is-active">
       <span>{{ generalLink.title }}</span>
     </a>
   </div>
 
   <div class="links-list">
     <span class="title">Social</span>
-    <a *ngFor="let socialLink of socialLinks" class="link">
+    <a *ngFor="let socialLink of socialLinks" class="link" [href]="socialLink.linkUrl" target="_blank">
       <i class="icon {{ socialLink.icon }}"></i>
       <span>{{ socialLink.title }}</span>
     </a>

@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PRODUCTS } from 'src/app/modules/bg-fashion/common/products';
+import { BgFashionPath, BG_FASHION_PREFIX } from 'src/app/modules/bg-fashion/router/bg-fashion.routes.names';
 import { HEADER_CATEGORIES } from '../../common/header-categories';
-import { HeaderCategory, HeaderMenuCategories } from '../../interfaces/header-category';
+import { HeaderCategory } from '../../interfaces/header-category';
 
 @Component({
   selector: 'app-header',
@@ -16,13 +18,39 @@ export class HeaderComponent implements OnInit {
     document.addEventListener('scroll', () => {
       return (this.isScrolled = window.pageYOffset > 0);
     });
+
+    PRODUCTS.forEach((product) => {
+      product.categories.forEach((category) => {
+        const headerCategory = this.pages.find((page) => page.category === category);
+        headerCategory
+          ? (headerCategory.menuCategories = this.concatWithNoDuplicates(product.subcategories, headerCategory.menuCategories))
+          : (this.pages = this.pages.concat({ category, menuCategories: product.subcategories }));
+      });
+    });
   }
 
-  onMouseEnter(page: HeaderCategory) {
+  getHomeLink() {
+    return `${BG_FASHION_PREFIX}/${BgFashionPath.Home}`;
+  }
+
+  getCartLink() {
+    return `${BG_FASHION_PREFIX}/${BgFashionPath.Cart}`;
+  }
+
+  getLink(category: string) {
+    return `${BG_FASHION_PREFIX}/${BgFashionPath.Category}/${category}`;
+  }
+
+  showHeaderMenu(page: HeaderCategory) {
     this.currentHoveredPage = page;
   }
 
-  onMouseLeave() {
+  hideHeaderMenu() {
     this.currentHoveredPage = null;
+  }
+
+  private concatWithNoDuplicates(a: string[], b: string[]): string[] {
+    const notDuplicateditems = b.filter((item) => a.indexOf(item) < 0);
+    return a.concat(notDuplicateditems);
   }
 }

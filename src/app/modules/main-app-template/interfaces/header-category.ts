@@ -1,11 +1,5 @@
 export interface HeaderCategory {
-  title: string;
+  category: string;
   menuImageUrl?: string;
-  linkUrl: string;
-  menuCategories?: HeaderMenuCategories[];
-}
-
-export interface HeaderMenuCategories {
-  title: string;
-  linkUrl: string;
+  menuCategories?: string[];
 }

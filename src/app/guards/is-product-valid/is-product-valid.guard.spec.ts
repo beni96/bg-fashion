@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
-import { IsExistProductGuard } from './is-exist-product.guard';
+import { IsProductValidGuard } from './is-product-valid.guard';
 
-describe('IsExistProductGuard', () => {
-  let guard: IsExistProductGuard;
+describe('IsProductValidGuard', () => {
+  let guard: IsProductValidGuard;
   let mockRouter: Router;
   const mockRoute: ActivatedRouteSnapshot = new ActivatedRouteSnapshot();
-  mockRoute.params = { id: '1' };
+  mockRoute.params = { category: 'clothes' };
 
   beforeEach(() => {
     mockRouter = jasmine.createSpyObj('Router', ['navigate']);
@@ -14,12 +14,12 @@ describe('IsExistProductGuard', () => {
     TestBed.configureTestingModule({
       providers: [{ provide: Router, useValue: mockRouter }],
     }).compileComponents();
-    guard = TestBed.inject(IsExistProductGuard);
+    guard = TestBed.inject(IsProductValidGuard);
   });
 
-  describe('canActivate', () => {
+  describe('canActivateChild', () => {
     it('should allow navigation', () => {
-      guard.canActivate(mockRoute).subscribe((value) => {
+      guard.canActivateChild(mockRoute).subscribe((value) => {
         expect(value).toBeTruthy();
       });
     });

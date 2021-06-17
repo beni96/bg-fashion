@@ -2,6 +2,7 @@ import { DebugElement } from '@angular/core';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { PRODUCTS } from 'src/app/modules/bg-fashion/common/products';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -46,5 +47,16 @@ describe('HeaderComponent', () => {
     expect(component.currentHoveredPage).toEqual(null);
     const menu = debugElement.query(By.css('app-header-menu'));
     expect(menu).toBe(null);
+  });
+
+  it('should set pages with the categories and subcategories', () => {
+    expect(component.pages.length).toBeTruthy();
+    expect(component.pages[0].menuCategories.length).toBeTruthy();
+
+    const subcategory = PRODUCTS[0].subcategories[0];
+    const isSubcategoryExist = component.pages.some((page) => {
+      return page.menuCategories.some((menuCategory) => menuCategory === subcategory);
+    });
+    expect(subcategory).toBeTruthy();
   });
 });

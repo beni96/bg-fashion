@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { HeaderMenuCategories } from '../../interfaces/header-category';
+import { BgFashionPath, BG_FASHION_PREFIX } from 'src/app/modules/bg-fashion/router/bg-fashion.routes.names';
 
 @Component({
   selector: 'app-header-menu',
@@ -7,6 +7,11 @@ import { HeaderMenuCategories } from '../../interfaces/header-category';
   styleUrls: ['./header-menu.component.scss'],
 })
 export class HeaderMenuComponent {
-  @Input() categories: HeaderMenuCategories[];
+  @Input() category: string;
+  @Input() subcategories: string[];
   @Input() imageUrl: string;
+
+  getLink(subcategory: string) {
+    return `${BG_FASHION_PREFIX}/${BgFashionPath.Category}/${this.category}/${BgFashionPath.Subcategory}/${subcategory}`;
+  }
 }
