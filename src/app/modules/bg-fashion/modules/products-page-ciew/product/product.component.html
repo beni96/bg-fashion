@@ -1,0 +1,19 @@
+<img [src]="selectedColorWithImages.images[0]" />
+<span class="title">{{ title | titlecase }}</span>
+<div class="price-wrapper">
+  <span *ngIf="previousPrice" class="previous-price">{{ previousPrice | currency }}</span>
+  <span class="price" [ngClass]="{ 'sale-price': previousPrice }">{{ price | currency }}</span>
+</div>
+<div *ngIf="shouldShowColors()" class="colors-wrapper">
+  <div
+    *ngFor="let colorWithImages of colorsWithImages"
+    class="color-wrapper"
+    [ngClass]="{ selected: isSelectedColor(colorWithImages) }"
+    (click)="onColorSelected(colorWithImages)"
+  >
+    <div class="color" [style.backgroundColor]="colorWithImages.color.hexCode"></div>
+    <span class="color-name">{{ colorWithImages.color.name | titlecase }}</span>
+  </div>
+</div>
+
+<span *ngIf="previousPrice" class="discount">- {{ getDiscount() }}%</span>

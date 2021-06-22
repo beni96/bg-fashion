@@ -1,1 +1,13 @@
-Products
+<span class="title">{{ 'clothes' | titlecase }}</span>
+
+<div class="products-wrapper">
+  <app-product
+    *ngFor="let product of products"
+    [title]="product.title"
+    [colorsWithImages]="product.colorsWithImages"
+    [price]="product.price"
+    [previousPrice]="product.previousPrice"
+    [defaultColorIndex]="product.defaultColorIndex"
+    (click)="onProductClick(product)"
+  ></app-product>
+</div>

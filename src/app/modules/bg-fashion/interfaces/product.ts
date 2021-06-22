@@ -1,8 +1,3 @@
-export interface Size {
-  sizeType: string;
-  sizeNames: string[];
-}
-
 export interface Color {
   name: string;
   hexCode: string;
@@ -18,8 +13,10 @@ export interface Product {
   title: string;
   subtitle: string;
   price: number;
-  sizes?: Size;
+  previousPrice?: number;
+  sizes?: string[] | number[];
   colorsWithImages: ColorWithImages[];
+  defaultColorIndex?: number;
   categories: string[];
   subcategories: string[];
 }

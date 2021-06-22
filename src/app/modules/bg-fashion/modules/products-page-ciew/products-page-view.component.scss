@@ -1,0 +1,23 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
+:host {
+  @extend %flex-align-center;
+
+  flex-direction: column;
+  width: 100%;
+}
+
+.title {
+  color: colors.$primary-color;
+  font-family: fonts.$font-montserrat;
+  font-size: 42px;
+  font-weight: 500;
+  margin-bottom: 54px;
+}
+
+.products-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+}
