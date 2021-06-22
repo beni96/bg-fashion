@@ -1,4 +1,4 @@
-<img [src]="selectedColorWithImages.images[0]" />
+<img [src]="selectedColorWithImages.images[0]" [style.height.px]="imgHeight" />
 <span class="title">{{ title | titlecase }}</span>
 <div class="price-wrapper">
   <span *ngIf="previousPrice" class="previous-price">{{ previousPrice | currency }}</span>

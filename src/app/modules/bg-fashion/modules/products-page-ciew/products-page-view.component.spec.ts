@@ -21,4 +21,11 @@ describe('ProductsPageViewComponent', () => {
   it('should create the app', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should set imgHeight to 4', () => {
+    // @ts-ignore
+    component.hostElement.nativeElement.style.width = '140px';
+    component.getImgHeight();
+    expect(component.imgHeight).toEqual(4);
+  });
 });

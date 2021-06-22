@@ -12,6 +12,7 @@ export class ProductComponent implements OnInit {
   @Input() defaultColorIndex: number;
   @Input() previousPrice: number;
   @Input() price: number;
+  @Input() imgHeight: number;
 
   selectedColorWithImages: ColorWithImages;
 
