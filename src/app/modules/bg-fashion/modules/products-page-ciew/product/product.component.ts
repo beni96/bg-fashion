@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ColorWithImages } from '../../../interfaces/product';
 
 @Component({
@@ -13,6 +13,8 @@ export class ProductComponent implements OnInit {
   @Input() previousPrice: number;
   @Input() price: number;
   @Input() imgHeight: number;
+
+  @Output() productClicked = new EventEmitter<number>();
 
   selectedColorWithImages: ColorWithImages;
 
@@ -34,5 +36,13 @@ export class ProductComponent implements OnInit {
 
   isSelectedColor(colorWithImages: ColorWithImages) {
     return colorWithImages.color.hexCode === this.selectedColorWithImages.color.hexCode;
+  }
+
+  onProductClick() {
+    const selectedColorIndex = this.colorsWithImages.findIndex(
+      (colorWithImages) => colorWithImages.color.hexCode === this.selectedColorWithImages.color.hexCode
+    );
+    const colorIndexQueryParam = selectedColorIndex === this.defaultColorIndex ? null : selectedColorIndex || 0;
+    this.productClicked.emit(colorIndexQueryParam);
   }
 }

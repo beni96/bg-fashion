@@ -1,4 +1,4 @@
-<span class="title">{{ 'clothes' | titlecase }}</span>
+<span class="title">{{ getTitle() | titlecase }}</span>
 
 <div class="products-wrapper">
   <app-product
@@ -9,6 +9,6 @@
     [previousPrice]="product.previousPrice"
     [defaultColorIndex]="product.defaultColorIndex"
     [imgHeight]="imgHeight"
-    (click)="onProductClick(product)"
+    (productClicked)="onProductClick(product.id, $event)"
   ></app-product>
 </div>

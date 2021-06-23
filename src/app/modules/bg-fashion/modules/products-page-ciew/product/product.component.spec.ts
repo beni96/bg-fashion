@@ -1,10 +1,13 @@
+import { DebugElement } from '@angular/core';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ProductComponent } from './product.component';
 
 describe('ProductComponent', () => {
   let fixture: ComponentFixture<ProductComponent>;
   let component: ProductComponent;
+  let debugElement: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -16,6 +19,14 @@ describe('ProductComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductComponent);
     component = fixture.componentInstance;
+    debugElement = fixture.debugElement;
+    component.colorsWithImages = [
+      { color: { name: 'black', hexCode: '#00000' }, images: [] },
+      { color: { name: 'red', hexCode: '#912345' }, images: [] },
+    ];
+    fixture.detectChanges();
+
+    spyOn(component.productClicked, 'emit');
   });
 
   it('should create the app', () => {
@@ -23,11 +34,24 @@ describe('ProductComponent', () => {
   });
 
   it('should set selectedColor to the first one', () => {
-    component.colorsWithImages = [{ color: { name: 'black', hexCode: '#00000' }, images: [] }];
     component.defaultColorIndex = 3;
     component.ngOnInit();
     fixture.detectChanges();
 
     expect(component.selectedColorWithImages).toEqual(component.colorsWithImages[0]);
+  });
+
+  it('should emit an event on clicking the product', () => {
+    const clickableSection = debugElement.query(By.css('.clickable-section'));
+    clickableSection.triggerEventHandler('click', null);
+    expect(component.productClicked.emit).toHaveBeenCalledWith(0);
+
+    component.selectedColorWithImages = component.colorsWithImages[1];
+    clickableSection.triggerEventHandler('click', null);
+    expect(component.productClicked.emit).toHaveBeenCalledWith(1);
+
+    component.defaultColorIndex = 1;
+    clickableSection.triggerEventHandler('click', null);
+    expect(component.productClicked.emit).toHaveBeenCalledWith(null);
   });
 });

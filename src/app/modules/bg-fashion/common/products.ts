@@ -39,7 +39,7 @@ export const PRODUCTS: Product[] = [
       { color: { name: 'black', hexCode: '#000000' }, images: [img] },
       { color: { name: 'red', hexCode: '#f10f29' }, images: [img2] },
     ],
-    categories: ['accessories'],
+    categories: ['accessories', 'sale'],
     subcategories: ['sunglasses'],
   },
   {

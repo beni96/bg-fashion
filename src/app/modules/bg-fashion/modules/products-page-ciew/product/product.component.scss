@@ -6,7 +6,6 @@
 :host {
   box-sizing: border-box;
   color: colors.$primary-color;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   font-family: fonts.$font-rubik;
@@ -19,6 +18,12 @@
   width: 25%;
 }
 
+.clickable-section {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
 img {
   margin-bottom: 16px;
   width: 100%;
@@ -29,6 +34,10 @@ img {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .price-wrapper {
