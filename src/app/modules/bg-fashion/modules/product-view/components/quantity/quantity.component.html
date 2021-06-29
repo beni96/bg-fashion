@@ -1,0 +1,3 @@
+<span tabindex="0" class="icon" (click)="onQuantityChange(quantity - 1)" (keydown)="onQuantityChange(quantity - 1, $event)">-</span>
+<span class="quantity">{{ quantity }}</span>
+<span tabindex="0" class="icon" (click)="onQuantityChange(quantity + 1)" (keydown)="onQuantityChange(quantity + 1, $event)">+</span>

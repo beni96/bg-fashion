@@ -1,0 +1,2 @@
+<span *ngIf="previousPrice" class="previous-price">{{ previousPrice | currency }}</span>
+<span class="price" [ngClass]="{ 'sale-price': previousPrice }">{{ price | currency }}</span>

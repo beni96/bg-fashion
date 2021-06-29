@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { IsProductValidGuard } from 'src/app/guards/is-product-valid/is-product-valid.guard';
 import { HomePageViewComponent } from '../modules/home-page-view/home-page-view.component';
 import { ProductViewComponent } from '../modules/product-view/product-view.component';
-import { ProductsPageViewComponent } from '../modules/products-page-ciew/products-page-view.component';
+import { ProductsPageViewComponent } from '../modules/products-page-view/products-page-view.component';
 import { BgFashionPath, PRODUCTS_PREFIX } from './bg-fashion.routes.names';
 
 const PRODUCTS_ROUTES: Routes = [

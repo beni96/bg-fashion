@@ -1,0 +1,58 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+@use 'src/assets/style/z-indexes';
+
+:host {
+  box-sizing: border-box;
+  color: colors.$primary-color;
+  display: flex;
+  flex-direction: column;
+  font-family: fonts.$font-rubik;
+  font-size: 18px;
+  font-weight: 400;
+  height: 100%;
+  margin-bottom: 32px;
+  padding: 0 16px;
+  position: relative;
+  width: 25%;
+}
+
+.clickable-section {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.title {
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+app-price {
+  margin-bottom: 12px;
+}
+
+.colors-wrapper {
+  @extend %flex-align-center;
+}
+
+.discount {
+  background-color: colors.$white;
+  color: colors.$sale-color;
+  left: 0;
+  padding: 4px 8px;
+  position: absolute;
+  top: 36px;
+}

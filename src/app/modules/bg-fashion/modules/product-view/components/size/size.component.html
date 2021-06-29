@@ -1,0 +1,9 @@
+<div
+  tabindex="0"
+  class="size-wrapper"
+  [ngClass]="{ selected: isSelected, disabled: disabled }"
+  (click)="onSizeSelect()"
+  (keydown)="onSizeSelect($event)"
+>
+  {{ name | uppercase }}
+</div>

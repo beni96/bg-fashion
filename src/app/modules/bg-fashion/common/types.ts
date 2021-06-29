@@ -18,4 +18,6 @@ export const CATEGORY_AND_SUBCATEGORY_TYPES = [
   { category: 'sale', subcategory: [...CLOTHES_SUBCATEGORY_TYPES, ...SHOES_SUBCATEGORY_TYPES, ...ACCESSORIES_SUBCATEGORY_TYPES] },
 ] as const;
 
-export const SIZE_TYPES = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
+export const SHIRTS_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'];
+export const PANTS_SIZES = [32, 34, 36, 38, 40];
+export const SHOES_SIZES = [36, 37, 38, 39, 40];

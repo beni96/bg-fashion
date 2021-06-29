@@ -1,0 +1,18 @@
+<div tabindex="0" class="clickable-section" (click)="onProductClick()" (keydown)="onProductClick($event)">
+  <img [src]="selectedColorWithImages.images[0]" [style.height.px]="imgHeight" />
+  <span class="title">{{ title | titlecase }}</span>
+</div>
+
+<app-price [price]="price" [previousPrice]="previousPrice"></app-price>
+
+<div *ngIf="shouldShowColors()" class="colors-wrapper">
+  <app-color
+    *ngFor="let colorWithImages of colorsWithImages"
+    [name]="colorWithImages.color.name"
+    [hexCode]="colorWithImages.color.hexCode"
+    [isSelected]="isSelectedColor(colorWithImages)"
+    (colorSelected)="onColorSelect(colorWithImages)"
+  ></app-color>
+</div>
+
+<span *ngIf="previousPrice" class="discount">- {{ getDiscount() }}%</span>

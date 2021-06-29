@@ -44,7 +44,7 @@ describe('ProductComponent', () => {
   it('should emit an event on clicking the product', () => {
     const clickableSection = debugElement.query(By.css('.clickable-section'));
     clickableSection.triggerEventHandler('click', null);
-    expect(component.productClicked.emit).toHaveBeenCalledWith(0);
+    expect(component.productClicked.emit).toHaveBeenCalledWith(null);
 
     component.selectedColorWithImages = component.colorsWithImages[1];
     clickableSection.triggerEventHandler('click', null);

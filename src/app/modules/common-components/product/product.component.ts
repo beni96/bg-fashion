@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ColorWithImages } from '../../../interfaces/product';
+import { isEnterOrSpacePressed } from '../../bg-fashion/common/utils';
+import { ColorWithImages } from '../../bg-fashion/interfaces/product';
 
 @Component({
   selector: 'app-product',
@@ -19,7 +20,8 @@ export class ProductComponent implements OnInit {
   selectedColorWithImages: ColorWithImages;
 
   ngOnInit() {
-    this.selectedColorWithImages = this.colorsWithImages[this.defaultColorIndex || 0] || this.colorsWithImages[0];
+    this.defaultColorIndex = this.defaultColorIndex || 0;
+    this.selectedColorWithImages = this.colorsWithImages[this.defaultColorIndex] || this.colorsWithImages[0];
   }
 
   shouldShowColors() {
@@ -30,7 +32,7 @@ export class ProductComponent implements OnInit {
     return (((this.previousPrice - this.price) * 100) / this.previousPrice).toFixed();
   }
 
-  onColorSelected(colorWithImages: ColorWithImages) {
+  onColorSelect(colorWithImages: ColorWithImages) {
     this.selectedColorWithImages = colorWithImages;
   }
 
@@ -38,7 +40,11 @@ export class ProductComponent implements OnInit {
     return colorWithImages.color.hexCode === this.selectedColorWithImages.color.hexCode;
   }
 
-  onProductClick() {
+  onProductClick(event?: KeyboardEvent) {
+    if (event && !isEnterOrSpacePressed(event)) {
+      return;
+    }
+
     const selectedColorIndex = this.colorsWithImages.findIndex(
       (colorWithImages) => colorWithImages.color.hexCode === this.selectedColorWithImages.color.hexCode
     );

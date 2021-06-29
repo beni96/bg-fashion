@@ -1,0 +1,4 @@
+<div tabindex="0" class="color-wrapper" [ngClass]="{ selected: isSelected }" (click)="onColorSelect()" (keydown)="onColorSelect($event)">
+  <div class="color" [style.backgroundColor]="hexCode"></div>
+  <span class="color-name">{{ name | titlecase }}</span>
+</div>

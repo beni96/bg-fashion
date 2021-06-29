@@ -1,0 +1,21 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
+:host {
+  @extend %flex-align-center;
+
+  color: colors.$primary-color;
+  font-family: fonts.$font-rubik;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.previous-price {
+  margin-inline-end: 12px;
+  text-decoration: line-through;
+}
+
+.sale-price {
+  color: colors.$sale-color;
+}

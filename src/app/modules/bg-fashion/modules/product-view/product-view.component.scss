@@ -1,0 +1,133 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+  width: 100%;
+}
+
+.product-section {
+  @extend %flex-space-between;
+
+  margin-bottom: 92px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid colors.$separator-color;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  font-family: fonts.$font-rubik;
+  font-weight: 400;
+
+  .title {
+    color: colors.$primary-color;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 24px;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    color: colors.$primary-color-light;
+    font-size: 16px;
+    margin-bottom: 36px;
+    max-width: 334px;
+    line-height: 24px;
+  }
+
+  .price-wrapper {
+    align-items: baseline;
+    display: flex;
+
+    app-price {
+      font-size: 24px;
+    }
+
+    .discount {
+      color: colors.$sale-color;
+      font-size: 16px;
+      margin-inline-start: 8px;
+    }
+  }
+
+  .selected-color,
+  .selected-size,
+  .quantity-title {
+    color: colors.$primary-color;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .colors-wrapper,
+  .sizes-wrapper {
+    @extend %flex-align-center;
+
+    margin-bottom: 24px;
+  }
+
+  app-color {
+    height: 32px;
+    margin-inline-end: 8px;
+    width: 32px;
+  }
+
+  app-size {
+    margin-inline-end: 8px;
+  }
+
+  .buttons-section {
+    @extend %flex-align-center;
+
+    app-button {
+      margin-inline-end: 12px;
+    }
+  }
+}
+
+.images-wrapper {
+  direction: rtl;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+  padding-inline-start: 32px;
+
+  img {
+    height: 750px;
+    width: 500px;
+  }
+}
+
+.more-to-love-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    color: colors.$primary-color;
+    font-family: fonts.$font-rubik;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 32px;
+  }
+
+  .products-wrapper {
+    display: flex;
+
+    app-product {
+      width: 280px;
+
+      &:first-child {
+        padding-inline-start: 0;
+      }
+    }
+  }
+}

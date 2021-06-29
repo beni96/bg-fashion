@@ -1,1 +1,63 @@
-Product
+<div class="product-section">
+  <div class="content-wrapper">
+    <div class="section">
+      <span class="title">{{ product.title | titlecase }}</span>
+      <span class="subtitle">{{ product.subtitle | titlecase }}</span>
+      <div class="price-wrapper">
+        <app-price [price]="product.price" [previousPrice]="product.previousPrice"></app-price>
+        <span *ngIf="product.previousPrice" class="discount">(-{{ getDiscount() }}%)</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <span class="selected-color">Color: {{ selectedColor.color.name | titlecase }}</span>
+      <div class="colors-wrapper">
+        <app-color
+          *ngFor="let colorWithImages of product.colorsWithImages"
+          [name]="colorWithImages.color.name"
+          [hexCode]="colorWithImages.color.hexCode"
+          [isSelected]="isSelectedColor(colorWithImages)"
+          (colorSelected)="onColorSelect(colorWithImages)"
+        ></app-color>
+      </div>
+      <span *ngIf="product.sizes?.length" class="selected-size">Size: {{ selectedSize?.toString() | uppercase }}</span>
+      <div *ngIf="product.sizes?.length" class="sizes-wrapper">
+        <app-size
+          *ngFor="let size of sizes"
+          [name]="size"
+          [disabled]="isDisabledSize(size)"
+          [isSelected]="isSelectedSize(size)"
+          (sizeSelected)="onSizeSelect(size)"
+        ></app-size>
+      </div>
+      <span class="quantity-title">Quantity:</span>
+      <app-quantity [quantity]="quantity" (quantityChanged)="onQuantityChange($event)"></app-quantity>
+    </div>
+
+    <div class="buttons-section">
+      <app-button size="lg">Add to Cart</app-button>
+      <app-button color="secondary" size="lg">Mark as Favorite</app-button>
+    </div>
+  </div>
+
+  <div class="images-wrapper">
+    <img *ngFor="let imgUrl of selectedColor.images" [src]="imgUrl" />
+  </div>
+</div>
+
+<div *ngIf="moreProducts.length" class="more-to-love-wrapper">
+  <span class="title">More to love</span>
+
+  <div class="products-wrapper">
+    <app-product
+      *ngFor="let product of moreProducts"
+      [title]="product.title"
+      [colorsWithImages]="product.colorsWithImages"
+      [price]="product.price"
+      [previousPrice]="product.previousPrice"
+      [defaultColorIndex]="product.defaultColorIndex"
+      imgHeight="350"
+      (productClicked)="onProductClick(product.id, $event)"
+    ></app-product>
+  </div>
+</div>

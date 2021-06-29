@@ -1,0 +1,42 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
+:host {
+  @extend %flex-align-center;
+
+  background-color: colors.$secondary-color;
+  border-radius: 4px;
+  border: 1px solid colors.$primary-color-light;
+  color: colors.$primary-color;
+  font-family: fonts.$font-rubik;
+  font-size: 16px;
+  padding: 8px 0;
+  width: max-content;
+}
+
+.icon {
+  border-radius: 50%;
+  border: 1px solid transparent;
+  cursor: pointer;
+  margin: 0 8px;
+  padding: 0 4px;
+  outline: none;
+  user-select: none;
+
+  &:hover,
+  &:focus {
+    border-color: colors.$primary-color;
+  }
+
+  &:active {
+    border-color: colors.$primary-color;
+    background-color: colors.$secondary-color-strong;
+  }
+}
+
+.quantity {
+  @extend %flex-center;
+
+  width: 40px;
+}
