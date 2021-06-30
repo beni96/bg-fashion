@@ -21,3 +21,8 @@ export const getSizes = (sizesType: SizesType) => {
       return SHIRTS_SIZES;
   }
 };
+
+export const getImgHeight = (imageRatio: number, columnsNum: number, totalWidth: number, imagePadding: number) => {
+  const imageWidth = totalWidth / columnsNum - imagePadding;
+  return imageWidth * imageRatio;
+};

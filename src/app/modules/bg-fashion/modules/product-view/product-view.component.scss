@@ -16,11 +16,11 @@
 }
 
 .section {
+  border-bottom: 1px solid colors.$separator-color;
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
   padding-bottom: 24px;
-  border-bottom: 1px solid colors.$separator-color;
 }
 
 .content-wrapper {
@@ -28,6 +28,7 @@
   flex-direction: column;
   font-family: fonts.$font-rubik;
   font-weight: 400;
+  padding-inline-end: 48px;
 
   .title {
     color: colors.$primary-color;
@@ -40,9 +41,9 @@
   .subtitle {
     color: colors.$primary-color-light;
     font-size: 16px;
+    line-height: 24px;
     margin-bottom: 36px;
     max-width: 334px;
-    line-height: 24px;
   }
 
   .price-wrapper {
@@ -99,11 +100,10 @@
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(2, 1fr);
-  padding-inline-start: 32px;
 
   img {
-    height: 750px;
-    width: 500px;
+    max-height: 720px;
+    min-height: 450px;
   }
 }
 
@@ -123,6 +123,7 @@
     display: flex;
 
     app-product {
+      box-sizing: unset;
       width: 280px;
 
       &:first-child {

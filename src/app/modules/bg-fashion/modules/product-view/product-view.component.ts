@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { map, mergeMap } from 'rxjs/operators';
 import { PRODUCTS } from '../../common/products';
-import { getSizes } from '../../common/utils';
+import { getImgHeight, getSizes } from '../../common/utils';
 import { ColorWithImages, Product } from '../../interfaces/product';
+
+const COLUMNS_NUM = 2;
+const IMAGE_PADDING = 8;
 
 @Component({
   selector: 'app-product-view',
@@ -17,8 +20,11 @@ export class ProductViewComponent implements OnInit {
   selectedSize: string | number;
   moreProducts: Product[] = [];
   sizes: string[] | number[];
+  imgHeight: number;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  @ViewChild('content') content: ElementRef;
+
+  constructor(private host: ElementRef, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     const fetchDataFromUrl$ = this.route.paramMap.pipe(
@@ -31,8 +37,10 @@ export class ProductViewComponent implements OnInit {
     );
 
     fetchDataFromUrl$.subscribe(() => {});
-
     this.sizes = getSizes(this.product.sizesType);
+    window.addEventListener('resize', () => this.getImgHeight());
+
+    setTimeout(() => this.getImgHeight(), 0);
   }
 
   getSelectedColor() {
@@ -60,6 +68,12 @@ export class ProductViewComponent implements OnInit {
       });
       this.moreProducts = this.moreProducts.slice(0, 3);
     }
+  }
+
+  getImgHeight() {
+    const totalWidth = this.host.nativeElement.offsetWidth - this.content.nativeElement.offsetWidth;
+    const imageRatio = 4 / 3;
+    this.imgHeight = getImgHeight(imageRatio, COLUMNS_NUM, totalWidth, IMAGE_PADDING);
   }
 
   isSelectedColor(colorWithImages: ColorWithImages) {

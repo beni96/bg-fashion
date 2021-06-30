@@ -1,10 +1,11 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PRODUCTS } from '../../common/products';
+import { getImgHeight } from '../../common/utils';
 import { Product } from '../../interfaces/product';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 
-const IMAGES_NUM_IN_ROW = 4;
+const COLUMNS_NUM = 4;
 const IMAGE_PADDING = 32;
 
 @Component({
@@ -44,9 +45,8 @@ export class ProductsPageViewComponent implements OnInit {
 
   getImgHeight() {
     const totalWidth = this.hostElement.nativeElement.offsetWidth;
-    const imageWidth = totalWidth / IMAGES_NUM_IN_ROW - IMAGE_PADDING;
     const imageRatio = 4 / 3;
-    this.imgHeight = imageWidth * imageRatio;
+    this.imgHeight = getImgHeight(imageRatio, COLUMNS_NUM, totalWidth, IMAGE_PADDING);
   }
 
   getTitle() {

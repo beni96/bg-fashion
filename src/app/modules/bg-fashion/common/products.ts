@@ -12,7 +12,7 @@ export const PRODUCTS: Product[] = [
     price: 20,
     sizes: ['sm', 'md', 'lg'],
     colorsWithImages: [
-      { color: { name: 'black', hexCode: '#000000' }, images: [img] },
+      { color: { name: 'black', hexCode: '#000000' }, images: [img, img2] },
       { color: { name: 'red', hexCode: '#f10f29' }, images: [img2] },
     ],
     categories: ['clothes', 'sale'],

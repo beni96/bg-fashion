@@ -20,8 +20,8 @@
   border: 1px solid transparent;
   cursor: pointer;
   margin: 0 8px;
-  padding: 0 4px;
   outline: none;
+  padding: 0 4px;
   user-select: none;
 
   &:hover,
@@ -30,8 +30,8 @@
   }
 
   &:active {
-    border-color: colors.$primary-color;
     background-color: colors.$secondary-color-strong;
+    border-color: colors.$primary-color;
   }
 }
 

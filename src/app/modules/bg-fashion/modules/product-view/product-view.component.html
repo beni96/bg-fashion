@@ -1,5 +1,5 @@
 <div class="product-section">
-  <div class="content-wrapper">
+  <div #content class="content-wrapper">
     <div class="section">
       <span class="title">{{ product.title | titlecase }}</span>
       <span class="subtitle">{{ product.subtitle | titlecase }}</span>
@@ -41,7 +41,7 @@
   </div>
 
   <div class="images-wrapper">
-    <img *ngFor="let imgUrl of selectedColor.images" [src]="imgUrl" />
+    <img *ngFor="let imgUrl of selectedColor.images" [src]="imgUrl" [style.height.px]="imgHeight" />
   </div>
 </div>
 
@@ -56,7 +56,6 @@
       [price]="product.price"
       [previousPrice]="product.previousPrice"
       [defaultColorIndex]="product.defaultColorIndex"
-      imgHeight="350"
       (productClicked)="onProductClick(product.id, $event)"
     ></app-product>
   </div>
