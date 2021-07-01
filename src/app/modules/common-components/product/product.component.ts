@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { isEnterOrSpacePressed } from '../../bg-fashion/common/utils';
-import { ColorWithImages } from '../../bg-fashion/interfaces/product';
+import { ColorWithImages } from '../../../common/interfaces/product';
 
 @Component({
   selector: 'app-product',

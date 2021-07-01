@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { PRODUCTS } from '../../common/products';
 import { getImgHeight } from '../../common/utils';
-import { Product } from '../../interfaces/product';
+import { Product } from '../../../../common/interfaces/product';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
+import { ProductsService } from 'src/app/services/products-service/products.service';
 
 const COLUMNS_NUM = 4;
 const IMAGE_PADDING = 32;
@@ -19,7 +19,12 @@ export class ProductsPageViewComponent implements OnInit {
   category: string;
   subcategory: string;
 
-  constructor(private hostElement: ElementRef, private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private hostElement: ElementRef,
+    private route: ActivatedRoute,
+    private router: Router,
+    private productsService: ProductsService
+  ) {}
 
   ngOnInit() {
     this.getProducts();
@@ -33,12 +38,7 @@ export class ProductsPageViewComponent implements OnInit {
       this.subcategory = paramMap.get('subcategory');
 
       if (this.category) {
-        this.products = PRODUCTS.filter((product) => {
-          const isProductIncludesCategory = product.categories.includes(this.category);
-          return this.subcategory
-            ? isProductIncludesCategory && product.subcategories.includes(this.subcategory)
-            : isProductIncludesCategory;
-        });
+        this.products = this.productsService.getProductsByCategories(this.category, this.subcategory);
       }
     });
   }

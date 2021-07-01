@@ -1,4 +1,4 @@
-import { SizesType } from '../interfaces/product';
+import { SizesType } from '../../../common/interfaces/product';
 import { PANTS_SIZES, SHIRTS_SIZES, SHOES_SIZES } from './types';
 
 export const isEnterOrSpacePressed = (event: KeyboardEvent) => {

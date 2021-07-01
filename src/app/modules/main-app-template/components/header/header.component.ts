@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PRODUCTS } from 'src/app/modules/bg-fashion/common/products';
 import { BgFashionPath, BG_FASHION_PREFIX } from 'src/app/modules/bg-fashion/router/bg-fashion.routes.names';
+import { ProductsService } from 'src/app/services/products-service/products.service';
 import { HEADER_CATEGORIES } from '../../common/header-categories';
 import { HeaderCategory } from '../../interfaces/header-category';
 
@@ -14,12 +14,14 @@ export class HeaderComponent implements OnInit {
   pages: HeaderCategory[] = HEADER_CATEGORIES;
   currentHoveredPage: HeaderCategory;
 
+  constructor(private productsService: ProductsService) {}
+
   ngOnInit() {
     document.addEventListener('scroll', () => {
       return (this.isScrolled = window.pageYOffset > 0);
     });
 
-    PRODUCTS.forEach((product) => {
+    this.productsService.getProducts().forEach((product) => {
       product.categories.forEach((category) => {
         const headerCategory = this.pages.find((page) => page.category === category);
         headerCategory

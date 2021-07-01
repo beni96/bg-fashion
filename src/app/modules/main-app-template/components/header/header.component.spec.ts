@@ -2,7 +2,7 @@ import { DebugElement } from '@angular/core';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { PRODUCTS } from 'src/app/modules/bg-fashion/common/products';
+import { PRODUCTS } from 'src/app/common/products/products';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {

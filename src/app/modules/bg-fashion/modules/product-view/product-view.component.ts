@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { map, mergeMap } from 'rxjs/operators';
-import { PRODUCTS } from '../../common/products';
 import { getImgHeight, getSizes } from '../../common/utils';
-import { ColorWithImages, Product } from '../../interfaces/product';
+import { ColorWithImages, Product } from '../../../../common/interfaces/product';
+import { ProductsService } from 'src/app/services/products-service/products.service';
 
 const COLUMNS_NUM = 2;
 const IMAGE_PADDING = 8;
@@ -24,13 +24,13 @@ export class ProductViewComponent implements OnInit {
 
   @ViewChild('content') content: ElementRef;
 
-  constructor(private host: ElementRef, private route: ActivatedRoute, private router: Router) {}
+  constructor(private host: ElementRef, private route: ActivatedRoute, private router: Router, private productsService: ProductsService) {}
 
   ngOnInit() {
     const fetchDataFromUrl$ = this.route.paramMap.pipe(
       map((paramMap) => {
         const productId = Number(paramMap.get('id'));
-        this.product = PRODUCTS.find((product) => product.id === productId);
+        this.product = this.productsService.getProductById(productId);
         this.getMoreProducts(paramMap);
       }),
       mergeMap(() => this.getSelectedColor())
@@ -58,14 +58,7 @@ export class ProductViewComponent implements OnInit {
     const subcategory = paramMap.get('subcategory');
 
     if (category) {
-      this.moreProducts = PRODUCTS.filter((product) => {
-        if (product.id === this.product.id) {
-          return false;
-        }
-
-        const isProductIncludesCategory = product.categories.includes(category);
-        return subcategory ? isProductIncludesCategory && product.subcategories.includes(subcategory) : isProductIncludesCategory;
-      });
+      this.moreProducts = this.productsService.getProductsByCategories(category, subcategory, this.product.id);
       this.moreProducts = this.moreProducts.slice(0, 3);
     }
   }
