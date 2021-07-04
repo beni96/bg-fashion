@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Product } from 'src/app/common/interfaces/product';
 import { PRODUCTS } from 'src/app/common/products/products';
 
-export const PARTNER_HUB_PARTNER_ID_COOKIE = 'partnerhub_partner_id';
-
 @Injectable({
   providedIn: 'root',
 })

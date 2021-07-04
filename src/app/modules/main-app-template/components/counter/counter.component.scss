@@ -1,0 +1,17 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
+:host {
+  @extend %flex-center;
+
+  background-color: colors.$sale-color;
+  border-radius: 50%;
+  box-sizing: border-box;
+  color: colors.$white;
+  font-family: fonts.$font-rubik;
+  font-size: 12px;
+  font-weight: 500;
+  height: 20px;
+  width: 20px;
+}

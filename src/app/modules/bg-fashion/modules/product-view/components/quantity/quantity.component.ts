@@ -15,7 +15,7 @@ export class QuantityComponent {
       return;
     }
 
-    if (quantity < 1) {
+    if (quantity < 1 || quantity > 15) {
       return;
     }
 

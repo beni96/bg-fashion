@@ -6,9 +6,10 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { HeaderMenuComponent } from './components/header-menu/header-menu.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { CounterComponent } from './components/counter/counter.component';
 
 @NgModule({
-  declarations: [MainAppTemplateComponent, HeaderComponent, HeaderMenuComponent, FooterComponent],
+  declarations: [MainAppTemplateComponent, HeaderComponent, HeaderMenuComponent, FooterComponent, CounterComponent],
   imports: [BrowserModule, CommonModule, RouterModule],
   exports: [MainAppTemplateComponent],
 })

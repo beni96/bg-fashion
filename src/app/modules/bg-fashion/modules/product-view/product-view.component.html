@@ -20,7 +20,10 @@
           (colorSelected)="onColorSelect(colorWithImages)"
         ></app-color>
       </div>
-      <span *ngIf="product.sizes?.length" class="selected-size">Size: {{ selectedSize?.toString() | uppercase }}</span>
+      <span *ngIf="product.sizes?.length" class="selected-size">
+        Size: {{ selectedSize?.toString() | uppercase }}
+        <span class="size-error" *ngIf="shouldShowSizeError">*Required field</span>
+      </span>
       <div *ngIf="product.sizes?.length" class="sizes-wrapper">
         <app-size
           *ngFor="let size of sizes"
@@ -35,8 +38,8 @@
     </div>
 
     <div class="buttons-section">
-      <app-button size="lg">Add to Cart</app-button>
-      <app-button color="secondary" size="lg">Mark as Favorite</app-button>
+      <app-button size="lg" (click)="onAddToCartClick()">Add to Cart</app-button>
+      <app-button color="secondary" size="lg" (click)="onMarkAsFavoriteClick()">Mark as Favorite</app-button>
     </div>
   </div>
 

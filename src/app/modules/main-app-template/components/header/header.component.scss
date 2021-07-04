@@ -21,7 +21,7 @@
   background-color: colors.$secondary-color;
   box-sizing: border-box;
   height: variables.$header-height;
-  padding: 16px 24px;
+  padding: 16px 32px;
   position: relative;
   width: 100%;
   z-index: z-indexes.$header-z-index;
@@ -93,10 +93,26 @@
     flex: 1;
     justify-content: flex-end;
 
-    .fa-shopping-cart {
+    a {
+      position: relative;
+
+      &:first-child {
+        margin-inline-end: 24px;
+      }
+    }
+
+    .fas {
       color: colors.$primary-color;
       cursor: pointer;
       font-size: 24px;
+      height: 24px;
+      width: 24px;
+    }
+
+    app-counter {
+      position: absolute;
+      top: 10px;
+      left: 10px;
     }
   }
 }

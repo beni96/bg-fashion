@@ -4,6 +4,9 @@ import { map, mergeMap } from 'rxjs/operators';
 import { getImgHeight, getSizes } from '../../common/utils';
 import { ColorWithImages, Product } from '../../../../common/interfaces/product';
 import { ProductsService } from 'src/app/services/products-service/products.service';
+import { FavoritesService } from 'src/app/services/favorites-service/favorites.service';
+import { CartService } from 'src/app/services/cart-service/cart.service';
+import { CartProduct } from 'src/app/common/interfaces/cart-product';
 
 const COLUMNS_NUM = 2;
 const IMAGE_PADDING = 8;
@@ -21,10 +24,18 @@ export class ProductViewComponent implements OnInit {
   moreProducts: Product[] = [];
   sizes: string[] | number[];
   imgHeight: number;
+  shouldShowSizeError = false;
 
   @ViewChild('content') content: ElementRef;
 
-  constructor(private host: ElementRef, private route: ActivatedRoute, private router: Router, private productsService: ProductsService) {}
+  constructor(
+    private host: ElementRef,
+    private route: ActivatedRoute,
+    private router: Router,
+    private productsService: ProductsService,
+    private favoritesService: FavoritesService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit() {
     const fetchDataFromUrl$ = this.route.paramMap.pipe(
@@ -86,6 +97,7 @@ export class ProductViewComponent implements OnInit {
   }
 
   onSizeSelect(size: string) {
+    this.shouldShowSizeError = false;
     this.selectedSize = size;
   }
 
@@ -100,5 +112,19 @@ export class ProductViewComponent implements OnInit {
   onProductClick(productId: number, selectedColorIndex: number) {
     const queryParams = { color: selectedColorIndex };
     this.router.navigate([`../${productId}`], { relativeTo: this.route, queryParams });
+  }
+
+  onAddToCartClick() {
+    if (this.product.sizes?.length && !this.selectedSize) {
+      this.shouldShowSizeError = true;
+      return;
+    }
+    const colorIndex = this.product.colorsWithImages.indexOf(this.selectedColor);
+    const cartProduct: CartProduct = { product: this.product, colorIndex, size: this.selectedSize, quantity: this.quantity };
+    this.cartService.addCartProduct(cartProduct);
+  }
+
+  onMarkAsFavoriteClick() {
+    this.favoritesService.addCartProduct(this.product);
   }
 }

@@ -69,6 +69,11 @@
     margin-bottom: 12px;
   }
 
+  .size-error {
+    color: colors.$sale-color;
+    margin-inline-start: 24px;
+  }
+
   .colors-wrapper,
   .sizes-wrapper {
     @extend %flex-align-center;
