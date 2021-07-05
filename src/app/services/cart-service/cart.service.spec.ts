@@ -19,7 +19,7 @@ describe('CartService', () => {
 
   describe('with saved values', () => {
     it('should return the saved cartProducts', () => {
-      const cartProduct: CartProduct = { product: PRODUCTS[0], size: 'md', colorIndex: 0, quantity: 1 };
+      const cartProduct: CartProduct = { product: PRODUCTS[0], size: 'md', colorWithImages: PRODUCTS[0].colorsWithImages[0], quantity: 1 };
       // @ts-ignore
       service.cartProducts = [cartProduct];
       expect(service.getCartProducts()).toEqual([cartProduct]);

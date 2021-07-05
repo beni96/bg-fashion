@@ -1,0 +1,19 @@
+<div class="products-section">
+  <div *ngFor="let cartproduct of cartProducts" class="cart-product-wrapper">
+    <div class="cart-product" (click)="onCartProductClick(cartproduct.product.id)">
+      <img [src]="cartproduct.colorWithImages.images[0]" />
+      <div class="content-wrapper">
+        <span class="product title">{{ cartproduct.product.title }}</span>
+        <span class="title">Color: {{ cartproduct.colorWithImages.color.name | titlecase }}</span>
+        <span class="title">Size: {{ cartproduct.size | uppercase }}</span>
+        <span class="title">Quantity: {{ cartproduct.quantity }}</span>
+        <span class="title">Total price: {{ cartproduct.product.price * cartproduct.quantity | currency }}</span>
+      </div>
+    </div>
+    <i class="fas fa-trash-alt" (click)="onTrashClick(cartproduct.product.id)"></i>
+  </div>
+</div>
+
+<div class="summary-section">
+  <span class="total-price">Total: {{ getTotalPrice() | currency }}</span>
+</div>

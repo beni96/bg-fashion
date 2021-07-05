@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { IsProductValidGuard } from 'src/app/guards/is-product-valid/is-product-valid.guard';
+import { CartViewComponent } from '../modules/cart-view/cart-view.component';
 import { FavoritesViewComponent } from '../modules/favorites-view/favorites-view.component';
 import { HomePageViewComponent } from '../modules/home-page-view/home-page-view.component';
 import { ProductViewComponent } from '../modules/product-view/product-view.component';
@@ -21,4 +22,5 @@ export const BG_FASHION_ROUTES: Routes = [
   { path: BgFashionPath.Home, component: HomePageViewComponent },
   { path: PRODUCTS_PREFIX, children: PRODUCTS_ROUTES, canActivateChild: [IsProductValidGuard] },
   { path: BgFashionPath.Favorites, component: FavoritesViewComponent },
+  { path: BgFashionPath.Cart, component: CartViewComponent },
 ];

@@ -1,9 +1,8 @@
 import { DebugElement } from '@angular/core';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
 import { Product } from 'src/app/common/interfaces/product';
 import { FavoritesService } from 'src/app/services/favorites-service/favorites.service';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
@@ -42,7 +41,6 @@ describe('FavoritesViewComponent', () => {
   let debugElement: DebugElement;
   let router: Router;
   let favoritesMock: jasmine.SpyObj<FavoritesService>;
-  const paramMap = convertToParamMap({ category: 'clothes' });
 
   beforeEach(async(() => {
     favoritesMock = jasmine.createSpyObj('FavoritesService', ['getFavoriteProducts', 'removeFavoriteProduct']);
@@ -50,10 +48,7 @@ describe('FavoritesViewComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [FavoritesViewComponent],
-      providers: [
-        { provide: ActivatedRoute, useValue: { paramMap: of(paramMap) } },
-        { provide: FavoritesService, useValue: favoritesMock },
-      ],
+      providers: [{ provide: FavoritesService, useValue: favoritesMock }],
     }).compileComponents();
     router = TestBed.inject(Router);
   }));

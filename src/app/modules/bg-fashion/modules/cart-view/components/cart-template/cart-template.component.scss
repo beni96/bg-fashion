@@ -1,0 +1,32 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.title {
+  color: colors.$primary-color;
+  font-family: fonts.$font-montserrat;
+  font-size: 42px;
+  font-weight: 500;
+  margin-bottom: 54px;
+  text-align: center;
+}
+
+.footer {
+  @extend %flex-space-between;
+
+  margin-top: 54px;
+
+  .buttons-wrapper {
+    display: flex;
+
+    app-button:first-child {
+      margin-inline-end: 8px;
+    }
+  }
+}

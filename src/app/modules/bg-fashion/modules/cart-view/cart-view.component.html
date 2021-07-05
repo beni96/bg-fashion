@@ -1,0 +1,13 @@
+<app-cart-template
+  [currentStep]="currentStep"
+  (nextClicked)="onNextClick()"
+  (backClicked)="onBackClick()"
+  (cancelClicked)="onCancelClick()"
+>
+  <app-cart-products
+    *ngIf="currentStep === cartStep.PRODUCTS"
+    [cartProducts]="cartProducts"
+    (productClicked)="onCartProductClick($event)"
+    (trashClicked)="onTrashClicked($event)"
+  ></app-cart-products>
+</app-cart-template>

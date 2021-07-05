@@ -1,0 +1,77 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
+:host {
+  color: colors.$primary-color;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.products-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-product-wrapper {
+  @extend %flex-space-between;
+
+  box-sizing: border-box;
+  padding: 24px 16px;
+  width: 100%;
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid colors.$separator-color;
+  }
+
+  .cart-product {
+    @extend %flex-align-center;
+
+    cursor: pointer;
+
+    img {
+      height: 120px;
+      margin-inline-end: 20px;
+      width: 80px;
+    }
+
+    .content-wrapper {
+      display: flex;
+      flex-direction: column;
+      font-family: fonts.$font-rubik;
+      font-size: 16px;
+      font-weight: 400;
+
+      .title:not(:last-child) {
+        margin-bottom: 8px;
+      }
+
+      .product {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .fa-trash-alt {
+    color: colors.$grey-color;
+    cursor: pointer;
+    font-size: 20px;
+  }
+}
+
+.summary-section {
+  align-items: flex-end;
+  border-top: 2px solid;
+  display: flex;
+  flex-direction: column;
+  font-family: fonts.$font-rubik;
+  margin-top: 24px;
+  padding-top: 24px;
+
+  .total-price {
+    font-family: fonts.$font-rubik;
+    font-size: 24px;
+    font-weight: 500;
+  }
+}

@@ -1,0 +1,9 @@
+<span class="title">{{ getTitle() }}</span>
+<ng-content></ng-content>
+<div class="footer">
+  <app-button color="secondary" (click)="onCancelClick()">Cancel</app-button>
+  <div class="buttons-wrapper">
+    <app-button *ngIf="currentStep !== cartStep.PRODUCTS" color="secondary" (click)="onBackClick()">Back</app-button>
+    <app-button (click)="onNextClick()">{{ currentStep === cartStep.SUMMARY ? 'Submit' : 'Next' }}</app-button>
+  </div>
+</div>

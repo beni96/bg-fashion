@@ -119,8 +119,12 @@ export class ProductViewComponent implements OnInit {
       this.shouldShowSizeError = true;
       return;
     }
-    const colorIndex = this.product.colorsWithImages.indexOf(this.selectedColor);
-    const cartProduct: CartProduct = { product: this.product, colorIndex, size: this.selectedSize, quantity: this.quantity };
+    const cartProduct: CartProduct = {
+      product: this.product,
+      colorWithImages: this.selectedColor,
+      size: this.selectedSize,
+      quantity: this.quantity,
+    };
     this.cartService.addCartProduct(cartProduct);
   }
 

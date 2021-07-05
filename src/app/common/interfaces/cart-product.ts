@@ -1,8 +1,8 @@
-import { Product } from './product';
+import { ColorWithImages, Product } from './product';
 
 export interface CartProduct {
   product: Product;
-  colorIndex: number;
+  colorWithImages: ColorWithImages;
   size: string | number;
   quantity: number;
 }

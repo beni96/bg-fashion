@@ -26,7 +26,7 @@ export class CartService {
     const duplicatedCartProduct = this.cartProducts.find((existsCartProduct) => {
       return (
         existsCartProduct.product.id === cartProduct.product.id &&
-        existsCartProduct.colorIndex === cartProduct.colorIndex &&
+        existsCartProduct.colorWithImages.color.hexCode === cartProduct.colorWithImages.color.hexCode &&
         existsCartProduct.size === cartProduct.size
       );
     });
