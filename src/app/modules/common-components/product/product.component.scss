@@ -15,7 +15,6 @@
   margin-bottom: 32px;
   padding: 0 16px;
   position: relative;
-  width: 25%;
 }
 
 .clickable-section {
@@ -29,14 +28,28 @@ img {
   width: 100%;
 }
 
-.title {
-  margin-bottom: 4px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.title-wrapper {
+  @extend %flex-space-between;
 
-  &:hover {
-    text-decoration: underline;
+  margin-bottom: 4px;
+
+  .title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .fa-trash-alt {
+    color: colors.$grey-color;
+    cursor: pointer;
+  }
+
+  .fa-heart {
+    cursor: pointer;
   }
 }
 

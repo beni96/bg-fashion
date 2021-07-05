@@ -1,17 +1,16 @@
-<span class="title">{{ getTitle() | titlecase }}</span>
+<span class="title">Favorites</span>
 
 <div class="products-wrapper">
   <app-product
-    *ngFor="let product of products"
+    *ngFor="let product of favoriteProducts"
     [title]="product.title"
     [colorsWithImages]="product.colorsWithImages"
     [price]="product.price"
     [previousPrice]="product.previousPrice"
     [defaultColorIndex]="product.defaultColorIndex"
     [imgHeight]="imgHeight"
-    [showHeart]="true"
-    [isFavorite]="isFavorite(product.id)"
+    [showTrash]="true"
     (productClicked)="onProductClick(product.id, $event)"
-    (heartClicked)="onHeartClick(product, $event)"
+    (trashClicked)="onTrashClick(product.id)"
   ></app-product>
 </div>

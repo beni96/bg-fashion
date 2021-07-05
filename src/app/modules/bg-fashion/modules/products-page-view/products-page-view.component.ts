@@ -4,6 +4,7 @@ import { getImgHeight } from '../../common/utils';
 import { Product } from '../../../../common/interfaces/product';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 import { ProductsService } from 'src/app/services/products-service/products.service';
+import { FavoritesService } from 'src/app/services/favorites-service/favorites.service';
 
 const COLUMNS_NUM = 4;
 const IMAGE_PADDING = 32;
@@ -23,7 +24,8 @@ export class ProductsPageViewComponent implements OnInit {
     private hostElement: ElementRef,
     private route: ActivatedRoute,
     private router: Router,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private favoritesService: FavoritesService
   ) {}
 
   ngOnInit() {
@@ -56,5 +58,13 @@ export class ProductsPageViewComponent implements OnInit {
   onProductClick(productId: number, selectedColorIndex: number) {
     const queryParams = { color: selectedColorIndex };
     this.router.navigate([BgFashionPath.Product, productId], { relativeTo: this.route, queryParams });
+  }
+
+  onHeartClick(product: Product, isFavorite: boolean) {
+    isFavorite ? this.favoritesService.addFavoriteProduct(product) : this.favoritesService.removeFavoriteProduct(product.id);
+  }
+
+  isFavorite(productId: number) {
+    return this.favoritesService.isFavoriteProduct(productId);
   }
 }

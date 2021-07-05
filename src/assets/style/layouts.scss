@@ -6,7 +6,8 @@
 }
 
 %flex-space-between {
-  display: flex;
+  @extend %flex-align-center;
+
   justify-content: space-between;
 }
 

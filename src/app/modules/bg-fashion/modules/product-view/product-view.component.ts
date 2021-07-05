@@ -125,6 +125,6 @@ export class ProductViewComponent implements OnInit {
   }
 
   onMarkAsFavoriteClick() {
-    this.favoritesService.addCartProduct(this.product);
+    this.favoritesService.addFavoriteProduct(this.product);
   }
 }

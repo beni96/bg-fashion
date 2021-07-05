@@ -14,8 +14,13 @@ export class ProductComponent implements OnInit {
   @Input() previousPrice: number;
   @Input() price: number;
   @Input() imgHeight: number;
+  @Input() showTrash = false;
+  @Input() showHeart = false;
+  @Input() isFavorite = false;
 
   @Output() productClicked = new EventEmitter<number>();
+  @Output() heartClicked = new EventEmitter<boolean>();
+  @Output() trashClicked = new EventEmitter<void>();
 
   selectedColorWithImages: ColorWithImages;
 
@@ -50,5 +55,18 @@ export class ProductComponent implements OnInit {
     );
     const colorIndexQueryParam = selectedColorIndex === this.defaultColorIndex ? null : selectedColorIndex || 0;
     this.productClicked.emit(colorIndexQueryParam);
+  }
+
+  onHeartClick(event: Event) {
+    this.isFavorite = !this.isFavorite;
+    this.heartClicked.emit(this.isFavorite);
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  onTrashClick(event: Event) {
+    this.trashClicked.emit();
+    event.preventDefault();
+    event.stopPropagation();
   }
 }

@@ -22,7 +22,7 @@ export class FavoritesService {
     return this.favoriteProducts;
   }
 
-  addCartProduct(favoriteProduct: Product): void {
+  addFavoriteProduct(favoriteProduct: Product): void {
     const duplicatedFavoriteProduct = this.favoriteProducts.find((existsFavoriteProduct) => {
       return existsFavoriteProduct.id === favoriteProduct.id;
     });
@@ -35,9 +35,13 @@ export class FavoritesService {
     localStorage.setItem(FAVORITE_PRODUCTS, JSON.stringify(this.favoriteProducts));
   }
 
-  removeCartProduct(favoriteProductId: number): void {
+  removeFavoriteProduct(favoriteProductId: number): void {
     const favoriteProductIndex = this.favoriteProducts.findIndex((favoriteProduct) => favoriteProduct.id === favoriteProductId);
-    this.favoriteProducts = this.favoriteProducts.splice(favoriteProductIndex, 1);
+    this.favoriteProducts.splice(favoriteProductIndex, 1);
     localStorage.setItem(FAVORITE_PRODUCTS, JSON.stringify(this.favoriteProducts));
+  }
+
+  isFavoriteProduct(productId: number) {
+    return this.getFavoriteProducts().some((product) => product.id === productId);
   }
 }
