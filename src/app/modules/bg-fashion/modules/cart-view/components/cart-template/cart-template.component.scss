@@ -20,7 +20,7 @@
 .footer {
   @extend %flex-space-between;
 
-  margin-top: 54px;
+  margin: 54px 0 32px;
 
   .buttons-wrapper {
     display: flex;

@@ -39,7 +39,7 @@ export class CartService {
 
   removeCartProduct(cartProductId: number): void {
     const cartProductIndex = this.cartProducts.findIndex((cartProduct) => cartProduct.product.id === cartProductId);
-    this.cartProducts = this.cartProducts.splice(cartProductIndex, 1);
+    this.cartProducts.splice(cartProductIndex, 1);
     localStorage.setItem(CART_PRODUCTS, JSON.stringify(this.cartProducts));
   }
 }

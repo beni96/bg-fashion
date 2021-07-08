@@ -1,4 +1,5 @@
 <app-cart-template
+  *ngIf="cartProducts.length"
   [currentStep]="currentStep"
   (nextClicked)="onNextClick()"
   (backClicked)="onBackClick()"
@@ -10,4 +11,15 @@
     (productClicked)="onCartProductClick($event)"
     (trashClicked)="onTrashClicked($event)"
   ></app-cart-products>
+
+  <app-cart-details #cartDetails *ngIf="currentStep === cartStep.DETAILS"></app-cart-details>
+
+  <app-cart-summary
+    *ngIf="currentStep === cartStep.SUMMARY"
+    [name]="cartDetailsValues.name"
+    [email]="cartDetailsValues.email"
+    [address]="cartDetailsValues.address"
+    [totalItems]="getTotalItems()"
+    [totalPrice]="getTotalPrice()"
+  ></app-cart-summary>
 </app-cart-template>

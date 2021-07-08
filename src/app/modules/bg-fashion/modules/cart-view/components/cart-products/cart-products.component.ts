@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CartProduct } from 'src/app/common/interfaces/cart-product';
+import { getTotalPrice } from 'src/app/modules/bg-fashion/common/utils';
 
 @Component({
   selector: 'app-cart-products',
@@ -21,10 +22,6 @@ export class CartProductsComponent {
   }
 
   getTotalPrice(): number {
-    let totalPrice = 0;
-    this.cartProducts.forEach((cartProduct) => {
-      totalPrice += cartProduct.quantity * cartProduct.product.price;
-    });
-    return totalPrice;
+    return getTotalPrice(this.cartProducts);
   }
 }

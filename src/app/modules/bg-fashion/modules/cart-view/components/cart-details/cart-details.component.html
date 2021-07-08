@@ -1,0 +1,43 @@
+<form [formGroup]="form">
+  <app-text-field
+    ngDefaultControl
+    formControlName="name"
+    label="Full Name"
+    placeholder="Enter your name.."
+    [value]="formControls.name.value"
+    [errorMessage]="errorMessages?.name"
+  ></app-text-field>
+  <app-text-field
+    ngDefaultControl
+    formControlName="email"
+    label="Email"
+    placeholder="Enter your email.."
+    type="email"
+    [value]="formControls.email.value"
+    [errorMessage]="errorMessages?.email"
+  ></app-text-field>
+  <app-text-field
+    ngDefaultControl
+    formControlName="phone"
+    label="Phone"
+    placeholder="Enter your phone number.."
+    [value]="formControls.phone.value"
+    [errorMessage]="errorMessages?.phone"
+  ></app-text-field>
+  <app-text-field
+    ngDefaultControl
+    formControlName="address"
+    label="Full Address (city, street, street number, apartment number)"
+    placeholder="Enter your full address.."
+    [value]="formControls.address.value"
+    [errorMessage]="errorMessages?.address"
+  ></app-text-field>
+  <app-text-field
+    ngDefaultControl
+    formControlName="notes"
+    isTextarea="true"
+    label="Notes"
+    [value]="formControls.notes.value"
+    [errorMessage]="errorMessages?.notes"
+  ></app-text-field>
+</form>

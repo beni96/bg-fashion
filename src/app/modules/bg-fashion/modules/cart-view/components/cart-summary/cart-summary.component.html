@@ -1,0 +1,5 @@
+<div class="summary-line" *ngFor="let summaryLine of summaryLines; let last = last">
+  <span class="title">{{ summaryLine.title }}</span>
+  <span *ngIf="!last" class="value">{{ summaryLine.value }}</span>
+  <span *ngIf="last" class="value">{{ summaryLine.value | currency }}</span>
+</div>

@@ -66,4 +66,16 @@ button {
     line-height: 24px;
     padding: 0px 20px;
   }
+
+  &:disabled {
+    background-color: colors.$grey-color-light;
+    color: colors.$grey-color-strong;
+    cursor: unset;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: colors.$grey-color-light;
+    }
+  }
 }

@@ -6,9 +6,12 @@ import { CommonComponentsModule } from 'src/app/modules/common-components/common
 import { CartViewComponent } from './cart-view.component';
 import { CartTemplateComponent } from './components/cart-template/cart-template.component';
 import { CartProductsComponent } from './components/cart-products/cart-products.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
 
 @NgModule({
-  declarations: [CartViewComponent, CartTemplateComponent, CartProductsComponent],
-  imports: [BrowserModule, RouterModule, CommonModule, CommonComponentsModule],
+  declarations: [CartViewComponent, CartTemplateComponent, CartProductsComponent, CartDetailsComponent, CartSummaryComponent],
+  imports: [BrowserModule, RouterModule, CommonModule, CommonComponentsModule, ReactiveFormsModule],
 })
 export class CartViewModule {}

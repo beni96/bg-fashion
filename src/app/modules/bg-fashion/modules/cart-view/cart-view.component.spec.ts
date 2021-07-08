@@ -3,19 +3,47 @@ import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { CartProduct } from 'src/app/common/interfaces/cart-product';
+import { CartService } from 'src/app/services/cart-service/cart.service';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 import { CartStep, CartViewComponent } from './cart-view.component';
+
+const CART_PRODUCTS: CartProduct[] = [
+  {
+    product: {
+      id: 1,
+      title: 'T-shirt',
+      subtitle: 'Nice t-shirt with cool print',
+      previousPrice: 40,
+      price: 20,
+      sizes: ['sm', 'md', 'lg'],
+      colorsWithImages: [
+        { color: { name: 'black', hexCode: '#000000' }, images: [] },
+        { color: { name: 'red', hexCode: '#f10f29' }, images: [] },
+      ],
+      categories: ['clothes', 'sale'],
+      subcategories: ['t-shirts'],
+    },
+    size: 'sm',
+    colorWithImages:  { color: { name: 'black', hexCode: '#000000' }, images: [] },
+    quantity: 1,
+  }
+];
 
 describe('CartViewComponent', () => {
   let fixture: ComponentFixture<CartViewComponent>;
   let component: CartViewComponent;
   let debugElement: DebugElement;
   let router: Router;
+  let cartMock: jasmine.SpyObj<CartService>;
 
   beforeEach(async(() => {
+    cartMock = jasmine.createSpyObj('CartService', ['getCartProducts', 'removeCartProduct']);
+
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [CartViewComponent],
+      providers: [{ provide: CartService, useValue: cartMock }],
     }).compileComponents();
     router = TestBed.inject(Router);
   }));
@@ -24,6 +52,8 @@ describe('CartViewComponent', () => {
     fixture = TestBed.createComponent(CartViewComponent);
     component = fixture.componentInstance;
     debugElement = fixture.debugElement;
+    cartMock.getCartProducts.and.returnValue(CART_PRODUCTS);
+    cartMock.removeCartProduct.and.returnValue();
     fixture.detectChanges();
 
     spyOn(router, 'navigate');
