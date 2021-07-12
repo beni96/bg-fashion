@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { CartService } from 'src/app/services/cart-service/cart.service';
+import { FavoritesService } from 'src/app/services/favorites-service/favorites.service';
 import { SHIRTS_SIZES } from '../../common/types';
 import { ProductViewComponent } from './product-view.component';
 
@@ -12,14 +14,23 @@ describe('ProductViewComponent', () => {
   let component: ProductViewComponent;
   let debugElement: DebugElement;
   let router: Router;
+  let cartMock: jasmine.SpyObj<CartService>;
+  let favoritesMock: jasmine.SpyObj<FavoritesService>;
   const paramMap = convertToParamMap({ category: 'clothes', id: '1' });
   const queryParamMap = convertToParamMap({ color: 1 });
 
   beforeEach(async(() => {
+    cartMock = jasmine.createSpyObj('CartService', ['addCartProduct']);
+    favoritesMock = jasmine.createSpyObj('FavoritesService', ['addFavoriteProduct']);
+
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [ProductViewComponent],
-      providers: [{ provide: ActivatedRoute, useValue: { paramMap: of(paramMap), queryParamMap: of(queryParamMap) } }],
+      providers: [
+        { provide: CartService, useValue: cartMock },
+        { provide: FavoritesService, useValue: favoritesMock },
+        { provide: ActivatedRoute, useValue: { paramMap: of(paramMap), queryParamMap: of(queryParamMap) } },
+      ],
     }).compileComponents();
 
     router = TestBed.inject(Router);
@@ -29,9 +40,12 @@ describe('ProductViewComponent', () => {
     fixture = TestBed.createComponent(ProductViewComponent);
     component = fixture.componentInstance;
     debugElement = fixture.debugElement;
+    cartMock.addCartProduct.and.returnValue();
+    favoritesMock.addFavoriteProduct.and.returnValue();
     fixture.detectChanges();
 
     spyOn(router, 'navigate');
+    spyOn(component.snackbarLabelSubject$, 'next');
   });
 
   it('should create the app', () => {
@@ -77,5 +91,20 @@ describe('ProductViewComponent', () => {
       relativeTo: component.route,
       queryParams: { color: 2 },
     });
+  });
+
+  it('should add to cart and show snackbar on clicking cart button', () => {
+    component.selectedSize = 'sm';
+    const cartButton = debugElement.queryAll(By.css('app-button'))[0];
+    cartButton.triggerEventHandler('click', null);
+    expect(cartMock.addCartProduct).toHaveBeenCalled();
+    expect(component.snackbarLabelSubject$.next).toHaveBeenCalledWith('Item was added to cart');
+  });
+
+  it('should add to favorites and show snackbar on clicking favorites button', () => {
+    const favoritesButton = debugElement.queryAll(By.css('app-button'))[1];
+    favoritesButton.triggerEventHandler('click', null);
+    expect(favoritesMock.addFavoriteProduct).toHaveBeenCalled();
+    expect(component.snackbarLabelSubject$.next).toHaveBeenCalledWith('Item was added to favorites');
   });
 });

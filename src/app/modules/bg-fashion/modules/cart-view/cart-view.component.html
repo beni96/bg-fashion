@@ -1,5 +1,5 @@
 <app-cart-template
-  *ngIf="cartProducts.length"
+  *ngIf="cartProducts.length && currentStep !== cartStep.CONFIRMATION"
   [currentStep]="currentStep"
   (nextClicked)="onNextClick()"
   (backClicked)="onBackClick()"
@@ -23,3 +23,18 @@
     [totalPrice]="getTotalPrice()"
   ></app-cart-summary>
 </app-cart-template>
+
+<app-state-message
+  *ngIf="currentStep === cartStep.CONFIRMATION"
+  imgUrl="assets/images/confirmation.png"
+  [title]="'We got your order!'"
+  [subtitle]="'One of our agents will contact you within 2 business days'"
+></app-state-message>
+
+<app-state-message
+  *ngIf="!cartProducts.length"
+  [title]="'Cart is empty'"
+  [subtitle]="'Keep looking for the best outfits in our site'"
+></app-state-message>
+
+<app-snackbar [snackbarLabel$]="snackbarLabelSubject$"></app-snackbar>

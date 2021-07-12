@@ -9,9 +9,19 @@ import { CartProductsComponent } from './components/cart-products/cart-products.
 import { ReactiveFormsModule } from '@angular/forms';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [CartViewComponent, CartTemplateComponent, CartProductsComponent, CartDetailsComponent, CartSummaryComponent],
-  imports: [BrowserModule, RouterModule, CommonModule, CommonComponentsModule, ReactiveFormsModule],
+  imports: [
+    BrowserAnimationsModule,
+    BrowserModule,
+    RouterModule,
+    CommonModule,
+    CommonComponentsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
 })
 export class CartViewModule {}

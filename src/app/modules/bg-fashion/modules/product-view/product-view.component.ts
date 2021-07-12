@@ -7,6 +7,7 @@ import { ProductsService } from 'src/app/services/products-service/products.serv
 import { FavoritesService } from 'src/app/services/favorites-service/favorites.service';
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { CartProduct } from 'src/app/common/interfaces/cart-product';
+import { Subject } from 'rxjs';
 
 const COLUMNS_NUM = 2;
 const IMAGE_PADDING = 8;
@@ -25,6 +26,7 @@ export class ProductViewComponent implements OnInit {
   sizes: string[] | number[];
   imgHeight: number;
   shouldShowSizeError = false;
+  snackbarLabelSubject$ = new Subject<string>();
 
   @ViewChild('content') content: ElementRef;
 
@@ -126,9 +128,11 @@ export class ProductViewComponent implements OnInit {
       quantity: this.quantity,
     };
     this.cartService.addCartProduct(cartProduct);
+    this.snackbarLabelSubject$.next('Item was added to cart');
   }
 
   onMarkAsFavoriteClick() {
     this.favoritesService.addFavoriteProduct(this.product);
+    this.snackbarLabelSubject$.next('Item was added to favorites');
   }
 }

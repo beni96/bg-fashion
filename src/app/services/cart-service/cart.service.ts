@@ -42,4 +42,9 @@ export class CartService {
     this.cartProducts.splice(cartProductIndex, 1);
     localStorage.setItem(CART_PRODUCTS, JSON.stringify(this.cartProducts));
   }
+
+  resetCart(): void {
+    this.cartProducts = [];
+    localStorage.setItem(CART_PRODUCTS, JSON.stringify(this.cartProducts));
+  }
 }

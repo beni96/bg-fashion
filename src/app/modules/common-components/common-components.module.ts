@@ -6,8 +6,18 @@ import { PriceComponent } from './price/price.component';
 import { ButtonComponent } from './button/button.component';
 import { ProductComponent } from './product/product.component';
 import { TextFieldComponent } from './text-field/text-field.component';
+import { SnackbarComponent } from './snackbar/snackbar.component';
+import { StateMessageComponent } from './state-message/state-message.component';
 
-const components = [ColorComponent, PriceComponent, ButtonComponent, ProductComponent, TextFieldComponent];
+const components = [
+  ColorComponent,
+  PriceComponent,
+  ButtonComponent,
+  ProductComponent,
+  TextFieldComponent,
+  SnackbarComponent,
+  StateMessageComponent,
+];
 
 @NgModule({
   declarations: components,

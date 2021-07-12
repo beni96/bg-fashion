@@ -3,10 +3,15 @@ import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
 import { CartProduct } from 'src/app/common/interfaces/cart-product';
+import { SendEmailResponse } from 'src/app/common/interfaces/send-email';
+import { ApiService } from 'src/app/services/api-service/api.service';
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 import { CartStep, CartViewComponent } from './cart-view.component';
+
+const SEND_EMAIL_RESPONSE: SendEmailResponse = { ok: true, next: '' };
 
 const CART_PRODUCTS: CartProduct[] = [
   {
@@ -25,9 +30,9 @@ const CART_PRODUCTS: CartProduct[] = [
       subcategories: ['t-shirts'],
     },
     size: 'sm',
-    colorWithImages:  { color: { name: 'black', hexCode: '#000000' }, images: [] },
+    colorWithImages: { color: { name: 'black', hexCode: '#000000' }, images: [] },
     quantity: 1,
-  }
+  },
 ];
 
 describe('CartViewComponent', () => {
@@ -36,14 +41,19 @@ describe('CartViewComponent', () => {
   let debugElement: DebugElement;
   let router: Router;
   let cartMock: jasmine.SpyObj<CartService>;
+  let apiMock: jasmine.SpyObj<ApiService>;
 
   beforeEach(async(() => {
-    cartMock = jasmine.createSpyObj('CartService', ['getCartProducts', 'removeCartProduct']);
+    cartMock = jasmine.createSpyObj('CartService', ['getCartProducts', 'removeCartProduct', 'resetCart']);
+    apiMock = jasmine.createSpyObj('ApiService', ['sendOrderEmail']);
 
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [CartViewComponent],
-      providers: [{ provide: CartService, useValue: cartMock }],
+      providers: [
+        { provide: CartService, useValue: cartMock },
+        { provide: ApiService, useValue: apiMock },
+      ],
     }).compileComponents();
     router = TestBed.inject(Router);
   }));
@@ -54,9 +64,13 @@ describe('CartViewComponent', () => {
     debugElement = fixture.debugElement;
     cartMock.getCartProducts.and.returnValue(CART_PRODUCTS);
     cartMock.removeCartProduct.and.returnValue();
+    cartMock.resetCart.and.returnValue();
+    apiMock.sendOrderEmail.and.returnValue(of(SEND_EMAIL_RESPONSE));
+    component.cartDetailsValues = { name: 'user', phone: '052', email: 'user@gmail.com', address: 'street' };
     fixture.detectChanges();
 
     spyOn(router, 'navigate');
+    spyOn(component.snackbarLabelSubject$, 'next');
   });
 
   it('should create the app', () => {
@@ -79,5 +93,26 @@ describe('CartViewComponent', () => {
     const cartProducts = debugElement.query(By.css('app-cart-products'));
     cartProducts.triggerEventHandler('productClicked', 1);
     expect(router.navigate).toHaveBeenCalledWith([BgFashionPath.Product, 1]);
+  });
+
+  it('should show error snackbar on error in sending an email', () => {
+    const response: SendEmailResponse = { ok: false, next: '' };
+    apiMock.sendOrderEmail.and.returnValue(of(response));
+
+    component.currentStep = CartStep.SUMMARY;
+    const cartTemplate = debugElement.query(By.css('app-cart-template'));
+    cartTemplate.triggerEventHandler('nextClicked', null);
+    fixture.detectChanges();
+
+    expect(component.snackbarLabelSubject$.next).toHaveBeenCalledWith('Oops something went wrong');
+  });
+
+  it('should reset cart on sending an email', () => {
+    component.currentStep = component.cartStep.SUMMARY;
+    const cartTemplate = debugElement.query(By.css('app-cart-template'));
+    cartTemplate.triggerEventHandler('nextClicked', null);
+    fixture.detectChanges();
+
+    expect(cartMock.resetCart).toHaveBeenCalled();
   });
 });
