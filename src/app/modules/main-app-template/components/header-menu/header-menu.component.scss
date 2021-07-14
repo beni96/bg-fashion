@@ -5,6 +5,7 @@
 :host {
   @extend %flex-space-between;
 
+  align-items: flex-start;
   background-color: colors.$secondary-color;
   height: 224px;
   position: fixed;
@@ -12,17 +13,19 @@
 }
 
 .subcategories-wrapper {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   flex-flow: column wrap;
-  padding: 24px;
+  height: 100%;
+  padding: 12px 0;
 
   .subcategory {
     color: colors.$primary-color;
     font-family: fonts.$font-rubik;
     font-size: 20px;
     font-weight: 400;
-    margin: 0 28px 16px;
+    margin: 0 32px 20px;
 
     &:hover {
       text-decoration: underline;

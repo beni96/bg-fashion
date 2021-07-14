@@ -8,7 +8,5 @@ export enum BgFashionPath {
   Subcategory = 'subcategory',
   Cart = 'cart',
   Favorites = 'favorites',
-  About = 'about',
-  Confirmation = 'confirmation',
   Error = 'error',
 }

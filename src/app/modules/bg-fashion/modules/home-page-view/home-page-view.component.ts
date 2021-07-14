@@ -1,38 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CategoryLink } from 'src/app/common/interfaces/category-link';
+import { HomePageService } from 'src/app/services/home-page-service/home-page.service';
 import { BgFashionPath, BG_FASHION_PREFIX } from '../../router/bg-fashion.routes.names';
-
-export interface CategoryImageLink {
-  imageUrl: string;
-  title: string;
-  category: string;
-  subcategory?: string;
-}
 
 @Component({
   selector: 'app-home-page-view',
   templateUrl: './home-page-view.component.html',
   styleUrls: ['./home-page-view.component.scss'],
 })
-export class HomePageViewComponent {
-  homeImage: CategoryImageLink = {
-    imageUrl: 'assets/images/back-to-life.jpg',
-    title: 'Back to life',
-    category: 'clothes',
-  };
+export class HomePageViewComponent implements OnInit {
+  homeImage: CategoryLink;
+  categories: CategoryLink[] = [];
+  moreCategories: CategoryLink[] = [];
 
-  categories: CategoryImageLink[] = [
-    { imageUrl: 'assets/images/accessories-category.jpg', title: 'Accessories', category: 'accessories' },
-    { imageUrl: 'assets/images/shoes-category.jpg', title: 'Shoes', category: 'shoes' },
-    { imageUrl: 'assets/images/t-shirts-category.jpg', title: 'T-Shirts', category: 'clothes', subcategory: 't-shirts' },
-    { imageUrl: 'assets/images/jeans-category.jpg', title: 'Jeans', category: 'clothes', subcategory: 'jeans' },
-  ];
+  constructor(private homePageService: HomePageService) {}
 
-  moreCategories: CategoryImageLink[] = [
-    { imageUrl: 'assets/images/dress-up.jpg', title: 'Dress Up.', category: 'clothes', subcategory: 'dresses' },
-    { imageUrl: 'assets/images/sale.jpg', title: 'SALE', category: 'sale' },
-  ];
+  ngOnInit() {
+    const categoryLinks = this.homePageService.getCategoryLinks();
+    this.homeImage = categoryLinks[0];
+    this.categories = categoryLinks.slice(1, 5);
+    this.moreCategories = categoryLinks.slice(5, 7);
+  }
 
-  getLink(categoryImageLink: CategoryImageLink) {
+  getLink(categoryImageLink: CategoryLink) {
     const linkSuffix = categoryImageLink.subcategory ? `/${BgFashionPath.Subcategory}/${categoryImageLink.subcategory}` : '';
     return `${BG_FASHION_PREFIX}/${BgFashionPath.Category}/${categoryImageLink.category}` + linkSuffix;
   }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CartDetails } from 'src/app/common/interfaces/cart-details';
 
-export type FIELD_NAME_TYPE = 'name' | 'email' | 'phone' | 'address' | 'notes';
+type FIELD_NAME_TYPE = 'name' | 'email' | 'phone' | 'address' | 'notes';
 
 const ERRORS_MESSAGES = {
   name: { required: 'Required' },

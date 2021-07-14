@@ -54,9 +54,6 @@ describe('HeaderComponent', () => {
     expect(component.pages[0].menuCategories.length).toBeTruthy();
 
     const subcategory = PRODUCTS[0].subcategories[0];
-    const isSubcategoryExist = component.pages.some((page) => {
-      return page.menuCategories.some((menuCategory) => menuCategory === subcategory);
-    });
     expect(subcategory).toBeTruthy();
   });
 });

@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+img {
+  margin-bottom: 16px;
+  max-height: 240px;
+  max-width: 240px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+
+  app-text-field,
+  app-select {
+    margin-bottom: 16px;
+  }
+}

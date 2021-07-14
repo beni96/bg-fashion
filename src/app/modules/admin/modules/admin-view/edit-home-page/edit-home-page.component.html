@@ -1,0 +1,18 @@
+<span class="title">Home Page</span>
+<div class="select-wrapper">
+  <span class="choose-link">Choose one of the home page links: </span>
+  <app-select
+    placeholder="Select option.."
+    [value]="selectedCategoryLink?.title"
+    [options]="selectOptions"
+    (optionSelected)="onSelect($event)"
+  ></app-select>
+</div>
+<app-edit-home-page-link
+  *ngIf="selectedCategoryLink"
+  [imageUrl]="selectedCategoryLink.imageUrl"
+  [title]="selectedCategoryLink.title"
+  [category]="selectedCategoryLink.category"
+  [subcategory]="selectedCategoryLink.subcategory"
+  (categoryLinkChanged)="onCategoryLinkChange($event)"
+></app-edit-home-page-link>

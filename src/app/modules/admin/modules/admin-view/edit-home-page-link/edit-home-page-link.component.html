@@ -1,0 +1,28 @@
+<img [src]="imageUrl" />
+<form [formGroup]="form" (ngSubmit)="onSave()">
+  <app-text-field
+    ngDefaultControl
+    formControlName="url"
+    label="Image url"
+    [value]="imageUrl"
+    [errorMessage]="getImageUrlErrorMessage()"
+  ></app-text-field>
+  <app-text-field ngDefaultControl formControlName="title" label="Title" [value]="title"></app-text-field>
+  <app-select
+    ngDefaultControl
+    formControlName="category"
+    label="Category"
+    [value]="category"
+    [options]="getCategoryOptions()"
+    color="secondary"
+  ></app-select>
+  <app-select
+    ngDefaultControl
+    formControlName="subcategory"
+    label="Subcategory"
+    [value]="subcategory"
+    [options]="getSubcategoryOptions()"
+    color="secondary"
+  ></app-select>
+  <app-button size="lg" type="submit">Save</app-button>
+</form>

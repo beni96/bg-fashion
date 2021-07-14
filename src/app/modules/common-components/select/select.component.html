@@ -1,0 +1,22 @@
+<div class="select-wrapper" [ngClass]="[color]">
+  <label *ngIf="label">{{ label }}</label>
+  <select #select [value]="value">
+    <option *ngFor="let option of options" [selected]="isOptionSelected(option)">{{ option }}</option>
+  </select>
+  <div tabindex="0" class="menu-wrapper" (click)="toggleMenu()" (keydown)="toggleMenu($event)">
+    <span *ngIf="value" class="value">{{ value }}</span>
+    <span *ngIf="!value" class="placeholder">{{ placeholder }}</span>
+    <i class="fas fa-angle-down" [ngClass]="{ open: isOpen }"></i>
+  </div>
+  <div class="options-wrapper" [ngClass]="{ open: isOpen }">
+    <span
+      tabindex="0"
+      *ngFor="let option of options"
+      class="option"
+      [ngClass]="{ selected: isOptionSelected(option) }"
+      (click)="onOptionSelect(option)"
+      (keydown)="onOptionSelect(option, $event)"
+      >{{ option }}</span
+    >
+  </div>
+</div>

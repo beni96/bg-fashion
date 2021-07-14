@@ -1,7 +1,8 @@
+import { AdminPath, ADMIN_PREFIX } from '../../admin/router/admin.routes.names';
 import { BgFashionPath, BG_FASHION_PREFIX } from '../../bg-fashion/router/bg-fashion.routes.names';
 import { FooterList } from '../interfaces/footer-list';
 
-const ABOUT_BG_FASHION_LINK = `${BG_FASHION_PREFIX}/${BgFashionPath.About}`;
+const ADMIN_LINK = `${ADMIN_PREFIX}/${AdminPath.Home}`;
 const ABOUT_BEN_GOLAN_LINK = 'https://ben-golan-portfolio.firebaseapp.com/';
 const CART_LINK = `${BG_FASHION_PREFIX}/${BgFashionPath.Cart}`;
 const FAVORITES_LINK = `${BG_FASHION_PREFIX}/${BgFashionPath.Favorites}`;
@@ -9,7 +10,7 @@ const LINKEDIN_LINK = 'https://www.linkedin.com/in/ben-golan-24359516b/';
 const GITHUB_LINK = 'https://github.com/beni96';
 
 export const GENERAL_LINKS: FooterList[] = [
-  { title: 'About BG Fashion', linkUrl: ABOUT_BG_FASHION_LINK },
+  { title: 'Admin', linkUrl: ADMIN_LINK },
   { title: 'Cart', linkUrl: CART_LINK },
   { title: 'Favorites', linkUrl: FAVORITES_LINK },
 ];

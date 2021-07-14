@@ -23,13 +23,12 @@ export class HeaderComponent implements OnInit {
       return (this.isScrolled = window.pageYOffset > 0);
     });
 
-    this.productsService.getProducts().forEach((product) => {
-      product.categories.forEach((category) => {
-        const headerCategory = this.pages.find((page) => page.category === category);
-        headerCategory
-          ? (headerCategory.menuCategories = this.concatWithNoDuplicates(product.subcategories, headerCategory.menuCategories))
-          : (this.pages = this.pages.concat({ category, menuCategories: product.subcategories }));
-      });
+    this.productsService.getCategories().forEach((category) => {
+      const existPage = this.pages.find((page) => page.category === category);
+      const subcategories = this.productsService.getSubcategories(category);
+      existPage
+        ? (existPage.menuCategories = subcategories)
+        : (this.pages = this.pages.concat({ category, menuCategories: subcategories }));
     });
   }
 
@@ -55,11 +54,6 @@ export class HeaderComponent implements OnInit {
 
   hideHeaderMenu() {
     this.currentHoveredPage = null;
-  }
-
-  private concatWithNoDuplicates(a: string[], b: string[]): string[] {
-    const notDuplicateditems = b.filter((item) => a.indexOf(item) < 0);
-    return a.concat(notDuplicateditems);
   }
 
   getFavoriteProductsCount() {

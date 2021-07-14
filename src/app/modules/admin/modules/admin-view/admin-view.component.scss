@@ -1,0 +1,22 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  align-self: center;
+  color: colors.$primary-color;
+  font-family: fonts.$font-montserrat;
+  font-size: 42px;
+  font-weight: 500;
+  margin-bottom: 48px;
+}
+
+app-edit-home-page {
+  border-bottom: 1px solid colors.$separator-color;
+  padding-bottom: 32px;
+}

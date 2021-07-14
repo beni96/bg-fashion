@@ -8,6 +8,7 @@ import { ProductComponent } from './product/product.component';
 import { TextFieldComponent } from './text-field/text-field.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { StateMessageComponent } from './state-message/state-message.component';
+import { SelectComponent } from './select/select.component';
 
 const components = [
   ColorComponent,
@@ -17,6 +18,7 @@ const components = [
   TextFieldComponent,
   SnackbarComponent,
   StateMessageComponent,
+  SelectComponent,
 ];
 
 @NgModule({
