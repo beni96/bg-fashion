@@ -1,8 +1,8 @@
-import { AdminPath, ADMIN_PREFIX } from '../../admin/router/admin.routes.names';
+import { ADMIN_PREFIX } from 'src/app/app-routing.module';
 import { BgFashionPath, BG_FASHION_PREFIX } from '../../bg-fashion/router/bg-fashion.routes.names';
 import { FooterList } from '../interfaces/footer-list';
 
-const ADMIN_LINK = `${ADMIN_PREFIX}/${AdminPath.Home}`;
+const ADMIN_LINK = `${ADMIN_PREFIX}`;
 const ABOUT_BEN_GOLAN_LINK = 'https://ben-golan-portfolio.firebaseapp.com/';
 const CART_LINK = `${BG_FASHION_PREFIX}/${BgFashionPath.Cart}`;
 const FAVORITES_LINK = `${BG_FASHION_PREFIX}/${BgFashionPath.Favorites}`;

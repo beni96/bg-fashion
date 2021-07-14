@@ -3,11 +3,11 @@ import { CategoryLink } from 'src/app/common/interfaces/category-link';
 import { HomePageService } from 'src/app/services/home-page-service/home-page.service';
 
 @Component({
-  selector: 'app-admin-view',
-  templateUrl: './admin-view.component.html',
-  styleUrls: ['./admin-view.component.scss'],
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.scss'],
 })
-export class AdminViewComponent implements OnInit {
+export class AdminComponent implements OnInit {
   categoryLinks: CategoryLink[] = [];
 
   constructor(private homePageService: HomePageService) {}

@@ -1,9 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { AdminViewModule } from './modules/admin-view/admin-view.module';
+import { CommonComponentsModule } from 'src/app/modules/common-components/common-components.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AdminComponent } from './admin.component';
+import { EditHomePageLinkComponent } from './components/edit-home-page-link/edit-home-page-link.component';
+import { EditHomePageComponent } from './components/edit-home-page/edit-home-page.component';
 
 @NgModule({
-  imports: [BrowserModule, CommonModule, AdminViewModule],
+  declarations: [AdminComponent, EditHomePageComponent, EditHomePageLinkComponent],
+  imports: [BrowserModule, CommonModule, CommonComponentsModule, ReactiveFormsModule],
+  exports: [AdminComponent],
 })
 export class AdminModule {}
