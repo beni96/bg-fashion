@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { isEnterOrSpacePressed } from '../../bg-fashion/common/utils';
 
 @Component({
@@ -12,6 +12,8 @@ export class SelectComponent implements OnInit {
   @Input() placeholder: string;
   @Input() label: string;
   @Input() color: 'primary' | 'secondary' = 'primary';
+  @Input() multiple = false;
+  @Input() errorMessage: string;
   @Output() optionSelected = new EventEmitter<string | number>();
 
   @ViewChild('select') select: ElementRef<HTMLSelectElement>;
@@ -30,6 +32,10 @@ export class SelectComponent implements OnInit {
   }
 
   isOptionSelected(value: string | number) {
+    if (this.multiple) {
+      return (this.value as string)?.includes(value as string);
+    }
+
     return this.value === value;
   }
 
@@ -46,10 +52,22 @@ export class SelectComponent implements OnInit {
       return;
     }
 
-    this.select.nativeElement.value = value as string;
+    if (this.multiple) {
+      const isIncludedValue = (this.value as string)?.includes(value as string);
+      if (isIncludedValue) {
+        this.value = (this.value as string).replace(`${value},`, '');
+        this.value = (this.value as string).replace(`,${value}`, '');
+        this.value = (this.value as string).replace(value as string, '');
+      } else {
+        this.value = this.value ? `${this.value},${value}` : value;
+      }
+    } else {
+      this.value = value;
+      this.toggleMenu();
+    }
+
+    this.select.nativeElement.value = this.value as string;
     this.select.nativeElement.dispatchEvent(new Event('input', { bubbles: true, composed: false }));
-    this.optionSelected.emit(value);
-    this.value = value;
-    this.toggleMenu();
+    this.optionSelected.emit(this.value);
   }
 }

@@ -1,5 +1,8 @@
 <div class="select-wrapper" [ngClass]="[color]">
-  <label *ngIf="label">{{ label }}</label>
+  <label *ngIf="label" [ngClass]="{ error: errorMessage }">
+    {{ label }}
+    <span *ngIf="errorMessage"> - *{{ errorMessage }}</span>
+  </label>
   <select #select [value]="value">
     <option *ngFor="let option of options" [selected]="isOptionSelected(option)">{{ option }}</option>
   </select>
@@ -16,7 +19,8 @@
       [ngClass]="{ selected: isOptionSelected(option) }"
       (click)="onOptionSelect(option)"
       (keydown)="onOptionSelect(option, $event)"
-      >{{ option }}</span
     >
+      {{ option }}
+    </span>
   </div>
 </div>

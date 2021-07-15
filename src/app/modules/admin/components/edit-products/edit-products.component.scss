@@ -1,0 +1,35 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 56px;
+}
+
+.title {
+  color: colors.$primary-color;
+  font-family: fonts.$font-rubik;
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.select-wrapper {
+  @extend %flex-align-center;
+
+  margin-bottom: 32px;
+
+  .choose-product {
+    color: colors.$primary-color;
+    font-family: fonts.$font-rubik;
+    font-size: 16px;
+    font-weight: 500;
+    margin-inline-end: 8px;
+  }
+}
+
+app-button {
+  width: max-content;
+}

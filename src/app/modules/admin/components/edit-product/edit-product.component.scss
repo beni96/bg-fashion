@@ -1,0 +1,45 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+img {
+  margin-bottom: 32px;
+  max-height: 240px;
+  max-width: 240px;
+}
+
+app-text-field,
+app-select {
+  flex: 1;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 560px;
+
+  app-select,
+  app-text-field {
+    margin-bottom: 24px;
+  }
+
+  .fields-wrapper {
+    display: flex;
+
+    app-text-field:first-child,
+    app-select:first-child {
+      margin-inline-end: 16px;
+    }
+  }
+
+  .buttons-wrapper {
+    display: flex;
+    margin-top: 32px;
+
+    app-button:first-child {
+      margin-inline-end: 16px;
+    }
+  }
+}

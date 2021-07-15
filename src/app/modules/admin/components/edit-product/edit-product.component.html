@@ -1,0 +1,88 @@
+<img [src]="product?.colorsWithImages[0].images[0]" />
+<form [formGroup]="form" (ngSubmit)="onSave()">
+  <div class="fields-wrapper">
+    <app-text-field
+      ngDefaultControl
+      formControlName="title"
+      label="Title"
+      [value]="formControls.title.value"
+      [errorMessage]="errorMessages.title"
+    ></app-text-field>
+    <app-text-field
+      ngDefaultControl
+      formControlName="subtitle"
+      label="Subtitle"
+      [value]="formControls.subtitle.value"
+      [errorMessage]="errorMessages.subtitle"
+    ></app-text-field>
+  </div>
+  <div class="fields-wrapper">
+    <app-text-field
+      ngDefaultControl
+      formControlName="price"
+      label="Price"
+      [value]="formControls.price.value"
+      [errorMessage]="errorMessages.price"
+    ></app-text-field>
+    <app-text-field
+      ngDefaultControl
+      formControlName="previousPrice"
+      label="Previous price"
+      [value]="formControls.previousPrice.value"
+      [errorMessage]="errorMessages.previousPrice"
+    ></app-text-field>
+  </div>
+  <div class="fields-wrapper">
+    <app-select
+      ngDefaultControl
+      formControlName="sizesType"
+      label="Sizes type"
+      placeholder="Choose type"
+      [value]="formControls.sizesType.value"
+      [options]="getSizesTypeOptions()"
+      color="secondary"
+      [errorMessage]="errorMessages.sizesType"
+      (optionSelected)="onOptionSelect(formControls.sizesType, $event, formControls.sizes)"
+    ></app-select>
+    <app-select
+      label="Sizes"
+      placeholder="Choose sizes"
+      [value]="formControls.sizes.value"
+      [options]="getSizeOptions()"
+      color="secondary"
+      [multiple]="true"
+      [errorMessage]="errorMessages.sizes"
+      (optionSelected)="onOptionSelect(formControls.sizes, $event)"
+    ></app-select>
+  </div>
+  <div class="fields-wrapper">
+    <app-select
+      label="Categories"
+      placeholder="Choose categories"
+      [value]="formControls.categories.value"
+      [options]="getCategoryOptions()"
+      color="secondary"
+      [multiple]="true"
+      [errorMessage]="errorMessages.categories"
+      (optionSelected)="onOptionSelect(formControls.categories, $event, formControls.subcategories)"
+    ></app-select>
+    <app-select
+      label="Subcategories"
+      placeholder="Choose subcategories"
+      [value]="formControls.subcategories.value"
+      [options]="getSubcategoryOptions()"
+      color="secondary"
+      [multiple]="true"
+      [errorMessage]="errorMessages.subcategories"
+      (optionSelected)="onOptionSelect(formControls.subcategories, $event)"
+    ></app-select>
+  </div>
+  <div class="fields-wrapper" *ngIf="showOtherCategoryInput() || showOtherSubcategoryInput()">
+    <app-text-field #otherCategory *ngIf="showOtherCategoryInput()" placeholder="Set categories.."></app-text-field>
+    <app-text-field #otherSubcategory *ngIf="showOtherSubcategoryInput()" placeholder="Set subcategories.."></app-text-field>
+  </div>
+  <div class="buttons-wrapper">
+    <app-button size="lg" type="submit">Save</app-button>
+    <app-button *ngIf="product" size="lg" color="secondary" (click)="onRemove()">Remove</app-button>
+  </div>
+</form>

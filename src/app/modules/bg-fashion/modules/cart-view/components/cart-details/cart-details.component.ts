@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CartDetails } from 'src/app/common/interfaces/cart-details';
+import { getFormErrorMessages } from 'src/app/modules/bg-fashion/common/utils';
 
 type FIELD_NAME_TYPE = 'name' | 'email' | 'phone' | 'address' | 'notes';
 
 const ERRORS_MESSAGES = {
-  name: { required: 'Required' },
-  email: { required: 'Required', pattern: 'Invalid email' },
-  phone: { required: 'Required', pattern: 'Invalid phone' },
-  address: { required: 'Required' },
-  notes: { required: 'Required' },
+  email: { pattern: 'Invalid email' },
+  phone: { pattern: 'Invalid phone' },
 };
 
 const EMAIL_FORMAT = '^[\\w]+(([\\w-+\\.]+[\\w])*)+@([\\w-]+\\.)+[\\w-]+[\\w-]*$';
@@ -44,15 +42,7 @@ export class CartDetailsComponent implements OnInit {
   }
 
   validateForm(): boolean {
-    this.errorMessages = {};
-    this.fieldNames.forEach((fieldName) => {
-      const errors = this.formControls[fieldName].errors;
-      if (errors) {
-        const fieldErrorNames = Object.keys(errors);
-        const errorName = fieldErrorNames[0];
-        this.errorMessages[fieldName] = ERRORS_MESSAGES[fieldName][errorName];
-      }
-    });
+    this.errorMessages = getFormErrorMessages(this.fieldNames, this.formControls, ERRORS_MESSAGES);
 
     return this.form.valid;
   }

@@ -10,6 +10,6 @@ export class TextFieldComponent {
   @Input() label: string;
   @Input() placeholder = '';
   @Input() errorMessage: string;
-  @Input() value: string;
+  @Input() value = '';
   @Input() type: 'text' | 'email' = 'text';
 }

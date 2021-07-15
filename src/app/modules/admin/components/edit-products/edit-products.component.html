@@ -1,0 +1,23 @@
+<span class="title">Products</span>
+
+<div *ngIf="!isAddProductClicked" class="select-wrapper">
+  <span class="choose-product">Choose one of the products ids: </span>
+  <app-select
+    placeholder="Select product.."
+    [value]="selectedProduct?.id"
+    [options]="getSelectOptions()"
+    (optionSelected)="onSelect($event)"
+  ></app-select>
+</div>
+
+<app-edit-product
+  *ngIf="selectedProduct || isAddProductClicked"
+  [product]="selectedProduct"
+  (productAdded)="onProductAdd($event)"
+  (productChanged)="onProductChange($event)"
+  (productRemoved)="onProductRemove()"
+></app-edit-product>
+
+<app-button *ngIf="!isAddProductClicked && !selectedProduct" size="lg" color="secondary" (click)="onAddProductButtonClick()">
+  Add product
+</app-button>

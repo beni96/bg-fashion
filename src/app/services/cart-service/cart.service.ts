@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CartProduct } from 'src/app/common/interfaces/cart-product';
+import { ProductsService } from '../products-service/products.service';
 
 const CART_PRODUCTS = 'cartProducts';
 
@@ -9,7 +10,7 @@ const CART_PRODUCTS = 'cartProducts';
 export class CartService {
   private cartProducts: CartProduct[];
 
-  constructor() {
+  constructor(private productsService: ProductsService) {
     this.getCartProducts();
   }
 
@@ -19,6 +20,7 @@ export class CartService {
     }
 
     this.cartProducts = JSON.parse(localStorage.getItem(CART_PRODUCTS)) || [];
+    this.cartProducts = this.cartProducts.filter((cartProduct) => !!this.productsService.getProductById(cartProduct.product.id));
     return this.cartProducts;
   }
 
@@ -46,5 +48,9 @@ export class CartService {
   resetCart(): void {
     this.cartProducts = [];
     localStorage.setItem(CART_PRODUCTS, JSON.stringify(this.cartProducts));
+  }
+
+  clearCache(): void {
+    this.cartProducts = null;
   }
 }

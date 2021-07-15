@@ -1,4 +1,4 @@
-<span class="title">Favorites</span>
+<span *ngIf="favoriteProducts.length" class="title">Favorites</span>
 
 <div class="products-wrapper">
   <app-product
@@ -14,3 +14,9 @@
     (trashClicked)="onTrashClick(product.id)"
   ></app-product>
 </div>
+
+<app-state-message
+  *ngIf="!favoriteProducts.length"
+  [title]="'Favorites is empty'"
+  [subtitle]="'Keep looking for the best outfits in our site'"
+></app-state-message>

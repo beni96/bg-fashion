@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { CartProduct } from 'src/app/common/interfaces/cart-product';
 import { SizesType } from '../../../common/interfaces/product';
 import { PANTS_SIZES, SHIRTS_SIZES, SHOES_SIZES } from './types';
@@ -14,9 +15,9 @@ export const isEnterOrSpacePressed = (event: KeyboardEvent) => {
 
 export const getSizes = (sizesType: SizesType) => {
   switch (sizesType) {
-    case 'pants':
+    case SizesType.PANTS:
       return PANTS_SIZES;
-    case 'shoes':
+    case SizesType.SHOES:
       return SHOES_SIZES;
     default:
       return SHIRTS_SIZES;
@@ -34,4 +35,17 @@ export const getTotalPrice = (cartProducts: CartProduct[]): number => {
     totalPrice += cartProduct.quantity * cartProduct.product.price;
   });
   return totalPrice;
+};
+
+export const getFormErrorMessages = (fieldNames, formControls: { [key: string]: FormControl }, messages) => {
+  const errorMessages = {};
+  fieldNames.forEach((fieldName) => {
+    const errors = formControls[fieldName].errors;
+    if (errors) {
+      const fieldErrorNames = Object.keys(errors);
+      const errorName = fieldErrorNames[0];
+      errorMessages[fieldName] = errorName === 'required' ? 'Required' : messages[fieldName][errorName];
+    }
+  });
+  return errorMessages;
 };

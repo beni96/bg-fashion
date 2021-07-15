@@ -8,7 +8,11 @@ export interface ColorWithImages {
   images: string[];
 }
 
-export type SizesType = 'shirts' | 'pants' | 'shoes';
+export enum SizesType {
+  SHIRTS = 'shirts',
+  PANTS = 'pants',
+  SHOES = 'shoes',
+}
 
 export interface Product {
   id: number;

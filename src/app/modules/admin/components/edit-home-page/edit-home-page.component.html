@@ -4,7 +4,7 @@
   <app-select
     placeholder="Select option.."
     [value]="selectedCategoryLink?.title"
-    [options]="selectOptions"
+    [options]="getSelectOptions()"
     (optionSelected)="onSelect($event)"
   ></app-select>
 </div>

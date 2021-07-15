@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from 'src/app/common/interfaces/product';
+import { ProductsService } from '../products-service/products.service';
 
 const FAVORITE_PRODUCTS = 'favoriteProducts';
 
@@ -9,7 +10,7 @@ const FAVORITE_PRODUCTS = 'favoriteProducts';
 export class FavoritesService {
   private favoriteProducts: Product[];
 
-  constructor() {
+  constructor(private productsService: ProductsService) {
     this.getFavoriteProducts();
   }
 
@@ -19,6 +20,7 @@ export class FavoritesService {
     }
 
     this.favoriteProducts = JSON.parse(localStorage.getItem(FAVORITE_PRODUCTS)) || [];
+    this.favoriteProducts = this.favoriteProducts.filter((favoriteProduct) => !!this.productsService.getProductById(favoriteProduct.id));
     return this.favoriteProducts;
   }
 
@@ -43,5 +45,9 @@ export class FavoritesService {
 
   isFavoriteProduct(productId: number) {
     return this.getFavoriteProducts().some((product) => product.id === productId);
+  }
+
+  clearCache(): void {
+    this.favoriteProducts = null;
   }
 }

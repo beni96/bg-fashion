@@ -1,2 +1,8 @@
 <span class="title">Admin</span>
-<app-edit-home-page [categoryLinks]="categoryLinks" (categoryLinkChanged)="onCategoryLinkChange($event)"></app-edit-home-page>
+<app-edit-home-page [categoryLinks]="getCategoryLinks()" (categoryLinkChanged)="onCategoryLinkChange($event)"></app-edit-home-page>
+<app-edit-products
+  [products]="getProducts()"
+  (productAdded)="onProductAdd($event)"
+  (productChanged)="onProductChange($event)"
+  (productRemoved)="onProductRemove($event)"
+></app-edit-products>

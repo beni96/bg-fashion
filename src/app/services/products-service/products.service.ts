@@ -15,7 +15,20 @@ export class ProductsService {
     }
 
     this.products = PRODUCTS;
-    return this.products;
+    return this.products || [];
+  }
+
+  addProduct(product: Product) {
+    this.products = this.products.concat(product);
+  }
+
+  setProduct(product: Product, index: number) {
+    this.getProducts()[index] = product;
+  }
+
+  removeProduct(index: number) {
+    this.getProducts().splice(index, 1);
+    this.clearCache();
   }
 
   getProductsByCategories(category: string, subcategory?: string, productIdToExclude?: number): Product[] {
@@ -37,6 +50,7 @@ export class ProductsService {
     if (this.categories) {
       return this.categories;
     }
+
     this.categories = [];
     this.getProducts().forEach((product) => {
       product.categories.forEach((category) => {
@@ -60,5 +74,10 @@ export class ProductsService {
       });
     });
     return subcategories;
+  }
+
+  clearCache() {
+    this.products = null;
+    this.categories = null;
   }
 }
