@@ -6,7 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { FavoritesService } from 'src/app/services/favorites-service/favorites.service';
-import { SHIRTS_SIZES } from '../../common/types';
+import { SHIRTS_SIZES } from '../../../../common/products/types';
 import { ProductViewComponent } from './product-view.component';
 
 describe('ProductViewComponent', () => {

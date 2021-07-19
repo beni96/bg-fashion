@@ -6,7 +6,7 @@ import { CartProduct } from 'src/app/common/interfaces/cart-product';
 import { SendEmailRequest, SendEmailResponse } from 'src/app/common/interfaces/send-email';
 import { ApiService } from 'src/app/services/api-service/api.service';
 import { CartService } from 'src/app/services/cart-service/cart.service';
-import { getTotalPrice } from '../../common/utils';
+import { getTotalPrice } from '../../../../common/utils/utils';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 

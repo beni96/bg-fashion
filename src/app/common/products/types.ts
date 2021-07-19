@@ -6,10 +6,12 @@ export const COLOR_TYPES = [
   { name: 'black', hexCode: '#000000' },
   { name: 'white', hexCode: '#ffffff' },
   { name: 'red', hexCode: '#f10f29' },
-  { name: 'blue', hexCode: '#21273f' },
+  { name: 'blue', hexCode: '#3333ff' },
   { name: 'yellow', hexCode: '#fbe43a' },
   { name: 'gray', hexCode: '#8a868f' },
-] as const;
+  { name: 'purple', hexCode: '#c9a0ff' },
+  { name: 'green', hexCode: '#02dd02' },
+];
 
 export const CATEGORY_AND_SUBCATEGORY_TYPES = [
   { category: 'clothes', subcategory: CLOTHES_SUBCATEGORY_TYPES },

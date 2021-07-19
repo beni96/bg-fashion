@@ -1,0 +1,36 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  app-select,
+  app-text-field {
+    flex: 1;
+    margin-bottom: 24px;
+  }
+
+  .fields-wrapper {
+    @extend %flex-align-center;
+
+    .color-name {
+      color: colors.$primary-color;
+      font-family: fonts.$font-rubik;
+      font-size: 16px;
+      margin-inline-start: 8px;
+    }
+
+    app-text-field:first-child,
+    app-select:first-child {
+      margin-inline-end: 16px;
+    }
+  }
+}

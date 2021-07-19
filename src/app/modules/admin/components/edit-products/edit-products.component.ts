@@ -31,16 +31,22 @@ export class EditProductsComponent {
 
   onProductChange(product: Product) {
     this.productChanged.emit({ product, index: this.selectedProductIndex });
-    this.isAddProductClicked = false;
+    this.resetForm();
   }
 
   onProductRemove() {
     this.productRemoved.emit(this.selectedProductIndex);
-    this.isAddProductClicked = false;
+    this.resetForm();
   }
 
   onProductAdd(product: Product) {
     this.productAdded.emit(product);
+    this.resetForm();
+  }
+
+  private resetForm() {
     this.isAddProductClicked = false;
+    this.selectedProduct = null;
+    this.selectedProductIndex = null;
   }
 }

@@ -20,6 +20,7 @@ describe('SizeComponent', () => {
     fixture = TestBed.createComponent(SizeComponent);
     component = fixture.componentInstance;
     debugElement = fixture.debugElement;
+    component.name = 'xs';
     fixture.detectChanges();
 
     spyOn(component.sizeSelected, 'emit');

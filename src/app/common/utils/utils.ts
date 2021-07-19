@@ -1,7 +1,7 @@
 import { FormControl } from '@angular/forms';
 import { CartProduct } from 'src/app/common/interfaces/cart-product';
-import { SizesType } from '../../../common/interfaces/product';
-import { PANTS_SIZES, SHIRTS_SIZES, SHOES_SIZES } from './types';
+import { SizesType } from '../interfaces/product';
+import { PANTS_SIZES, SHIRTS_SIZES, SHOES_SIZES } from '../products/types';
 
 export const isEnterOrSpacePressed = (event: KeyboardEvent) => {
   if (event.code === 'Enter' || event.code === 'Space') {

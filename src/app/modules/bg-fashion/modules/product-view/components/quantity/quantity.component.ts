@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { isEnterOrSpacePressed } from 'src/app/modules/bg-fashion/common/utils';
+import { isEnterOrSpacePressed } from 'src/app/common/utils/utils';
 
 @Component({
   selector: 'app-quantity',

@@ -81,6 +81,12 @@
     <app-text-field #otherCategory *ngIf="showOtherCategoryInput()" placeholder="Set categories.."></app-text-field>
     <app-text-field #otherSubcategory *ngIf="showOtherSubcategoryInput()" placeholder="Set subcategories.."></app-text-field>
   </div>
+  <app-edit-colors-with-images
+    #editColorWithImages
+    [colorsWithImages]="product?.colorsWithImages || []"
+    [defaultColorIndex]="product?.defaultColorIndex"
+  >
+  </app-edit-colors-with-images>
   <div class="buttons-wrapper">
     <app-button size="lg" type="submit">Save</app-button>
     <app-button *ngIf="product" size="lg" color="secondary" (click)="onRemove()">Remove</app-button>

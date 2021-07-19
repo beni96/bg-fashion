@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CartDetails } from 'src/app/common/interfaces/cart-details';
-import { getFormErrorMessages } from 'src/app/modules/bg-fashion/common/utils';
+import { getFormErrorMessages } from 'src/app/common/utils/utils';
 
 type FIELD_NAME_TYPE = 'name' | 'email' | 'phone' | 'address' | 'notes';
 

@@ -8,9 +8,17 @@ import { EditHomePageLinkComponent } from './components/edit-home-page-link/edit
 import { EditHomePageComponent } from './components/edit-home-page/edit-home-page.component';
 import { EditProductsComponent } from './components/edit-products/edit-products.component';
 import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { EditColorsWithImagesComponent } from './components/edit-colors-with-images/edit-colors-with-images.component';
 
 @NgModule({
-  declarations: [AdminComponent, EditHomePageComponent, EditHomePageLinkComponent, EditProductsComponent, EditProductComponent],
+  declarations: [
+    AdminComponent,
+    EditHomePageComponent,
+    EditHomePageLinkComponent,
+    EditProductsComponent,
+    EditProductComponent,
+    EditColorsWithImagesComponent,
+  ],
   imports: [BrowserModule, CommonModule, CommonComponentsModule, ReactiveFormsModule],
   exports: [AdminComponent],
 })

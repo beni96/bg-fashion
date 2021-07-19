@@ -17,8 +17,8 @@
 }
 
 .select-wrapper {
-  @extend %flex-align-center;
-
+  align-items: baseline;
+  display: flex;
   margin-bottom: 32px;
 
   .choose-product {

@@ -48,9 +48,11 @@ label {
 .menu-wrapper {
   @extend %flex-align-center;
 
+  box-sizing: border-box;
   background-color: colors.$bg-purple;
   color: colors.$white;
   cursor: pointer;
+  height: 48px;
   padding: 8px 16px;
   user-select: none;
 

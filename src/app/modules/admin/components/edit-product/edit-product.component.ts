@@ -1,21 +1,13 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product, SizesType } from 'src/app/common/interfaces/product';
-import { getFormErrorMessages, getSizes } from 'src/app/modules/bg-fashion/common/utils';
+import { getFormErrorMessages, getSizes } from 'src/app/common/utils/utils';
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { FavoritesService } from 'src/app/services/favorites-service/favorites.service';
 import { ProductsService } from 'src/app/services/products-service/products.service';
+import { EditColorsWithImagesComponent } from '../edit-colors-with-images/edit-colors-with-images.component';
 
-type FIELD_NAME_TYPE =
-  | 'title'
-  | 'subtitle'
-  | 'price'
-  | 'previousPrice'
-  | 'sizes'
-  | 'sizesType'
-  | 'defaultColor'
-  | 'categories'
-  | 'subcategories';
+type FIELD_NAME_TYPE = 'title' | 'subtitle' | 'price' | 'previousPrice' | 'sizes' | 'sizesType' | 'categories' | 'subcategories';
 
 const ERRORS_MESSAGES = {
   title: { minlength: 'At least 3 characters' },
@@ -35,19 +27,11 @@ export class EditProductComponent implements OnInit, OnChanges {
   @Output() productRemoved = new EventEmitter<void>();
   @Output() productAdded = new EventEmitter<Product>();
 
+  @ViewChild('editColorWithImages') editColorWithImages: EditColorsWithImagesComponent;
+
   form: FormGroup;
   formControls: { [key: string]: FormControl };
-  fieldNames: FIELD_NAME_TYPE[] = [
-    'title',
-    'subtitle',
-    'sizes',
-    'sizesType',
-    'defaultColor',
-    'price',
-    'previousPrice',
-    'categories',
-    'subcategories',
-  ];
+  fieldNames: FIELD_NAME_TYPE[] = ['title', 'subtitle', 'sizes', 'sizesType', 'price', 'previousPrice', 'categories', 'subcategories'];
   errorMessages: { [key: string]: string } = {};
 
   constructor(
@@ -73,7 +57,6 @@ export class EditProductComponent implements OnInit, OnChanges {
       subtitle: this.formbuilder.control(this.product?.subtitle, [Validators.required]),
       sizes: this.formbuilder.control(this.product?.sizes.toString(), [Validators.required]),
       sizesType: this.formbuilder.control(this.product?.sizesType, [Validators.required]),
-      defaultColor: this.formbuilder.control(this.product?.defaultColorIndex, []),
       price: this.formbuilder.control(this.product?.price, [Validators.required]),
       previousPrice: this.formbuilder.control(this.product?.previousPrice, []),
       categories: this.formbuilder.control(this.product?.categories.toString(), [Validators.required]),
@@ -114,7 +97,7 @@ export class EditProductComponent implements OnInit, OnChanges {
 
   onOptionSelect(formControl: FormControl, value: string, resetFormControl?: FormControl) {
     formControl.setValue(value);
-    resetFormControl.reset();
+    resetFormControl?.reset();
   }
 
   onRemove() {
@@ -124,7 +107,7 @@ export class EditProductComponent implements OnInit, OnChanges {
   }
 
   onSave() {
-    if (!this.form.valid) {
+    if (!this.form.valid || !this.editColorWithImages.isFormValid()) {
       this.errorMessages = getFormErrorMessages(this.fieldNames, this.formControls, ERRORS_MESSAGES);
       return;
     }
@@ -135,14 +118,24 @@ export class EditProductComponent implements OnInit, OnChanges {
       subtitle: this.formControls.subtitle.value,
       price: this.formControls.price.value,
       previousPrice: this.formControls.previousPrice.value,
-      sizes: this.formControls.sizes.value.split(','),
+      sizesType: this.formControls.sizesType.value,
+      sizes: this.getSizes(),
       categories: this.formControls.categories.value.split(','),
       subcategories: this.formControls.subcategories.value.split(','),
-      colorsWithImages: this.product?.colorsWithImages || [],
+      colorsWithImages: this.editColorWithImages.getFormValues().colorsWithImages,
+      defaultColorIndex: Number(this.editColorWithImages.getFormValues().defaultColorIndex),
     };
 
     this.product ? this.productChanged.emit(product) : this.productAdded.emit(product);
     this.cartService.clearCache();
     this.favoritesService.clearCache();
+  }
+
+  private getSizes(): string[] | number[] {
+    const sizes = this.formControls.sizes.value.split(',');
+    if (this.formControls.sizesType.value === SizesType.SHIRTS) {
+      return sizes;
+    }
+    return sizes.map((size) => Number(size));
   }
 }

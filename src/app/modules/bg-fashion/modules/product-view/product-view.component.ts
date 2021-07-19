@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { map, mergeMap } from 'rxjs/operators';
-import { getImgHeight, getSizes } from '../../common/utils';
+import { getImgHeight, getSizes } from '../../../../common/utils/utils';
 import { ColorWithImages, Product } from '../../../../common/interfaces/product';
 import { ProductsService } from 'src/app/services/products-service/products.service';
 import { FavoritesService } from 'src/app/services/favorites-service/favorites.service';

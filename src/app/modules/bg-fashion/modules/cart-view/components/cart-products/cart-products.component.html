@@ -5,7 +5,7 @@
       <div class="content-wrapper">
         <span class="product title">{{ cartproduct.product.title }}</span>
         <span class="title">Color: {{ cartproduct.colorWithImages.color.name | titlecase }}</span>
-        <span class="title">Size: {{ cartproduct.size | uppercase }}</span>
+        <span class="title">Size: {{ cartproduct.size.toString() | uppercase }}</span>
         <span class="title">Quantity: {{ cartproduct.quantity }}</span>
         <span class="title">Total price: {{ cartproduct.product.price * cartproduct.quantity | currency }}</span>
       </div>

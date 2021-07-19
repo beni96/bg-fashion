@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { isEnterOrSpacePressed } from '../../bg-fashion/common/utils';
+import { isEnterOrSpacePressed } from '../../../common/utils/utils';
 
 @Component({
   selector: 'app-select',
@@ -33,7 +33,8 @@ export class SelectComponent implements OnInit {
 
   isOptionSelected(value: string | number) {
     if (this.multiple) {
-      return (this.value as string)?.includes(value as string);
+      const values = this.value?.toString().split(',');
+      return values?.includes(value.toString());
     }
 
     return this.value === value;
@@ -53,7 +54,8 @@ export class SelectComponent implements OnInit {
     }
 
     if (this.multiple) {
-      const isIncludedValue = (this.value as string)?.includes(value as string);
+      const values = this.value?.toString().split(',');
+      const isIncludedValue = values?.includes(value.toString());
       if (isIncludedValue) {
         this.value = (this.value as string).replace(`${value},`, '');
         this.value = (this.value as string).replace(`,${value}`, '');

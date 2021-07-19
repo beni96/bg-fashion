@@ -10,11 +10,6 @@ img {
   max-width: 240px;
 }
 
-app-text-field,
-app-select {
-  flex: 1;
-}
-
 form {
   display: flex;
   flex-direction: column;
@@ -22,6 +17,7 @@ form {
 
   app-select,
   app-text-field {
+    flex: 1;
     margin-bottom: 24px;
   }
 

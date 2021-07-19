@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/common/interfaces/product';
 import { FavoritesService } from 'src/app/services/favorites-service/favorites.service';
-import { getImgHeight } from '../../common/utils';
+import { getImgHeight } from '../../../../common/utils/utils';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 
 const COLUMNS_NUM = 4;

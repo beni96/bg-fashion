@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { getImgHeight } from '../../common/utils';
+import { getImgHeight } from '../../../../common/utils/utils';
 import { Product } from '../../../../common/interfaces/product';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 import { ProductsService } from 'src/app/services/products-service/products.service';
