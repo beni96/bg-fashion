@@ -55,8 +55,8 @@ export class EditProductComponent implements OnInit, OnChanges {
     this.formControls = {
       title: this.formbuilder.control(this.product?.title, [Validators.required, Validators.minLength(3)]),
       subtitle: this.formbuilder.control(this.product?.subtitle, [Validators.required]),
-      sizes: this.formbuilder.control(this.product?.sizes.toString(), [Validators.required]),
-      sizesType: this.formbuilder.control(this.product?.sizesType, [Validators.required]),
+      sizes: this.formbuilder.control(this.product?.sizes?.toString(), []),
+      sizesType: this.formbuilder.control(this.product?.sizesType, []),
       price: this.formbuilder.control(this.product?.price, [Validators.required]),
       previousPrice: this.formbuilder.control(this.product?.previousPrice, []),
       categories: this.formbuilder.control(this.product?.categories.toString(), [Validators.required]),
@@ -67,11 +67,11 @@ export class EditProductComponent implements OnInit, OnChanges {
   }
 
   getSizeOptions() {
-    return getSizes(this.formControls.sizesType.value);
+    return this.formControls.sizesType.value ? getSizes(this.formControls.sizesType.value) : [];
   }
 
   getSizesTypeOptions() {
-    return Object.values(SizesType);
+    return [...Object.values(SizesType), ''];
   }
 
   getCategoryOptions() {
@@ -107,6 +107,11 @@ export class EditProductComponent implements OnInit, OnChanges {
   }
 
   onSave() {
+    if (this.formControls.sizesType.value) {
+      this.formControls.sizes.setValidators(Validators.required);
+      this.formControls.sizes.updateValueAndValidity();
+    }
+
     if (!this.form.valid || !this.editColorWithImages.isFormValid()) {
       this.errorMessages = getFormErrorMessages(this.fieldNames, this.formControls, ERRORS_MESSAGES);
       return;
@@ -132,6 +137,10 @@ export class EditProductComponent implements OnInit, OnChanges {
   }
 
   private getSizes(): string[] | number[] {
+    if (!this.formControls.sizes.value) {
+      return null;
+    }
+
     const sizes = this.formControls.sizes.value.split(',');
     if (this.formControls.sizesType.value === SizesType.SHIRTS) {
       return sizes;

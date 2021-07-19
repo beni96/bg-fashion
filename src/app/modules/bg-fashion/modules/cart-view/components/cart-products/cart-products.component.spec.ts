@@ -2,10 +2,10 @@ import { DebugElement } from '@angular/core';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import { CartProduct } from 'src/app/common/interfaces/cart-product';
+import { CartProductExtended } from 'src/app/common/interfaces/cart-product';
 import { CartProductsComponent } from './cart-products.component';
 
-const CART_PRODUCTS: CartProduct[] = [
+const CART_PRODUCTS: CartProductExtended[] = [
   {
     product: {
       id: 1,

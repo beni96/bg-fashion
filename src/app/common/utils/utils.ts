@@ -1,5 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { CartProduct } from 'src/app/common/interfaces/cart-product';
+import { CartProductExtended } from 'src/app/common/interfaces/cart-product';
 import { SizesType } from '../interfaces/product';
 import { PANTS_SIZES, SHIRTS_SIZES, SHOES_SIZES } from '../products/types';
 
@@ -29,7 +29,7 @@ export const getImgHeight = (imageRatio: number, columnsNum: number, totalWidth:
   return imageWidth * imageRatio;
 };
 
-export const getTotalPrice = (cartProducts: CartProduct[]): number => {
+export const getTotalPrice = (cartProducts: CartProductExtended[]): number => {
   let totalPrice = 0;
   cartProducts.forEach((cartProduct) => {
     totalPrice += cartProduct.quantity * cartProduct.product.price;

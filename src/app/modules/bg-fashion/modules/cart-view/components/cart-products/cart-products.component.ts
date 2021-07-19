@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CartProduct } from 'src/app/common/interfaces/cart-product';
+import { CartProductExtended } from 'src/app/common/interfaces/cart-product';
 import { getTotalPrice } from 'src/app/common/utils/utils';
 
 @Component({
@@ -8,7 +8,7 @@ import { getTotalPrice } from 'src/app/common/utils/utils';
   styleUrls: ['./cart-products.component.scss'],
 })
 export class CartProductsComponent {
-  @Input() cartProducts: CartProduct[] = [];
+  @Input() cartProducts: CartProductExtended[] = [];
 
   @Output() productClicked = new EventEmitter<number>();
   @Output() trashClicked = new EventEmitter<number>();

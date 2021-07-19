@@ -61,7 +61,7 @@ export class ProductsPageViewComponent implements OnInit {
   }
 
   onHeartClick(product: Product, isFavorite: boolean) {
-    isFavorite ? this.favoritesService.addFavoriteProduct(product) : this.favoritesService.removeFavoriteProduct(product.id);
+    isFavorite ? this.favoritesService.addFavoriteProduct(product.id) : this.favoritesService.removeFavoriteProduct(product.id);
   }
 
   isFavorite(productId: number) {

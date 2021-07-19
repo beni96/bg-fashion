@@ -61,6 +61,6 @@ export class HeaderComponent implements OnInit {
   }
 
   getCartProductsCount() {
-    return this.cartService.getCartProducts().length;
+    return this.cartService.getExtendedCartProducts().length;
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CartProduct } from 'src/app/common/interfaces/cart-product';
+import { CartProduct, CartProductExtended } from 'src/app/common/interfaces/cart-product';
 import { ProductsService } from '../products-service/products.service';
 
 const CART_PRODUCTS = 'cartProducts';
@@ -9,26 +9,44 @@ const CART_PRODUCTS = 'cartProducts';
 })
 export class CartService {
   private cartProducts: CartProduct[];
+  private extendedCartProducts: CartProductExtended[];
 
   constructor(private productsService: ProductsService) {
     this.getCartProducts();
   }
 
-  getCartProducts(): CartProduct[] {
+  private getCartProducts(): CartProduct[] {
     if (this.cartProducts) {
       return this.cartProducts;
     }
 
     this.cartProducts = JSON.parse(localStorage.getItem(CART_PRODUCTS)) || [];
-    this.cartProducts = this.cartProducts.filter((cartProduct) => !!this.productsService.getProductById(cartProduct.product.id));
     return this.cartProducts;
   }
 
+  getExtendedCartProducts(): CartProductExtended[] {
+    if (this.extendedCartProducts) {
+      return this.extendedCartProducts;
+    }
+
+    this.extendedCartProducts = this.getCartProducts().map((cartProduct) => {
+      const product = this.productsService.getProductById(cartProduct.productId);
+      const colorWithImages = product?.colorsWithImages?.find((color) => color.color.name === cartProduct.colorName);
+      const isSizeExist = cartProduct.size ? (product?.sizes as any[])?.find((size) => size === cartProduct.size) : true;
+      if (!product || !colorWithImages || !isSizeExist) {
+        return null;
+      }
+      return { product, colorWithImages, size: cartProduct.size, quantity: cartProduct.quantity };
+    });
+    this.extendedCartProducts = this.extendedCartProducts.filter((cartProduct) => !!cartProduct);
+    return this.extendedCartProducts;
+  }
+
   addCartProduct(cartProduct: CartProduct): void {
-    const duplicatedCartProduct = this.cartProducts.find((existsCartProduct) => {
+    const duplicatedCartProduct = this.getCartProducts().find((existsCartProduct) => {
       return (
-        existsCartProduct.product.id === cartProduct.product.id &&
-        existsCartProduct.colorWithImages.color.hexCode === cartProduct.colorWithImages.color.hexCode &&
+        existsCartProduct.productId === cartProduct.productId &&
+        existsCartProduct.colorName === cartProduct.colorName &&
         existsCartProduct.size === cartProduct.size
       );
     });
@@ -37,20 +55,28 @@ export class CartService {
       ? (duplicatedCartProduct.quantity += cartProduct.quantity)
       : (this.cartProducts = this.cartProducts.concat(cartProduct));
     localStorage.setItem(CART_PRODUCTS, JSON.stringify(this.cartProducts));
+    this.clearExtendedInfoCache();
   }
 
   removeCartProduct(cartProductId: number): void {
-    const cartProductIndex = this.cartProducts.findIndex((cartProduct) => cartProduct.product.id === cartProductId);
+    const cartProductIndex = this.getCartProducts().findIndex((cartProduct) => cartProduct.productId === cartProductId);
     this.cartProducts.splice(cartProductIndex, 1);
     localStorage.setItem(CART_PRODUCTS, JSON.stringify(this.cartProducts));
+    this.clearExtendedInfoCache();
   }
 
   resetCart(): void {
     this.cartProducts = [];
+    this.extendedCartProducts = [];
     localStorage.setItem(CART_PRODUCTS, JSON.stringify(this.cartProducts));
   }
 
   clearCache(): void {
     this.cartProducts = null;
+    this.extendedCartProducts = null;
+  }
+
+  clearExtendedInfoCache() {
+    this.extendedCartProducts = null;
   }
 }

@@ -122,8 +122,8 @@ export class ProductViewComponent implements OnInit {
       return;
     }
     const cartProduct: CartProduct = {
-      product: this.product,
-      colorWithImages: this.selectedColor,
+      productId: this.product.id,
+      colorName: this.selectedColor.color.name,
       size: this.selectedSize,
       quantity: this.quantity,
     };
@@ -132,7 +132,7 @@ export class ProductViewComponent implements OnInit {
   }
 
   onMarkAsFavoriteClick() {
-    this.favoritesService.addFavoriteProduct(this.product);
+    this.favoritesService.addFavoriteProduct(this.product.id);
     this.snackbarLabelSubject$.next('Item was added to favorites');
   }
 }

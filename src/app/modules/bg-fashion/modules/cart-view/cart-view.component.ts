@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { CartDetails } from 'src/app/common/interfaces/cart-details';
-import { CartProduct } from 'src/app/common/interfaces/cart-product';
+import { CartProductExtended } from 'src/app/common/interfaces/cart-product';
 import { SendEmailRequest, SendEmailResponse } from 'src/app/common/interfaces/send-email';
 import { ApiService } from 'src/app/services/api-service/api.service';
 import { CartService } from 'src/app/services/cart-service/cart.service';
@@ -24,7 +24,7 @@ export enum CartStep {
 })
 export class CartViewComponent implements OnInit {
   currentStep: CartStep = CartStep.PRODUCTS;
-  cartProducts: CartProduct[] = [];
+  cartProducts: CartProductExtended[] = [];
   cartStep = CartStep;
   cartDetailsValues: CartDetails;
   snackbarLabelSubject$ = new Subject<string>();
@@ -34,7 +34,11 @@ export class CartViewComponent implements OnInit {
   constructor(private api: ApiService, private router: Router, private cartService: CartService) {}
 
   ngOnInit() {
-    this.cartProducts = this.cartService.getCartProducts();
+    this.getCartProducts();
+  }
+
+  getCartProducts() {
+    this.cartProducts = this.cartService.getExtendedCartProducts();
   }
 
   onCancelClick() {
@@ -85,6 +89,7 @@ export class CartViewComponent implements OnInit {
 
   onTrashClicked(productId: number) {
     this.cartService.removeCartProduct(productId);
+    this.getCartProducts();
   }
 
   getTotalPrice(): number {
@@ -106,7 +111,7 @@ export class CartViewComponent implements OnInit {
     this.cartProducts.forEach((cartProduct, index) => {
       // tslint:disable-next-line:max-line-length
       message += `${index + 1}. Product id: ${cartProduct.product.id}\nColor: ${cartProduct.colorWithImages.color.name}\nSize: ${
-        cartProduct.size
+        cartProduct.size || ''
       }\nQuantity: ${cartProduct.quantity}\n\n`;
     });
     return message;

@@ -20,9 +20,13 @@ export class FavoritesViewComponent implements OnInit {
   constructor(private hostElement: ElementRef, private favoritesService: FavoritesService, private router: Router) {}
 
   ngOnInit() {
-    this.favoriteProducts = this.favoritesService.getFavoriteProducts();
+    this.getFavoriteProducts();
     this.getImgHeight();
     window.addEventListener('resize', () => this.getImgHeight());
+  }
+
+  getFavoriteProducts() {
+    this.favoriteProducts = this.favoritesService.getFavoriteProducts();
   }
 
   getImgHeight() {
@@ -38,5 +42,6 @@ export class FavoritesViewComponent implements OnInit {
 
   onTrashClick(productId: number) {
     this.favoritesService.removeFavoriteProduct(productId);
+    this.getFavoriteProducts();
   }
 }

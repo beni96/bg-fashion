@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { CartProduct } from 'src/app/common/interfaces/cart-product';
+import { CartProductExtended } from 'src/app/common/interfaces/cart-product';
 import { SendEmailResponse } from 'src/app/common/interfaces/send-email';
 import { ApiService } from 'src/app/services/api-service/api.service';
 import { CartService } from 'src/app/services/cart-service/cart.service';
@@ -13,7 +13,7 @@ import { CartStep, CartViewComponent } from './cart-view.component';
 
 const SEND_EMAIL_RESPONSE: SendEmailResponse = { ok: true, next: '' };
 
-const CART_PRODUCTS: CartProduct[] = [
+const CART_PRODUCTS: CartProductExtended[] = [
   {
     product: {
       id: 1,
@@ -44,7 +44,7 @@ describe('CartViewComponent', () => {
   let apiMock: jasmine.SpyObj<ApiService>;
 
   beforeEach(async(() => {
-    cartMock = jasmine.createSpyObj('CartService', ['getCartProducts', 'removeCartProduct', 'resetCart']);
+    cartMock = jasmine.createSpyObj('CartService', ['getExtendedCartProducts', 'removeCartProduct', 'resetCart']);
     apiMock = jasmine.createSpyObj('ApiService', ['sendOrderEmail']);
 
     TestBed.configureTestingModule({
@@ -62,7 +62,7 @@ describe('CartViewComponent', () => {
     fixture = TestBed.createComponent(CartViewComponent);
     component = fixture.componentInstance;
     debugElement = fixture.debugElement;
-    cartMock.getCartProducts.and.returnValue(CART_PRODUCTS);
+    cartMock.getExtendedCartProducts.and.returnValue(CART_PRODUCTS);
     cartMock.removeCartProduct.and.returnValue();
     cartMock.resetCart.and.returnValue();
     apiMock.sendOrderEmail.and.returnValue(of(SEND_EMAIL_RESPONSE));
