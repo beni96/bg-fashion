@@ -3,12 +3,12 @@
     {{ label }}
     <span *ngIf="errorMessage"> - *{{ errorMessage }}</span>
   </label>
-  <select #select [value]="value">
+  <select #select>
     <option *ngFor="let option of options" [selected]="isOptionSelected(option)">{{ option }}</option>
   </select>
   <div tabindex="0" class="menu-wrapper" (click)="toggleMenu()" (keydown)="toggleMenu($event)">
-    <span *ngIf="value" class="value">{{ value }}</span>
-    <span *ngIf="!value" class="placeholder">{{ placeholder }}</span>
+    <span *ngIf="value || multipleValue?.length" class="value">{{ multiple ? multipleValue.join(', ') : value }}</span>
+    <span *ngIf="!value && !multipleValue?.length" class="placeholder">{{ placeholder }}</span>
     <i class="fas fa-angle-down" [ngClass]="{ open: isOpen }"></i>
   </div>
   <div *ngIf="options.length" class="options-wrapper" [ngClass]="{ open: isOpen }">

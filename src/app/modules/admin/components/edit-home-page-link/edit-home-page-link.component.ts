@@ -22,14 +22,14 @@ export class EditHomePageLinkComponent implements OnInit, OnChanges {
   @Output() categoryLinkChanged = new EventEmitter<CategoryLink>();
 
   form: FormGroup;
-  formControls: { [key: string]: FormControl };
+  formControls: Record<FIELD_NAME_TYPE, FormControl>;
   fieldNames: FIELD_NAME_TYPE[] = ['url', 'title', 'category', 'subcategory'];
   showErrors = false;
 
   constructor(private formbuilder: FormBuilder, private productsService: ProductsService) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.imageUrl || changes.title) {
+    if ((changes.imageUrl && !changes.imageUrl.isFirstChange()) || (changes.title && !changes.title.isFirstChange())) {
       this.generateControls();
     }
   }

@@ -7,7 +7,17 @@ import { FavoritesService } from 'src/app/services/favorites-service/favorites.s
 import { ProductsService } from 'src/app/services/products-service/products.service';
 import { EditColorsWithImagesComponent } from '../edit-colors-with-images/edit-colors-with-images.component';
 
-type FIELD_NAME_TYPE = 'title' | 'subtitle' | 'price' | 'previousPrice' | 'sizes' | 'sizesType' | 'categories' | 'subcategories';
+type FIELD_NAME_TYPE =
+  | 'title'
+  | 'subtitle'
+  | 'price'
+  | 'previousPrice'
+  | 'sizes'
+  | 'sizesType'
+  | 'categories'
+  | 'subcategories'
+  | 'otherCategory'
+  | 'otherSubcategory';
 
 const ERRORS_MESSAGES = {
   title: { minlength: 'At least 3 characters' },
@@ -30,8 +40,19 @@ export class EditProductComponent implements OnInit, OnChanges {
   @ViewChild('editColorWithImages') editColorWithImages: EditColorsWithImagesComponent;
 
   form: FormGroup;
-  formControls: { [key: string]: FormControl };
-  fieldNames: FIELD_NAME_TYPE[] = ['title', 'subtitle', 'sizes', 'sizesType', 'price', 'previousPrice', 'categories', 'subcategories'];
+  formControls: Record<FIELD_NAME_TYPE, FormControl>;
+  fieldNames: FIELD_NAME_TYPE[] = [
+    'title',
+    'subtitle',
+    'sizes',
+    'sizesType',
+    'price',
+    'previousPrice',
+    'categories',
+    'subcategories',
+    'otherCategory',
+    'otherSubcategory',
+  ];
   errorMessages: { [key: string]: string } = {};
 
   constructor(
@@ -42,7 +63,7 @@ export class EditProductComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.product) {
+    if (changes.product && !changes.product.isFirstChange()) {
       this.generateControls();
     }
   }
@@ -55,12 +76,14 @@ export class EditProductComponent implements OnInit, OnChanges {
     this.formControls = {
       title: this.formbuilder.control(this.product?.title, [Validators.required, Validators.minLength(3)]),
       subtitle: this.formbuilder.control(this.product?.subtitle, [Validators.required]),
-      sizes: this.formbuilder.control(this.product?.sizes?.toString(), []),
+      sizes: this.formbuilder.control(this.product?.sizes || [], []),
       sizesType: this.formbuilder.control(this.product?.sizesType, []),
       price: this.formbuilder.control(this.product?.price, [Validators.required]),
       previousPrice: this.formbuilder.control(this.product?.previousPrice, []),
-      categories: this.formbuilder.control(this.product?.categories.toString(), [Validators.required]),
-      subcategories: this.formbuilder.control(this.product?.subcategories.toString(), [Validators.required]),
+      categories: this.formbuilder.control(this.product?.categories || [], [Validators.required]),
+      subcategories: this.formbuilder.control(this.product?.subcategories || [], [Validators.required]),
+      otherCategory: this.formbuilder.control('', []),
+      otherSubcategory: this.formbuilder.control('', []),
     };
 
     this.form = this.formbuilder.group(this.formControls);
@@ -80,8 +103,7 @@ export class EditProductComponent implements OnInit, OnChanges {
 
   getSubcategoryOptions() {
     let subcategories = [];
-    const selectedCategories = this.formControls.categories.value?.split(',') || [];
-    selectedCategories.forEach((category) => {
+    this.formControls.categories.value?.forEach((category) => {
       subcategories = subcategories.concat(this.productsService.getSubcategories(category));
     });
     return [...new Set(subcategories)].concat('other');
@@ -107,10 +129,7 @@ export class EditProductComponent implements OnInit, OnChanges {
   }
 
   onSave() {
-    if (this.formControls.sizesType.value) {
-      this.formControls.sizes.setValidators(Validators.required);
-      this.formControls.sizes.updateValueAndValidity();
-    }
+    this.setValidatorsOnSave();
 
     if (!this.form.valid || !this.editColorWithImages.isFormValid()) {
       this.errorMessages = getFormErrorMessages(this.fieldNames, this.formControls, ERRORS_MESSAGES);
@@ -125,8 +144,8 @@ export class EditProductComponent implements OnInit, OnChanges {
       previousPrice: this.formControls.previousPrice.value,
       sizesType: this.formControls.sizesType.value,
       sizes: this.getSizes(),
-      categories: this.formControls.categories.value.split(','),
-      subcategories: this.formControls.subcategories.value.split(','),
+      categories: this.getCategories(this.formControls.categories.value, this.formControls.otherCategory.value),
+      subcategories: this.getCategories(this.formControls.subcategories.value, this.formControls.otherSubcategory.value),
       colorsWithImages: this.editColorWithImages.getFormValues().colorsWithImages,
       defaultColorIndex: Number(this.editColorWithImages.getFormValues().defaultColorIndex),
     };
@@ -136,15 +155,41 @@ export class EditProductComponent implements OnInit, OnChanges {
     this.favoritesService.clearCache();
   }
 
+  private setValidatorsOnSave() {
+    if (this.formControls.sizesType.value) {
+      this.formControls.sizes.setValidators(Validators.required);
+      this.formControls.sizes.updateValueAndValidity();
+    }
+
+    if (this.showOtherCategoryInput()) {
+      this.formControls.otherCategory.setValidators(Validators.required);
+      this.formControls.otherCategory.updateValueAndValidity();
+    }
+
+    if (this.showOtherSubcategoryInput()) {
+      this.formControls.otherSubcategory.setValidators(Validators.required);
+      this.formControls.otherSubcategory.updateValueAndValidity();
+    }
+  }
+
   private getSizes(): string[] | number[] {
     if (!this.formControls.sizes.value) {
       return null;
     }
 
-    const sizes = this.formControls.sizes.value.split(',');
+    const sizes = this.formControls.sizes.value;
     if (this.formControls.sizesType.value === SizesType.SHIRTS) {
       return sizes;
     }
     return sizes.map((size) => Number(size));
+  }
+
+  private getCategories(categories: string[], otherCategory: string): string[] {
+    const index = categories.indexOf('other');
+    if (index >= 0) {
+      categories.splice(index, 1);
+      return categories.concat(otherCategory);
+    }
+    return categories;
   }
 }

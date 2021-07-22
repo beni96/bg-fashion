@@ -20,7 +20,7 @@ const PHONE_FORMAT = '^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-s./0-9]*$';
 })
 export class CartDetailsComponent implements OnInit {
   form: FormGroup;
-  formControls: { [key: string]: FormControl };
+  formControls: Record<FIELD_NAME_TYPE, FormControl>;
   fieldNames: FIELD_NAME_TYPE[] = ['name', 'email', 'phone', 'address', 'notes'];
   errorMessages: { [key: string]: string } = {};
 

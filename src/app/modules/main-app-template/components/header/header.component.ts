@@ -23,12 +23,14 @@ export class HeaderComponent implements OnInit {
       return (this.isScrolled = window.pageYOffset > 0);
     });
 
-    this.productsService.getCategories().forEach((category) => {
-      const existPage = this.pages.find((page) => page.category === category);
-      const subcategories = this.productsService.getSubcategories(category);
-      existPage
-        ? (existPage.menuCategories = subcategories)
-        : (this.pages = this.pages.concat({ category, menuCategories: subcategories }));
+    this.productsService.getCategoriesSubject().subscribe((categories) => {
+      categories.forEach((category) => {
+        const existPage = this.pages.find((page) => page.category === category);
+        const subcategories = this.productsService.getSubcategories(category);
+        existPage
+          ? (existPage.menuCategories = subcategories)
+          : (this.pages = this.pages.concat({ category, menuCategories: subcategories }));
+      });
     });
   }
 

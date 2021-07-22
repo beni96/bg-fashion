@@ -26,7 +26,7 @@ describe('EditColorsWithImagesComponent', () => {
   it('should get the form values on calling getFormValues()', () => {
     component.colorsWithImages = [{ color: { name: 'red', hexCode: '#f10f29' }, images: ['img1', 'img2'] }];
     component.ngOnInit();
-    component.onColorOptionSelect(component.formControls.colors, 'red,yellow', component.formControls.defaultColor);
+    component.onColorOptionSelect(component.formControls.colors, ['red', 'yellow'], component.formControls.defaultColor);
     component.formControls.yellow1.setValue('yellow image 1');
     component.formControls.yellow2.setValue('yellow image 2');
     component.formControls.defaultColor.setValue(1);

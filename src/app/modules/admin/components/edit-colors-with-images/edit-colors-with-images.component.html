@@ -3,7 +3,7 @@
     <app-select
       label="Colors"
       placeholder="Choose colors"
-      [value]="formControls.colors.value"
+      [multipleValue]="getColorsValue()"
       [options]="getColorsOptions()"
       color="secondary"
       [multiple]="true"

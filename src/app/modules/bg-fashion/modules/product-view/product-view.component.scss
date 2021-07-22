@@ -12,6 +12,7 @@
 .product-section {
   @extend %flex-space-between;
 
+  align-items: flex-start;
   margin-bottom: 92px;
 }
 

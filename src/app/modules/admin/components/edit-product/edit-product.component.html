@@ -50,7 +50,7 @@
     <app-select
       label="Sizes"
       placeholder="Choose sizes"
-      [value]="formControls.sizes.value"
+      [multipleValue]="formControls.sizes.value"
       [options]="getSizeOptions()"
       color="secondary"
       [multiple]="true"
@@ -62,7 +62,7 @@
     <app-select
       label="Categories"
       placeholder="Choose categories"
-      [value]="formControls.categories.value"
+      [multipleValue]="formControls.categories.value"
       [options]="getCategoryOptions()"
       color="secondary"
       [multiple]="true"
@@ -72,7 +72,7 @@
     <app-select
       label="Subcategories"
       placeholder="Choose subcategories"
-      [value]="formControls.subcategories.value"
+      [multipleValue]="formControls.subcategories.value"
       [options]="getSubcategoryOptions()"
       color="secondary"
       [multiple]="true"
@@ -81,8 +81,22 @@
     ></app-select>
   </div>
   <div class="fields-wrapper" *ngIf="showOtherCategoryInput() || showOtherSubcategoryInput()">
-    <app-text-field #otherCategory *ngIf="showOtherCategoryInput()" placeholder="Set categories.."></app-text-field>
-    <app-text-field #otherSubcategory *ngIf="showOtherSubcategoryInput()" placeholder="Set subcategories.."></app-text-field>
+    <app-text-field
+      #otherCategory
+      *ngIf="showOtherCategoryInput()"
+      ngDefaultControl
+      formControlName="otherCategory"
+      placeholder="Set categories.."
+      [errorMessage]="errorMessages.otherCategory"
+    ></app-text-field>
+    <app-text-field
+      #otherSubcategory
+      *ngIf="showOtherSubcategoryInput()"
+      ngDefaultControl
+      formControlName="otherSubcategory"
+      placeholder="Set subcategories.."
+      [errorMessage]="errorMessages.otherSubcategory"
+    ></app-text-field>
   </div>
   <app-edit-colors-with-images
     #editColorWithImages

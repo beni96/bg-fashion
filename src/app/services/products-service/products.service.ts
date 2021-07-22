@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { Product } from 'src/app/common/interfaces/product';
 import { PRODUCTS } from 'src/app/common/products/products';
 
@@ -8,6 +9,11 @@ import { PRODUCTS } from 'src/app/common/products/products';
 export class ProductsService {
   private products: Product[];
   private categories: string[];
+  private categoriesSubject$: Subject<string[]> = new Subject();
+
+  constructor() {
+    this.categoriesSubject$.next(this.getCategories());
+  }
 
   getProducts(): Product[] {
     if (this.products) {
@@ -19,15 +25,16 @@ export class ProductsService {
   }
 
   addProduct(product: Product) {
-    this.products = this.products.concat(product);
+    this.products = PRODUCTS.concat(product);
   }
 
   setProduct(product: Product, index: number) {
-    this.getProducts()[index] = product;
+    PRODUCTS[index] = product;
+    this.clearCache();
   }
 
   removeProduct(index: number) {
-    this.getProducts().splice(index, 1);
+    PRODUCTS.splice(index, 1);
     this.clearCache();
   }
 
@@ -63,6 +70,10 @@ export class ProductsService {
     return this.categories;
   }
 
+  getCategoriesSubject(): Observable<string[]> {
+    return this.categoriesSubject$;
+  }
+
   getSubcategories(category: string): string[] {
     let subcategories = [];
     this.getProductsByCategories(category).forEach((product) => {
@@ -79,5 +90,6 @@ export class ProductsService {
   clearCache() {
     this.products = null;
     this.categories = null;
+    this.categoriesSubject$.next(this.getCategories());
   }
 }

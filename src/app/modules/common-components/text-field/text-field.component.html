@@ -1,7 +1,7 @@
 <div class="input-wrapper" [ngClass]="{ error: errorMessage }">
   <label>
     {{ label }}
-    <span *ngIf="errorMessage"> - *{{ errorMessage }}</span>
+    <span *ngIf="errorMessage"> {{ label ? '-' : '' }} *{{ errorMessage }}</span>
   </label>
   <input *ngIf="!isTextarea" [value]="value" [type]="type" [placeholder]="placeholder" />
   <textarea *ngIf="isTextarea" [value]="value" [placeholder]="placeholder"></textarea>

@@ -24,7 +24,7 @@ export class EditColorsWithImagesComponent implements OnInit, OnChanges {
   constructor(private formbuilder: FormBuilder) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.colorsWithImages) {
+    if (changes.colorsWithImages && !changes.colorsWithImages.isFirstChange()) {
       this.generateControls();
     }
   }
@@ -34,7 +34,7 @@ export class EditColorsWithImagesComponent implements OnInit, OnChanges {
   }
 
   generateControls() {
-    const colorNames = this.colorsWithImages?.map((colorWithImages) => colorWithImages.color.name).join(',');
+    const colorNames = this.colorsWithImages?.map((colorWithImages) => colorWithImages.color.name);
     this.formControls = {
       colors: this.formbuilder.control(colorNames, [Validators.required]),
       defaultColor: this.formbuilder.control(this.defaultColorIndex, []),
@@ -55,27 +55,29 @@ export class EditColorsWithImagesComponent implements OnInit, OnChanges {
   }
 
   getSelectedColors() {
-    return this.formControls.colors.value ? this.formControls.colors.value.split(',') : [];
+    return this.formControls.colors.value || [];
   }
 
-  onColorOptionSelect(formControl: FormControl, value: string, resetFormControl: FormControl) {
+  getColorsValue() {
+    return [...this.formControls.colors.value];
+  }
+
+  onColorOptionSelect(formControl: FormControl, value: any[], resetFormControl: FormControl) {
     this.regenerateControls(formControl.value, value);
     formControl.setValue(value);
     resetFormControl.reset();
   }
 
-  regenerateControls(oldValue: string, value: string) {
+  regenerateControls(oldValues: any[], values: any[]) {
     // Color removed
-    if (oldValue?.length > value.length) {
-      const oldValuesArray = oldValue.split(',');
-      const removedColor = oldValuesArray.find((newValue) => !value.includes(newValue));
+    if (oldValues?.length > values.length) {
+      const removedColor = oldValues.find((oldValue) => !values.includes(oldValue));
       delete this.formControls[removedColor + '1'];
       delete this.formControls[removedColor + '2'];
     }
     // Color added
-    if (oldValue?.length < value.length) {
-      const newValuesArray = value.split(',');
-      const addedColor = newValuesArray[newValuesArray.length - 1];
+    if (oldValues?.length < values.length) {
+      const addedColor = values[values.length - 1];
       this.formControls[addedColor + '1'] = this.formbuilder.control('', [Validators.required]);
       this.formControls[addedColor + '2'] = this.formbuilder.control('', [Validators.required]);
     }
@@ -89,7 +91,7 @@ export class EditColorsWithImagesComponent implements OnInit, OnChanges {
   }
 
   getFormValues(): { colorsWithImages: ColorWithImages[]; defaultColorIndex: number } {
-    const colorNamesArray = this.formControls.colors.value.split(',');
+    const colorNamesArray = this.formControls.colors.value;
     const colorsWithImages = colorNamesArray.map((colorName) => {
       const color = COLOR_TYPES.find((colorType) => colorType.name === colorName);
       const img1 = this.formControls[colorName + '1'].value;

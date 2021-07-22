@@ -9,12 +9,13 @@ import { isEnterOrSpacePressed } from '../../../common/utils/utils';
 export class SelectComponent implements OnInit {
   @Input() options: string[] | number[];
   @Input() value: string | number;
+  @Input() multipleValue: any[] = [];
   @Input() placeholder: string;
   @Input() label: string;
   @Input() color: 'primary' | 'secondary' = 'primary';
   @Input() multiple = false;
   @Input() errorMessage: string;
-  @Output() optionSelected = new EventEmitter<string | number>();
+  @Output() optionSelected = new EventEmitter<any>();
 
   @ViewChild('select') select: ElementRef<HTMLSelectElement>;
 
@@ -33,8 +34,7 @@ export class SelectComponent implements OnInit {
 
   isOptionSelected(value: string | number) {
     if (this.multiple) {
-      const values = this.value?.toString().split(',');
-      return values?.includes(value.toString());
+      return this.multipleValue?.includes(value);
     }
 
     return this.value === value;
@@ -54,22 +54,15 @@ export class SelectComponent implements OnInit {
     }
 
     if (this.multiple) {
-      const values = this.value?.toString().split(',');
-      const isIncludedValue = values?.includes(value.toString());
-      if (isIncludedValue) {
-        this.value = (this.value as string).replace(`${value},`, '');
-        this.value = (this.value as string).replace(`,${value}`, '');
-        this.value = (this.value as string).replace(value as string, '');
-      } else {
-        this.value = this.value ? `${this.value},${value}` : value;
-      }
+      const valueIndex = this.multipleValue?.indexOf(value);
+      this.multipleValue = this.multipleValue || [];
+      valueIndex >= 0 ? this.multipleValue.splice(valueIndex, 1) : this.multipleValue.push(value);
     } else {
       this.value = value;
       this.toggleMenu();
     }
 
-    this.select.nativeElement.value = this.value as string;
     this.select.nativeElement.dispatchEvent(new Event('input', { bubbles: true, composed: false }));
-    this.optionSelected.emit(this.value);
+    this.optionSelected.emit(this.multiple ? this.multipleValue : this.value);
   }
 }
