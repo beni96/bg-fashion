@@ -4,10 +4,11 @@ import { NgModule } from '@angular/core';
 import { ProductsPageViewComponent } from './products-page-view.component';
 import { RouterModule } from '@angular/router';
 import { CommonComponentsModule } from 'src/app/modules/common-components/common-components.module';
-import { FilterBarComponent } from './filter-bar/filter-bar.component';
+import { FilterBarComponent } from './components/filter-bar/filter-bar.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
-  declarations: [ProductsPageViewComponent, FilterBarComponent],
+  declarations: [ProductsPageViewComponent, FilterBarComponent, BreadcrumbsComponent],
   imports: [BrowserModule, CommonModule, RouterModule, CommonComponentsModule],
 })
 export class ProductsPageViewModule {}

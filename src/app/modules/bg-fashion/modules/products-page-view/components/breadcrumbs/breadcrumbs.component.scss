@@ -1,0 +1,32 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
+:host {
+  @extend %flex-center;
+}
+
+.breadcrumb {
+  @extend %flex-align-center;
+
+  color: colors.$bg-purple-dark;
+  font-family: fonts.$font-rubik;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  line-height: 24px;
+
+  &:not(:last-child):hover span {
+    text-decoration: underline;
+  }
+
+  &:last-child {
+    color: colors.$primary-color-light;
+  }
+
+  .fa-angle-right {
+    color: colors.$primary-color-light;
+    font-size: 16px;
+    margin: 0 8px;
+  }
+}

@@ -9,6 +9,8 @@ import { CartService } from 'src/app/services/cart-service/cart.service';
 import { CartProduct } from 'src/app/common/interfaces/cart-product';
 import { Subject } from 'rxjs';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
+import { Param } from 'src/app/common/url-params/params';
+import { QueryParam } from 'src/app/common/url-params/query-params';
 
 const COLUMNS_NUM = 2;
 const IMAGE_PADDING = 8;
@@ -45,7 +47,7 @@ export class ProductViewComponent implements OnInit {
   ngOnInit() {
     const fetchDataFromUrl$ = this.route.paramMap.pipe(
       map((paramMap) => {
-        const productId = Number(paramMap.get('id'));
+        const productId = Number(paramMap.get(Param.PRODUCT_ID));
         this.product = this.productsService.getProductById(productId);
         this.getMoreProducts(paramMap);
       }),
@@ -62,7 +64,7 @@ export class ProductViewComponent implements OnInit {
   getSelectedColor() {
     return this.route.queryParamMap.pipe(
       map((queryParamMap) => {
-        const colorIndex = queryParamMap.get('color');
+        const colorIndex = queryParamMap.get(QueryParam.COLOR_INDEX);
         const defaultColorIndex = this.product.defaultColorIndex || 0;
         this.selectedColor = colorIndex ? this.product.colorsWithImages[colorIndex] : this.product.colorsWithImages[defaultColorIndex];
       })
@@ -70,8 +72,8 @@ export class ProductViewComponent implements OnInit {
   }
 
   getMoreProducts(paramMap: ParamMap) {
-    this.category = paramMap.get('category');
-    this.subcategory = paramMap.get('subcategory');
+    this.category = paramMap.get(Param.CATEGORY);
+    this.subcategory = paramMap.get(Param.SUBCATEGORY);
 
     if (this.category) {
       this.moreProducts = this.productsService.getProductsByCategories(this.category, this.subcategory, null, null, this.product.id);
@@ -120,7 +122,7 @@ export class ProductViewComponent implements OnInit {
   }
 
   onProductClick(productId: number, selectedColorIndex: number) {
-    const queryParams = { color: selectedColorIndex };
+    const queryParams = { [QueryParam.COLOR_INDEX]: selectedColorIndex };
     this.router.navigate([`../${productId}`], { relativeTo: this.route, queryParams });
   }
 

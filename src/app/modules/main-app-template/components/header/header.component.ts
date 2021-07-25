@@ -12,19 +12,10 @@ import { HeaderCategory } from '../../interfaces/header-category';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   animations: [
-    trigger(
-      'menuAnimation', [
-        transition(':enter', [
-          style({ opacity: 0 }),
-          group([
-            animate('100ms', style({ opacity: 1 })),
-          ]),
-        ]),
-        transition(':leave', [
-          animate('100ms', style({ opacity: 0 }))
-        ])
-      ]
-    )
+    trigger('menuAnimation', [
+      transition(':enter', [style({ opacity: 0 }), group([animate('100ms', style({ opacity: 1 }))])]),
+      transition(':leave', [animate('100ms', style({ opacity: 0 }))]),
+    ]),
   ],
 })
 export class HeaderComponent implements OnInit {

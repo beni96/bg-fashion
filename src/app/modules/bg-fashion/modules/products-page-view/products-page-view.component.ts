@@ -6,9 +6,12 @@ import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 import { ProductsService } from 'src/app/services/products-service/products.service';
 import { FavoritesService } from 'src/app/services/favorites-service/favorites.service';
 import { map, mergeMap } from 'rxjs/operators';
+import { Param } from 'src/app/common/url-params/params';
+import { QueryParam } from 'src/app/common/url-params/query-params';
 
 const COLUMNS_NUM = 4;
 const IMAGE_PADDING = 32;
+const QUERY_PARAM_SEPARATOR = '_';
 
 @Component({
   selector: 'app-products-page-view',
@@ -44,13 +47,13 @@ export class ProductsPageViewComponent implements OnInit {
   fetchData() {
     const fetchData$ = this.route.queryParamMap.pipe(
       mergeMap((queryParamMap: ParamMap) => {
-        this.sizes = queryParamMap.get('sizes')?.split('_');
-        this.colors = queryParamMap.get('colors')?.split('_');
+        this.sizes = queryParamMap.get(QueryParam.SELECTED_SIZES)?.split(QUERY_PARAM_SEPARATOR);
+        this.colors = queryParamMap.get(QueryParam.SELECTED_COLORS)?.split(QUERY_PARAM_SEPARATOR);
         return this.route.paramMap;
       }),
       map((paramMap: ParamMap) => {
-        this.category = paramMap.get('category');
-        this.subcategory = paramMap.get('subcategory');
+        this.category = paramMap.get(Param.CATEGORY);
+        this.subcategory = paramMap.get(Param.SUBCATEGORY);
 
         if (this.category) {
           this.products = this.productsService.getProductsByCategories(this.category, this.subcategory, this.colors, this.sizes);
@@ -81,7 +84,7 @@ export class ProductsPageViewComponent implements OnInit {
   }
 
   onProductClick(productId: number, selectedColorIndex: number) {
-    const queryParams = { color: selectedColorIndex };
+    const queryParams = { [QueryParam.COLOR_INDEX]: selectedColorIndex };
     this.router.navigate([BgFashionPath.Product, productId], { relativeTo: this.route, queryParams });
   }
 
@@ -102,10 +105,16 @@ export class ProductsPageViewComponent implements OnInit {
   }
 
   onColorSelect(value: string[]) {
-    this.router.navigate([], { relativeTo: this.route, queryParams: { colors: value.join('_') }, queryParamsHandling: 'merge' });
+    this.changeQueryParam(QueryParam.SELECTED_COLORS, value);
   }
 
   onSizeSelect(value: string[] | number[]) {
-    this.router.navigate([], { relativeTo: this.route, queryParams: { sizes: value.join('_') }, queryParamsHandling: 'merge' });
+    this.changeQueryParam(QueryParam.SELECTED_SIZES, value);
+  }
+
+  private changeQueryParam(queryParam: string, value: string[] | number[]) {
+    const queryParamValue = value.length ? value.join(QUERY_PARAM_SEPARATOR) : null;
+    const queryParams = { [queryParam]: queryParamValue };
+    this.router.navigate([], { relativeTo: this.route, queryParams, queryParamsHandling: 'merge' });
   }
 }

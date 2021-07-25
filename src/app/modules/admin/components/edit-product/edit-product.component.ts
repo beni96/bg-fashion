@@ -7,6 +7,8 @@ import { FavoritesService } from 'src/app/services/favorites-service/favorites.s
 import { ProductsService } from 'src/app/services/products-service/products.service';
 import { EditColorsWithImagesComponent } from '../edit-colors-with-images/edit-colors-with-images.component';
 
+const OTHER_OPTION = 'other';
+
 type FIELD_NAME_TYPE =
   | 'title'
   | 'subtitle'
@@ -106,7 +108,7 @@ export class EditProductComponent implements OnInit, OnChanges {
   }
 
   getCategoryOptions() {
-    return this.productsService.getCategories().concat('other');
+    return this.productsService.getCategories().concat(OTHER_OPTION);
   }
 
   getSubcategoryOptions() {
@@ -118,15 +120,15 @@ export class EditProductComponent implements OnInit, OnChanges {
     this.formControls.categories.value?.forEach((category) => {
       subcategories = subcategories.concat(this.productsService.getSubcategories(category));
     });
-    return [...new Set(subcategories)].concat('other');
+    return [...new Set(subcategories)].concat(OTHER_OPTION);
   }
 
   showOtherCategoryInput() {
-    return this.formControls.categories.value?.includes('other');
+    return this.formControls.categories.value?.includes(OTHER_OPTION);
   }
 
   showOtherSubcategoryInput() {
-    return this.formControls.subcategories.value?.includes('other');
+    return this.formControls.subcategories.value?.includes(OTHER_OPTION);
   }
 
   onOptionSelect(formControl: FormControl, value: string, resetFormControl?: FormControl) {
@@ -198,7 +200,7 @@ export class EditProductComponent implements OnInit, OnChanges {
   }
 
   private getCategories(categories: string[], otherCategory: string): string[] {
-    const index = categories.indexOf('other');
+    const index = categories.indexOf(OTHER_OPTION);
     if (index >= 0) {
       categories.splice(index, 1);
       return categories.concat(otherCategory);

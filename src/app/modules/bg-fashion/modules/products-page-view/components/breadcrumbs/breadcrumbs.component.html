@@ -1,0 +1,5 @@
+<a *ngFor="let link of links" class="breadcrumb" [routerLink]="link.url" routerLinkActive="is-active">
+  <span class="breadcrumb-title">{{ link.title }}</span>
+  <i class="fas fa-angle-right"></i>
+</a>
+<span class="breadcrumb">{{ subcategory || category }}</span>

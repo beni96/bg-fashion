@@ -9,7 +9,7 @@ import { ProductsService } from 'src/app/services/products-service/products.serv
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 import { ProductsPageViewComponent } from './products-page-view.component';
 
-const PRODUCT_MOCK: Product =   {
+const PRODUCT_MOCK: Product = {
   id: 1,
   title: 'T-shirt',
   subtitle: 'Nice t-shirt with cool print',
@@ -34,14 +34,20 @@ describe('ProductsPageViewComponent', () => {
   const queryParamMap = convertToParamMap({ colors: 'red' });
 
   beforeEach(async(() => {
-    productsServiceMock = jasmine.createSpyObj('ProductsService', ['getProductsByCategories', 'getCategories', 'getSubcategories', 'getColors', 'getSizes']);
+    productsServiceMock = jasmine.createSpyObj('ProductsService', [
+      'getProductsByCategories',
+      'getCategories',
+      'getSubcategories',
+      'getColors',
+      'getSizes',
+    ]);
 
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [ProductsPageViewComponent],
       providers: [
         { provide: ActivatedRoute, useValue: { paramMap: of(paramMap), queryParamMap: of(queryParamMap) } },
-        { provide: ProductsService, useValue: productsServiceMock }
+        { provide: ProductsService, useValue: productsServiceMock },
       ],
     }).compileComponents();
 
@@ -99,13 +105,11 @@ describe('ProductsPageViewComponent', () => {
   it('should set queryParams on selecting colors', () => {
     const filterBar = debugElement.query(By.css('app-filter-bar'));
     filterBar.triggerEventHandler('colorSelected', ['red', 'blue']);
-    expect(router.navigate).toHaveBeenCalledWith(
-      [],
-      {
-        // @ts-ignore
-        relativeTo: component.route,
-        queryParams: { colors: 'red_blue' },
-        queryParamsHandling: 'merge'
-      });
+    expect(router.navigate).toHaveBeenCalledWith([], {
+      // @ts-ignore
+      relativeTo: component.route,
+      queryParams: { colors: 'red_blue' },
+      queryParamsHandling: 'merge',
+    });
   });
 });

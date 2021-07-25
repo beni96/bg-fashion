@@ -20,7 +20,7 @@ export class EditProductsComponent {
   }
 
   onSelect(selectedId: number) {
-    this.selectedProduct = this.products.find(product => product.id === selectedId);
+    this.selectedProduct = this.products.find((product) => product.id === selectedId);
   }
 
   onAddProductButtonClick() {

@@ -1,5 +1,7 @@
 <span class="page-title">{{ getTitle() | titlecase }}</span>
 
+<app-breadcrumbs [category]="category" [subcategory]="subcategory"></app-breadcrumbs>
+
 <app-filter-bar
   [category]="category"
   [subcategory]="subcategory"

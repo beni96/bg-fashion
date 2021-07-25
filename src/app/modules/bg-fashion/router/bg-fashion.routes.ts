@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { Param } from 'src/app/common/url-params/params';
 import { IsProductValidGuard } from 'src/app/guards/is-product-valid/is-product-valid.guard';
 import { CartViewComponent } from '../modules/cart-view/cart-view.component';
 import { FavoritesViewComponent } from '../modules/favorites-view/favorites-view.component';
@@ -8,12 +9,15 @@ import { ProductsPageViewComponent } from '../modules/products-page-view/product
 import { BgFashionPath, PRODUCTS_PREFIX } from './bg-fashion.routes.names';
 
 const PRODUCTS_ROUTES: Routes = [
-  { path: `${BgFashionPath.Category}/:category`, component: ProductsPageViewComponent },
-  { path: `${BgFashionPath.Category}/:category/${BgFashionPath.Subcategory}/:subcategory`, component: ProductsPageViewComponent },
-  { path: `${BgFashionPath.Product}/:id`, component: ProductViewComponent },
-  { path: `${BgFashionPath.Category}/:category/${BgFashionPath.Product}/:id`, component: ProductViewComponent },
+  { path: `${BgFashionPath.Category}/:${Param.CATEGORY}`, component: ProductsPageViewComponent },
   {
-    path: `${BgFashionPath.Category}/:category/${BgFashionPath.Subcategory}/:subcategory/${BgFashionPath.Product}/:id`,
+    path: `${BgFashionPath.Category}/:${Param.CATEGORY}/${BgFashionPath.Subcategory}/:${Param.SUBCATEGORY}`,
+    component: ProductsPageViewComponent,
+  },
+  { path: `${BgFashionPath.Product}/:${Param.PRODUCT_ID}`, component: ProductViewComponent },
+  { path: `${BgFashionPath.Category}/:${Param.CATEGORY}/${BgFashionPath.Product}/:${Param.PRODUCT_ID}`, component: ProductViewComponent },
+  {
+    path: `${BgFashionPath.Category}/:${Param.CATEGORY}/${BgFashionPath.Subcategory}/:${Param.SUBCATEGORY}/${BgFashionPath.Product}/:${Param.PRODUCT_ID}`,
     component: ProductViewComponent,
   },
 ];
