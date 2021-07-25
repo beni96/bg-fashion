@@ -48,24 +48,20 @@ describe('EditProductsComponent', () => {
 
   it('should emit an event on changing product', () => {
     component.selectedProduct = PRODUCT;
-    component.selectedProductIndex = 1;
     fixture.detectChanges();
 
     const editProduct = debugElement.query(By.css('app-edit-product'));
     editProduct.triggerEventHandler('productChanged', PRODUCT);
-    expect(component.productChanged.emit).toHaveBeenCalledWith({ product: PRODUCT, index: 1 });
-    expect(component.selectedProductIndex).toBeFalsy();
+    expect(component.productChanged.emit).toHaveBeenCalledWith(PRODUCT);
   });
 
   it('should emit an event on removing product', () => {
     component.selectedProduct = PRODUCT;
-    component.selectedProductIndex = 1;
     fixture.detectChanges();
 
     const editProduct = debugElement.query(By.css('app-edit-product'));
     editProduct.triggerEventHandler('productRemoved', null);
     expect(component.productRemoved.emit).toHaveBeenCalledWith(1);
-    expect(component.selectedProductIndex).toBeFalsy();
   });
 
   it('should emit an event on adding product', () => {

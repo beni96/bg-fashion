@@ -8,11 +8,10 @@ import { Product } from 'src/app/common/interfaces/product';
 })
 export class EditProductsComponent {
   @Input() products: Product[] = [];
-  @Output() productChanged = new EventEmitter<{ product: Product; index: number }>();
+  @Output() productChanged = new EventEmitter<Product>();
   @Output() productRemoved = new EventEmitter<number>();
   @Output() productAdded = new EventEmitter<Product>();
 
-  selectedProductIndex: number;
   selectedProduct: Product;
   isAddProductClicked = false;
 
@@ -20,9 +19,8 @@ export class EditProductsComponent {
     return this.products.map((categoryLink) => categoryLink.id);
   }
 
-  onSelect(option: number) {
-    this.selectedProductIndex = this.products.findIndex((categoryLink) => option === categoryLink.id);
-    this.selectedProduct = this.products[this.selectedProductIndex];
+  onSelect(selectedId: number) {
+    this.selectedProduct = this.products.find(product => product.id === selectedId);
   }
 
   onAddProductButtonClick() {
@@ -30,12 +28,12 @@ export class EditProductsComponent {
   }
 
   onProductChange(product: Product) {
-    this.productChanged.emit({ product, index: this.selectedProductIndex });
+    this.productChanged.emit(product);
     this.resetForm();
   }
 
   onProductRemove() {
-    this.productRemoved.emit(this.selectedProductIndex);
+    this.productRemoved.emit(this.selectedProduct.id);
     this.resetForm();
   }
 
@@ -47,6 +45,5 @@ export class EditProductsComponent {
   private resetForm() {
     this.isAddProductClicked = false;
     this.selectedProduct = null;
-    this.selectedProductIndex = null;
   }
 }

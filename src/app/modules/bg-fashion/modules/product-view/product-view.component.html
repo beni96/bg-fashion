@@ -1,6 +1,9 @@
 <div class="product-section">
   <div #content class="content-wrapper">
     <div class="section">
+      <a *ngIf="category || subcategory" class="go-back" [routerLink]="getBackLink()" routerLinkActive="is-active"
+        >&lt; Back to {{ subcategory || category }}</a
+      >
       <span class="title">{{ product.title | titlecase }}</span>
       <span class="subtitle">{{ product.subtitle | titlecase }}</span>
       <div class="price-wrapper">

@@ -1,0 +1,13 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/layouts';
+
+:host {
+  @extend %flex-align-center;
+
+  box-sizing: border-box;
+  width: 100%;
+}
+
+app-select:not(:last-child) {
+  margin-inline-end: 16px;
+}

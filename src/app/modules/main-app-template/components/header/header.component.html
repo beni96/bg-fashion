@@ -15,6 +15,7 @@
       {{ page.category | titlecase }}
     </a>
     <app-header-menu
+      [@menuAnimation]
       *ngIf="currentHoveredPage?.menuCategories?.length"
       [category]="currentHoveredPage.category"
       [subcategories]="currentHoveredPage.menuCategories"

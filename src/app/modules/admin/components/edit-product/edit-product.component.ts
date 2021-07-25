@@ -76,17 +76,25 @@ export class EditProductComponent implements OnInit, OnChanges {
     this.formControls = {
       title: this.formbuilder.control(this.product?.title, [Validators.required, Validators.minLength(3)]),
       subtitle: this.formbuilder.control(this.product?.subtitle, [Validators.required]),
-      sizes: this.formbuilder.control(this.product?.sizes || [], []),
+      sizes: this.formbuilder.control(this.getControlInitValue(this.product?.sizes), []),
       sizesType: this.formbuilder.control(this.product?.sizesType, []),
       price: this.formbuilder.control(this.product?.price, [Validators.required]),
       previousPrice: this.formbuilder.control(this.product?.previousPrice, []),
-      categories: this.formbuilder.control(this.product?.categories || [], [Validators.required]),
-      subcategories: this.formbuilder.control(this.product?.subcategories || [], [Validators.required]),
+      categories: this.formbuilder.control(this.getControlInitValue(this.product?.categories), [Validators.required]),
+      subcategories: this.formbuilder.control(this.getControlInitValue(this.product?.subcategories), [Validators.required]),
       otherCategory: this.formbuilder.control('', []),
       otherSubcategory: this.formbuilder.control('', []),
     };
 
     this.form = this.formbuilder.group(this.formControls);
+  }
+
+  getControlInitValue(value: any[]) {
+    if (!value) {
+      return [];
+    }
+
+    return [...value]; // For sending a copy instead of the original array.
   }
 
   getSizeOptions() {
@@ -102,6 +110,10 @@ export class EditProductComponent implements OnInit, OnChanges {
   }
 
   getSubcategoryOptions() {
+    if (!this.formControls.categories.value?.length) {
+      return [];
+    }
+
     let subcategories = [];
     this.formControls.categories.value?.forEach((category) => {
       subcategories = subcategories.concat(this.productsService.getSubcategories(category));
@@ -131,7 +143,8 @@ export class EditProductComponent implements OnInit, OnChanges {
   onSave() {
     this.setValidatorsOnSave();
 
-    if (!this.form.valid || !this.editColorWithImages.isFormValid()) {
+    const isEditColorsValid = this.editColorWithImages.isFormValid();
+    if (!this.form.valid || !isEditColorsValid) {
       this.errorMessages = getFormErrorMessages(this.fieldNames, this.formControls, ERRORS_MESSAGES);
       return;
     }

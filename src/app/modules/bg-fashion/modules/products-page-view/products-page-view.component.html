@@ -1,4 +1,19 @@
-<span class="title">{{ getTitle() | titlecase }}</span>
+<span class="page-title">{{ getTitle() | titlecase }}</span>
+
+<app-filter-bar
+  [category]="category"
+  [subcategory]="subcategory"
+  [colors]="colors"
+  [sizes]="sizes"
+  [categoryOptions]="categoryOptions"
+  [subcategoryOptions]="subcategoryOptions"
+  [colorOptions]="colorOptions"
+  [sizeOptions]="sizeOptions"
+  (categorySelected)="onCategorySelect($event)"
+  (subcategorySelected)="onSubcategorySelect($event)"
+  (colorSelected)="onColorSelect($event)"
+  (sizeSelected)="onSizeSelect($event)"
+></app-filter-bar>
 
 <div class="products-wrapper">
   <app-product

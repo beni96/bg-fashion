@@ -1,4 +1,4 @@
-<div class="select-wrapper" [ngClass]="[color]">
+<div class="select-wrapper" [ngClass]="[color, size]">
   <label *ngIf="label" [ngClass]="{ error: errorMessage }">
     {{ label }}
     <span *ngIf="errorMessage"> - *{{ errorMessage }}</span>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Product } from 'src/app/common/interfaces/product';
 import { PRODUCTS } from 'src/app/common/products/products';
 
@@ -9,10 +9,10 @@ import { PRODUCTS } from 'src/app/common/products/products';
 export class ProductsService {
   private products: Product[];
   private categories: string[];
-  private categoriesSubject$: Subject<string[]> = new Subject();
+  private categoriesSubject$: BehaviorSubject<string[]>;
 
   constructor() {
-    this.categoriesSubject$.next(this.getCategories());
+    this.categoriesSubject$ = new BehaviorSubject(this.getCategories());
   }
 
   getProducts(): Product[] {
@@ -25,27 +25,38 @@ export class ProductsService {
   }
 
   addProduct(product: Product) {
-    this.products = PRODUCTS.concat(product);
+    this.products = this.products.concat(product);
   }
 
-  setProduct(product: Product, index: number) {
-    PRODUCTS[index] = product;
+  setProduct(product: Product) {
+    const index = this.products.findIndex((currentProduct) => currentProduct.id === product.id);
+    this.products[index] = product;
     this.clearCache();
   }
 
-  removeProduct(index: number) {
-    PRODUCTS.splice(index, 1);
+  removeProduct(id: number) {
+    this.products = this.products.filter((product) => product.id !== id);
     this.clearCache();
   }
 
-  getProductsByCategories(category: string, subcategory?: string, productIdToExclude?: number): Product[] {
+  getProductsByCategories(
+    category: string,
+    subcategory?: string,
+    colors?: string[],
+    sizes?: any[],
+    productIdToExclude?: number
+  ): Product[] {
     return this.getProducts().filter((product) => {
       if (productIdToExclude && product.id === productIdToExclude) {
         return false;
       }
 
-      const isProductIncludesCategory = product.categories.includes(category);
-      return subcategory ? isProductIncludesCategory && product.subcategories.includes(subcategory) : isProductIncludesCategory;
+      const includesCategory = product.categories.includes(category);
+      const includesSubcategory = !subcategory || product.subcategories.includes(subcategory);
+      const includesColors = !colors || product.colorsWithImages.some((colorWithImages) => colors.includes(colorWithImages.color.name));
+      const includesSizes = !sizes || product.sizes?.some((size) => sizes.includes(size));
+
+      return includesCategory && includesSubcategory && includesColors && includesSizes;
     });
   }
 
@@ -87,8 +98,43 @@ export class ProductsService {
     return subcategories;
   }
 
+  getColors(category: string, subcategory?: string, sizes?: any): string[] {
+    const products = this.getProducts().filter((product) => {
+      const includesCategory = product.categories.includes(category);
+      const includesSubcategory = !subcategory || product.subcategories.includes(subcategory);
+      const includesSizes = !sizes || product.sizes?.some((size) => sizes.includes(size));
+
+      return includesCategory && includesSubcategory && includesSizes;
+    });
+
+    let colors: string[] = [];
+    products.forEach((product) => {
+      product.colorsWithImages.forEach((colorWithImages) => (colors = colors.concat(colorWithImages.color.name)));
+    });
+
+    colors = colors.filter((color, index) => !colors.slice(index + 1).includes(color));
+    return colors;
+  }
+
+  getSizes(category: string, subcategory?: string, colors?: string[]): any[] {
+    const products = this.getProducts().filter((product) => {
+      const includesCategory = product.categories.includes(category);
+      const includesSubcategory = !subcategory || product.subcategories.includes(subcategory);
+      const includesColors = !colors || product.colorsWithImages.some((colorsWithImages) => colors.includes(colorsWithImages.color.name));
+
+      return includesCategory && includesSubcategory && includesColors;
+    });
+
+    let sizes: any[] = [];
+    products.forEach((product) => {
+      product.sizes?.forEach((size) => (sizes = sizes.concat(size)));
+    });
+
+    sizes = sizes.filter((size, index) => !sizes.slice(index + 1).includes(size));
+    return sizes;
+  }
+
   clearCache() {
-    this.products = null;
     this.categories = null;
     this.categoriesSubject$.next(this.getCategories());
   }

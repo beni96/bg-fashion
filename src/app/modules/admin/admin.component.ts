@@ -10,7 +10,7 @@ import { ProductsService } from 'src/app/services/products-service/products.serv
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent {
-  constructor(private homePageService: HomePageService, private productsServcie: ProductsService) {}
+  constructor(private homePageService: HomePageService, private productsService: ProductsService) {}
 
   onCategoryLinkChange(event: { categoryLink: CategoryLink; index: number }) {
     this.homePageService.setCategoryLink(event.categoryLink, event.index);
@@ -21,18 +21,18 @@ export class AdminComponent {
   }
 
   getProducts() {
-    return this.productsServcie.getProducts();
+    return this.productsService.getProducts();
   }
 
   onProductAdd(product: Product) {
-    this.productsServcie.addProduct(product);
+    this.productsService.addProduct(product);
   }
 
-  onProductChange(event: { product: Product; index: number }) {
-    this.productsServcie.setProduct(event.product, event.index);
+  onProductChange(product: Product) {
+    this.productsService.setProduct(product);
   }
 
-  onProductRemove(index: number) {
-    this.productsServcie.removeProduct(index);
+  onProductRemove(id: number) {
+    this.productsService.removeProduct(id);
   }
 }

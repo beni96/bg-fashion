@@ -12,7 +12,8 @@ export class SelectComponent implements OnInit {
   @Input() multipleValue: any[] = [];
   @Input() placeholder: string;
   @Input() label: string;
-  @Input() color: 'primary' | 'secondary' = 'primary';
+  @Input() color: 'primary' | 'secondary' | 'text' = 'primary';
+  @Input() size: 'lg' | 'md' | 'sm' = 'lg';
   @Input() multiple = false;
   @Input() errorMessage: string;
   @Output() optionSelected = new EventEmitter<any>();

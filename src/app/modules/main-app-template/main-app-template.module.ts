@@ -7,10 +7,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { HeaderMenuComponent } from './components/header-menu/header-menu.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [MainAppTemplateComponent, HeaderComponent, HeaderMenuComponent, FooterComponent, CounterComponent],
-  imports: [BrowserModule, CommonModule, RouterModule],
+  imports: [BrowserModule, BrowserAnimationsModule, CommonModule, RouterModule],
   exports: [MainAppTemplateComponent],
 })
 export class MainAppTemplateModule {}

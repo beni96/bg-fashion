@@ -1,3 +1,4 @@
+import { trigger, transition, style, animate, group } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { BgFashionPath, BG_FASHION_PREFIX } from 'src/app/modules/bg-fashion/router/bg-fashion.routes.names';
 import { CartService } from 'src/app/services/cart-service/cart.service';
@@ -10,6 +11,21 @@ import { HeaderCategory } from '../../interfaces/header-category';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  animations: [
+    trigger(
+      'menuAnimation', [
+        transition(':enter', [
+          style({ opacity: 0 }),
+          group([
+            animate('100ms', style({ opacity: 1 })),
+          ]),
+        ]),
+        transition(':leave', [
+          animate('100ms', style({ opacity: 0 }))
+        ])
+      ]
+    )
+  ],
 })
 export class HeaderComponent implements OnInit {
   isScrolled = false;

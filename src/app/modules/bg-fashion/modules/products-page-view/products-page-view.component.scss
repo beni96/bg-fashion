@@ -1,20 +1,18 @@
-@use 'src/assets/style/colors';
-@use 'src/assets/style/fonts';
 @use 'src/assets/style/layouts';
 
 :host {
-  @extend %flex-align-center;
+  display: flex;
 
   flex-direction: column;
   width: 100%;
 }
 
-.title {
-  color: colors.$primary-color;
-  font-family: fonts.$font-montserrat;
-  font-size: 42px;
-  font-weight: 500;
-  margin-bottom: 54px;
+.page-title {
+  margin-bottom: 32px;
+}
+
+app-filter-bar {
+  margin: 0 16px 56px;
 }
 
 .products-wrapper {

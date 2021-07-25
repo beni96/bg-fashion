@@ -1,0 +1,38 @@
+<app-select
+  placeholder="Category"
+  [value]="category"
+  [options]="categoryOptions"
+  size="sm"
+  color="text"
+  (optionSelected)="onCategorySelect($event)"
+></app-select>
+
+<app-select
+  placeholder="Subategory"
+  [value]="subcategory"
+  [options]="subcategoryOptions"
+  size="sm"
+  color="text"
+  (optionSelected)="onSubcategorySelect($event)"
+></app-select>
+
+<app-select
+  placeholder="Colors"
+  [multipleValue]="colors"
+  [options]="colorOptions"
+  [multiple]="true"
+  size="sm"
+  color="text"
+  (optionSelected)="onColorSelect($event)"
+></app-select>
+
+<app-select
+  *ngIf="sizeOptions.length"
+  placeholder="Sizes"
+  [multipleValue]="sizes"
+  [options]="sizeOptions"
+  [multiple]="true"
+  size="sm"
+  color="text"
+  (optionSelected)="onSizeSelect($event)"
+></app-select>

@@ -1,3 +1,7 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+
 html,
 body {
   height: 100%;
@@ -7,4 +11,13 @@ body {
 a {
   color: inherit;
   text-decoration: unset;
+}
+
+.page-title {
+  color: colors.$primary-color;
+  font-family: fonts.$font-montserrat;
+  font-size: 42px;
+  font-weight: 500;
+  margin-bottom: 54px;
+  text-align: center;
 }

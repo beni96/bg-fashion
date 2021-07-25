@@ -8,6 +8,7 @@ import { FavoritesService } from 'src/app/services/favorites-service/favorites.s
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { CartProduct } from 'src/app/common/interfaces/cart-product';
 import { Subject } from 'rxjs';
+import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 
 const COLUMNS_NUM = 2;
 const IMAGE_PADDING = 8;
@@ -25,6 +26,8 @@ export class ProductViewComponent implements OnInit {
   moreProducts: Product[] = [];
   sizes: string[] | number[];
   imgHeight: number;
+  category: string;
+  subcategory: string;
   shouldShowSizeError = false;
   snackbarLabelSubject$ = new Subject<string>();
 
@@ -67,13 +70,18 @@ export class ProductViewComponent implements OnInit {
   }
 
   getMoreProducts(paramMap: ParamMap) {
-    const category = paramMap.get('category');
-    const subcategory = paramMap.get('subcategory');
+    this.category = paramMap.get('category');
+    this.subcategory = paramMap.get('subcategory');
 
-    if (category) {
-      this.moreProducts = this.productsService.getProductsByCategories(category, subcategory, this.product.id);
+    if (this.category) {
+      this.moreProducts = this.productsService.getProductsByCategories(this.category, this.subcategory, null, null, this.product.id);
       this.moreProducts = this.moreProducts.slice(0, 3);
     }
+  }
+
+  getBackLink() {
+    const categoryPath = [`/${BgFashionPath.Category}`, this.category];
+    return this.subcategory ? [...categoryPath, BgFashionPath.Subcategory, this.subcategory] : categoryPath;
   }
 
   getImgHeight() {
