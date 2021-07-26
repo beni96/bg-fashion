@@ -9,7 +9,7 @@
   bottom: 24px;
   height: 48px;
   min-width: 64px;
-  position: absolute;
+  position: fixed;
   right: 24px;
   z-index: z-indexes.$snackbar-z-index;
 }
@@ -26,9 +26,8 @@
   padding: 16px;
 }
 
+:host-context([style*='rtl']),
 :host-context([dir='rtl']) {
-  .circle-wrapper {
-    left: 24px;
-    right: unset;
-  }
+  left: 24px;
+  right: unset;
 }

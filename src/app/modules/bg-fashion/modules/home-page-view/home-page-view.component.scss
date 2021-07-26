@@ -129,3 +129,16 @@ img {
     }
   }
 }
+
+:host-context([style*='rtl']),
+:host-context([dir='rtl']) {
+  .home-image-wrapper .home-image-title {
+    left: unset;
+    right: 56px;
+  }
+
+  .more-categories-wrapper .category-title {
+    left: unset;
+    right: 64px;
+  }
+}

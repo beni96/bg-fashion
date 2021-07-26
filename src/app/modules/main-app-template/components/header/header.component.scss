@@ -120,6 +120,7 @@
 app-header-menu {
   left: 0;
   position: absolute;
+  right: 0;
   top: variables.$header-height;
 }
 
@@ -134,4 +135,12 @@ app-header-menu {
   top: 0;
   width: 100%;
   z-index: z-indexes.$black-overlay-z-index;
+}
+
+:host-context([style*='rtl']),
+:host-context([dir='rtl']) {
+  app-counter {
+    left: unset;
+    right: 10px;
+  }
 }

@@ -69,3 +69,11 @@ app-price {
   position: absolute;
   top: 36px;
 }
+
+:host-context([style*='rtl']),
+:host-context([dir='rtl']) {
+  .discount {
+    left: unset;
+    right: 0;
+  }
+}
