@@ -6,12 +6,3 @@
   flex-direction: column;
   width: 100%;
 }
-
-.products-wrapper {
-  display: flex;
-  flex-flow: row wrap;
-
-  app-product {
-    width: 25%;
-  }
-}

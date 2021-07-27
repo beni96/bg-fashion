@@ -19,18 +19,30 @@ form {
   }
 
   .fields-wrapper {
-    @extend %flex-align-center;
-
-    .color-name {
-      color: colors.$primary-color;
-      font-family: fonts.$font-rubik;
-      font-size: 16px;
-      margin-inline-start: 8px;
-    }
+    display: flex;
 
     app-text-field:first-child,
     app-select:first-child {
       margin-inline-end: 16px;
     }
+  }
+
+  .images-fields-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    .color-name {
+      color: colors.$primary-color;
+      font-family: fonts.$font-rubik;
+      font-size: 16px;
+      margin-bottom: 16px;
+      text-decoration: underline;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .fields-wrapper {
+    flex-direction: column;
   }
 }

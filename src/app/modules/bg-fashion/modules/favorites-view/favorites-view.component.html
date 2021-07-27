@@ -1,19 +1,11 @@
 <span *ngIf="favoriteProducts.length" class="page-title">Favorites</span>
 
-<div class="products-wrapper">
-  <app-product
-    *ngFor="let product of favoriteProducts"
-    [title]="product.title"
-    [colorsWithImages]="product.colorsWithImages"
-    [price]="product.price"
-    [previousPrice]="product.previousPrice"
-    [defaultColorIndex]="product.defaultColorIndex"
-    [imgHeight]="imgHeight"
-    [showTrash]="true"
-    (productClicked)="onProductClick(product.id, $event)"
-    (trashClicked)="onTrashClick(product.id)"
-  ></app-product>
-</div>
+<app-products
+  [products]="favoriteProducts"
+  [showTrash]="true"
+  (productClicked)="onProductClick($event)"
+  (trashClicked)="onTrashClick($event)"
+></app-products>
 
 <app-state-message
   *ngIf="!favoriteProducts.length"

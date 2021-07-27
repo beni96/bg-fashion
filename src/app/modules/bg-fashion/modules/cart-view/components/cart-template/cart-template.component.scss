@@ -6,6 +6,10 @@
   width: 100%;
 }
 
+.page-title {
+  margin-bottom: 24px;
+}
+
 .footer {
   @extend %flex-space-between;
 

@@ -39,3 +39,9 @@ form {
     }
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .fields-wrapper {
+    flex-direction: column;
+  }
+}

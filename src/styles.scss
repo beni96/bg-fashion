@@ -21,3 +21,10 @@ a {
   margin-bottom: 54px;
   text-align: center;
 }
+
+@media only screen and (max-width: 500px) {
+  .page-title {
+    font-size: 36px;
+    margin-bottom: 32px;
+  }
+}

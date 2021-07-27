@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { map, mergeMap } from 'rxjs/operators';
-import { getImgHeight, getSizes } from '../../../../common/utils/utils';
+import { getSizes } from '../../../../common/utils/utils';
 import { ColorWithImages, Product } from '../../../../common/interfaces/product';
 import { ProductsService } from 'src/app/services/products-service/products.service';
 import { FavoritesService } from 'src/app/services/favorites-service/favorites.service';
@@ -11,9 +11,6 @@ import { Subject } from 'rxjs';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 import { Param } from 'src/app/common/url-params/params';
 import { QueryParam } from 'src/app/common/url-params/query-params';
-
-const COLUMNS_NUM = 2;
-const IMAGE_PADDING = 8;
 
 @Component({
   selector: 'app-product-view',
@@ -27,7 +24,6 @@ export class ProductViewComponent implements OnInit {
   selectedSize: string | number;
   moreProducts: Product[] = [];
   sizes: string[] | number[];
-  imgHeight: number;
   category: string;
   subcategory: string;
   shouldShowSizeError = false;
@@ -36,7 +32,6 @@ export class ProductViewComponent implements OnInit {
   @ViewChild('content') content: ElementRef;
 
   constructor(
-    private host: ElementRef,
     private route: ActivatedRoute,
     private router: Router,
     private productsService: ProductsService,
@@ -56,9 +51,6 @@ export class ProductViewComponent implements OnInit {
 
     fetchDataFromUrl$.subscribe(() => {});
     this.sizes = getSizes(this.product.sizesType);
-    window.addEventListener('resize', () => this.getImgHeight());
-
-    setTimeout(() => this.getImgHeight(), 0);
   }
 
   getSelectedColor() {
@@ -84,12 +76,6 @@ export class ProductViewComponent implements OnInit {
   getBackLink() {
     const categoryPath = [`/${BgFashionPath.Category}`, this.category];
     return this.subcategory ? [...categoryPath, BgFashionPath.Subcategory, this.subcategory] : categoryPath;
-  }
-
-  getImgHeight() {
-    const totalWidth = this.host.nativeElement.offsetWidth - this.content.nativeElement.offsetWidth;
-    const imageRatio = 4 / 3;
-    this.imgHeight = getImgHeight(imageRatio, COLUMNS_NUM, totalWidth, IMAGE_PADDING);
   }
 
   isSelectedColor(colorWithImages: ColorWithImages) {
@@ -121,9 +107,9 @@ export class ProductViewComponent implements OnInit {
     return (((this.product.previousPrice - this.product.price) * 100) / this.product.previousPrice).toFixed();
   }
 
-  onProductClick(productId: number, selectedColorIndex: number) {
-    const queryParams = { [QueryParam.COLOR_INDEX]: selectedColorIndex };
-    this.router.navigate([`../${productId}`], { relativeTo: this.route, queryParams });
+  onProductClick(event: { productId: number; selectedColorIndex: number }) {
+    const queryParams = { [QueryParam.COLOR_INDEX]: event.selectedColorIndex };
+    this.router.navigate([`../${event.productId}`], { relativeTo: this.route, queryParams });
   }
 
   onAddToCartClick() {

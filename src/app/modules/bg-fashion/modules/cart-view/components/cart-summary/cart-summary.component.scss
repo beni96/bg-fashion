@@ -26,7 +26,7 @@
   }
 
   &:last-child .value {
-    font-size: 24px;
+    font-size: 1.2em;
     font-weight: 500;
   }
 
@@ -36,5 +36,20 @@
 
   .value {
     font-weight: 400;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  :host {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .value {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }

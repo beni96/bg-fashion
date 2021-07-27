@@ -1,0 +1,39 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/layouts';
+
+:host {
+  display: flex;
+  position: relative;
+  width: 526px;
+}
+
+img {
+  max-height: 100%;
+  user-select: none;
+  width: 100%;
+}
+
+.fas {
+  @extend %flex-center;
+
+  background-color: colors.$secondary-color-strong;
+  border-radius: 50%;
+  bottom: 0;
+  color: colors.$primary-color;
+  cursor: pointer;
+  font-size: 24px;
+  height: 24px;
+  margin: auto;
+  padding: 4px;
+  position: absolute;
+  top: 0;
+  width: 24px;
+}
+
+.fa-angle-right {
+  right: 16px;
+}
+
+.fa-angle-left {
+  left: 16px;
+}

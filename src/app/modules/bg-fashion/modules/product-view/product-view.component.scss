@@ -111,19 +111,6 @@
   }
 }
 
-.images-wrapper {
-  direction: rtl;
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(2, 1fr);
-
-  img {
-    max-height: 720px;
-    max-width: 100%;
-    min-height: 450px;
-  }
-}
-
 .more-to-love-wrapper {
   display: flex;
   flex-direction: column;
@@ -136,16 +123,79 @@
     margin-bottom: 32px;
   }
 
-  .products-wrapper {
-    display: flex;
+  app-products {
+    margin-inline-start: -16px;
+  }
+}
 
-    app-product {
-      box-sizing: unset;
-      width: 280px;
+@media only screen and (max-width: 998px) {
+  app-product-images {
+    width: 332px;
+  }
+}
 
-      &:first-child {
-        padding-inline-start: 0;
+@media only screen and (max-width: 760px) {
+  :host {
+    align-items: center;
+    margin-top: 16px;
+  }
+
+  .product-section {
+    flex-direction: column-reverse;
+    max-width: 600px;
+    width: 100%;
+
+    .content-wrapper {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+
+      .go-back {
+        margin-bottom: 12px;
       }
+
+      .section {
+        align-items: center;
+        width: 100%;
+      }
+    }
+
+    app-product-images {
+      margin-bottom: 24px;
+      width: 100%;
+    }
+  }
+
+  .more-to-love-wrapper {
+    align-items: center;
+
+    app-products {
+      margin-inline-start: unset;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .content-wrapper {
+    .title,
+    app-price {
+      font-size: 20px;
+    }
+
+    .subtitle {
+      margin-bottom: 24px;
+    }
+  }
+
+  .buttons-section {
+    flex-direction: column-reverse;
+    max-width: 420px;
+    width: 100%;
+
+    app-button {
+      margin-inline-end: unset;
+      margin-bottom: 12px;
     }
   }
 }

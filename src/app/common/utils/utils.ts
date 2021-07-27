@@ -24,9 +24,22 @@ export const getSizes = (sizesType: SizesType) => {
   }
 };
 
-export const getImgHeight = (imageRatio: number, columnsNum: number, totalWidth: number, imagePadding: number) => {
+export const getImgHeight = (totalWidth: number, imagePadding: number, screenWidth?: number) => {
+  const columnsNum = screenWidth ? getProdcutsColumnsCount(screenWidth) : 1;
+  const imageRatio = 4 / 3;
   const imageWidth = totalWidth / columnsNum - imagePadding;
   return imageWidth * imageRatio;
+};
+
+const getProdcutsColumnsCount = (screenWidth: number) => {
+  switch (true) {
+    case screenWidth < 760:
+      return 2;
+    case screenWidth < 998:
+      return 3;
+    default:
+      return 4;
+  }
 };
 
 export const getTotalPrice = (cartProducts: CartProductExtended[]): number => {

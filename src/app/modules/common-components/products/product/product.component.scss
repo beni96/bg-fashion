@@ -54,6 +54,7 @@ img {
 }
 
 app-price {
+  font-size: 1em;
   margin-bottom: 12px;
 }
 
@@ -75,5 +76,21 @@ app-price {
   .discount {
     left: unset;
     right: 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  :host {
+    font-size: 14px;
+    padding: 0 8px;
+  }
+
+  app-price {
+    margin-bottom: 8px;
+  }
+
+  app-color {
+    height: 16px;
+    width: 16px;
   }
 }

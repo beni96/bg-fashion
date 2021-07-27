@@ -1,0 +1,15 @@
+<app-product
+  *ngFor="let product of products"
+  [title]="product.title"
+  [colorsWithImages]="product.colorsWithImages"
+  [price]="product.price"
+  [previousPrice]="product.previousPrice"
+  [defaultColorIndex]="product.defaultColorIndex"
+  [imgHeight]="imgHeight"
+  [showHeart]="showHeart"
+  [showTrash]="showTrash"
+  [isFavorite]="product.isFavorite"
+  (productClicked)="onProductClick(product.id, $event)"
+  (heartClicked)="onHeartClick(product.id, $event)"
+  (trashClicked)="onTrashClick(product.id)"
+></app-product>

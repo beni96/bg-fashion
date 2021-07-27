@@ -26,4 +26,5 @@ export interface Product {
   defaultColorIndex?: number;
   categories: string[];
   subcategories: string[];
+  isFavorite?: boolean;
 }

@@ -84,8 +84,8 @@ describe('ProductViewComponent', () => {
   });
 
   it('should navigate to the product page on clicking it', () => {
-    const product = debugElement.queryAll(By.css('app-product'))[0];
-    product.triggerEventHandler('productClicked', 2);
+    const products = debugElement.query(By.css('app-products'));
+    products.triggerEventHandler('productClicked', { productId: 4, selectedColorIndex: 2 });
     expect(router.navigate).toHaveBeenCalledWith([`../${component.moreProducts[0].id}`], {
       // @ts-ignore
       relativeTo: component.route,

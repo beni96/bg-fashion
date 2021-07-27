@@ -46,25 +46,13 @@
     </div>
   </div>
 
-  <div class="images-wrapper">
-    <img *ngFor="let imgUrl of selectedColor.images" [src]="imgUrl" [style.height.px]="imgHeight" />
-  </div>
+  <app-product-images [imgUrls]="selectedColor.images"></app-product-images>
 </div>
 
 <div *ngIf="moreProducts.length" class="more-to-love-wrapper">
   <span class="title">More to love</span>
 
-  <div class="products-wrapper">
-    <app-product
-      *ngFor="let product of moreProducts"
-      [title]="product.title"
-      [colorsWithImages]="product.colorsWithImages"
-      [price]="product.price"
-      [previousPrice]="product.previousPrice"
-      [defaultColorIndex]="product.defaultColorIndex"
-      (productClicked)="onProductClick(product.id, $event)"
-    ></app-product>
-  </div>
+  <app-products [products]="moreProducts" (productClicked)="onProductClick($event)"></app-products>
 </div>
 
 <app-snackbar [snackbarLabel$]="snackbarLabelSubject$"></app-snackbar>

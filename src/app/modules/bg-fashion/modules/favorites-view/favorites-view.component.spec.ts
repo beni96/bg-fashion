@@ -68,24 +68,17 @@ describe('FavoritesViewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set imgHeight to 4', () => {
-    // @ts-ignore
-    component.hostElement.nativeElement.style.width = '140px';
-    component.getImgHeight();
-    expect(component.imgHeight).toEqual(4);
-  });
-
   it('should navigate to the product page on clicking it', () => {
-    const product = debugElement.queryAll(By.css('app-product'))[0];
-    product.triggerEventHandler('productClicked', 2);
+    const products = debugElement.query(By.css('app-products'));
+    products.triggerEventHandler('productClicked', { productId: 1, selectedColorIndex: 2 });
     expect(router.navigate).toHaveBeenCalledWith([BgFashionPath.Product, component.favoriteProducts[0].id], {
       queryParams: { color: 2 },
     });
   });
 
   it('should remove product from favorites on clicking trash', () => {
-    const product = debugElement.queryAll(By.css('app-product'))[0];
-    product.triggerEventHandler('trashClicked', null);
+    const products = debugElement.query(By.css('app-products'));
+    products.triggerEventHandler('trashClicked', 1);
     expect(favoritesMock.removeFavoriteProduct).toHaveBeenCalledWith(component.favoriteProducts[0].id);
   });
 });

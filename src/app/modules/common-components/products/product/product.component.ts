@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { isEnterOrSpacePressed } from '../../../common/utils/utils';
-import { ColorWithImages } from '../../../common/interfaces/product';
+import { isEnterOrSpacePressed } from '../../../../common/utils/utils';
+import { ColorWithImages } from '../../../../common/interfaces/product';
 
 @Component({
   selector: 'app-product',
