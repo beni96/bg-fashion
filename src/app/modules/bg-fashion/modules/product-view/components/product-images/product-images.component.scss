@@ -3,14 +3,31 @@
 
 :host {
   display: flex;
+  overflow: hidden;
   position: relative;
   width: 526px;
 }
 
-img {
-  max-height: 100%;
-  user-select: none;
-  width: 100%;
+.images-wrapper {
+  display: flex;
+  transition: transform ease;
+
+  .image {
+    position: relative;
+
+    img {
+      bottom: 0;
+      height: 100%;
+      left: 0;
+      max-height: 100%;
+      max-width: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      user-select: none;
+      width: 100%;
+    }
+  }
 }
 
 .fas {
@@ -28,6 +45,15 @@ img {
   position: absolute;
   top: 0;
   width: 24px;
+
+  &:hover,
+  &:focus {
+    background-color: colors.$separator-color;
+  }
+
+  &:active {
+    background-color: colors.$grey-color-light;
+  }
 }
 
 .fa-angle-right {

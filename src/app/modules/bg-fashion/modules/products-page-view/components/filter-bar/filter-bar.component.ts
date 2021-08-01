@@ -13,7 +13,7 @@ export class FilterBarComponent {
   @Input() categoryOptions: string[] = [];
   @Input() subcategoryOptions: string[] = [];
   @Input() colorOptions: string[] = [];
-  @Input() sizeOptions: string[] = [];
+  @Input() sizeOptions: string[] | number[] = [];
 
   @Output() categorySelected = new EventEmitter<string>();
   @Output() subcategorySelected = new EventEmitter<string>();

@@ -1,3 +1,15 @@
-<img [src]="imgUrls[currentImgUrlIndex]" [style.height.px]="imgHeight" />
-<i class="fas fa-angle-right" tabindex="0" (click)="onNextClick()" (keydown)="onNextClick($event)"></i>
-<i class="fas fa-angle-left" tabindex="0" (click)="onBackClick()" (keydown)="onBackClick($event)"></i>
+<div
+  class="images-wrapper"
+  [style.height.px]="imgHeight"
+  [style.transform]="containerTransform"
+  [style.transition-duration]="transitionDuration"
+>
+  <div *ngFor="let imgUrl of imgUrls" class="image" [style.width.px]="imgWidth">
+    <img [src]="imgUrl" />
+  </div>
+</div>
+
+<div *ngIf="imgUrls.length > 1">
+  <i class="fas fa-angle-right" tabindex="0" (click)="onNextClick()" (keydown)="onNextClick($event)"></i>
+  <i class="fas fa-angle-left" tabindex="0" (click)="onBackClick()" (keydown)="onBackClick($event)"></i>
+</div>

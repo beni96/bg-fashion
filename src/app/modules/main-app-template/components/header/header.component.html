@@ -1,10 +1,14 @@
 <div *ngIf="isScrolled" class="header-sticky-background"></div>
 <div class="header" [ngClass]="{ sticky: isScrolled }">
-  <div class="logo-wrapper">
-    <a class="logo" [routerLink]="getHomeLink()" routerLinkActive="is-active">BG Fashion</a>
+  <div *ngIf="isMobile" class="menu-icon-wrapper">
+    <i #menuIcon class="fas fa-bars" tabindex="0" (click)="toggleMobileMenu()" (keydown)="toggleMobileMenu($event)"></i>
   </div>
 
-  <div class="pages-wrapper" (click)="hideHeaderMenu()" (mouseleave)="hideHeaderMenu()">
+  <div class="logo-wrapper">
+    <a class="logo" [routerLink]="getHomeLink()" routerLinkActive="is-active" (click)="hideMobileMenu()">BG Fashion</a>
+  </div>
+
+  <div *ngIf="!isMobile" class="pages-wrapper" (click)="hideHeaderMenu()" (mouseleave)="hideHeaderMenu()">
     <a
       *ngFor="let page of pages"
       class="page"
@@ -35,4 +39,12 @@
   </div>
 </div>
 
-<div *ngIf="currentHoveredPage?.menuCategories?.length" class="black-overlay"></div>
+<app-header-mobile-menu
+  #mobileMenu
+  *ngIf="isMobile && isMobileMenuOpen"
+  [@mobileMenuAnimation]
+  [pages]="pages"
+  (linkClicked)="hideMobileMenu()"
+></app-header-mobile-menu>
+
+<div *ngIf="currentHoveredPage?.menuCategories?.length || isMobileMenuOpen" class="black-overlay"></div>

@@ -17,7 +17,6 @@
 
   &:not(.disabled) {
     &:hover,
-    &:focus,
     &.selected {
       border-color: colors.$primary-color-light;
     }

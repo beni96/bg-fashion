@@ -1,0 +1,60 @@
+<div *ngIf="isOpen" [@dialogAnimation] class="dialog-wrapper">
+  <span class="dialog-title">Filter Results</span>
+  <div class="section">
+    <span class="section-title">Category</span>
+    <div class="options-wrapper">
+      <span
+        class="category"
+        *ngFor="let categoryOption of categoryOptions"
+        [ngClass]="{ selected: selectedCategory === categoryOption }"
+        (click)="onCategorySelect(categoryOption)"
+      >
+        {{ categoryOption | titlecase }}
+      </span>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="section-title">Subcategory</span>
+    <div class="options-wrapper">
+      <span
+        class="category"
+        *ngFor="let subcategoryOption of subcategoryOptions"
+        [ngClass]="{ selected: selectedSubcategory === subcategoryOption }"
+        (click)="onSubcategorySelect(subcategoryOption)"
+      >
+        {{ subcategoryOption | titlecase }}
+      </span>
+    </div>
+  </div>
+
+  <div class="section">
+    <span class="section-title">Colors</span>
+    <div class="options-wrapper">
+      <app-color
+        *ngFor="let color of colorOptions"
+        [name]="color.name"
+        [hexCode]="color.hexCode"
+        [isSelected]="isSelectedColor(color.name)"
+        (colorSelected)="onColorSelect(color.name)"
+      ></app-color>
+    </div>
+  </div>
+
+  <div *ngIf="sizeOptions.length" class="section">
+    <span class="section-title">Sizes</span>
+    <div class="options-wrapper">
+      <app-size
+        *ngFor="let size of sizeOptions"
+        [name]="size"
+        [isSelected]="isSelectedSize(size)"
+        (sizeSelected)="onSizeSelect(size)"
+      ></app-size>
+    </div>
+  </div>
+
+  <app-button (click)="onDoneClick()">Done</app-button>
+  <i class="fas fa-times" (click)="dismissDialog()"></i>
+</div>
+
+<div *ngIf="isOpen" class="black-overlay"></div>

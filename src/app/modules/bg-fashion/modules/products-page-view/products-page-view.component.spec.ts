@@ -62,7 +62,10 @@ describe('ProductsPageViewComponent', () => {
     productsServiceMock.getCategories.and.returnValue(['clothes', 'shoes']);
     productsServiceMock.getSubcategories.and.returnValue(['t-shirts', 'jeans']);
     productsServiceMock.getSizes.and.returnValue(['sm', 'md']);
-    productsServiceMock.getColors.and.returnValue(['red', 'blue']);
+    productsServiceMock.getColors.and.returnValue([
+      { name: 'red', hexCode: '' },
+      { name: 'blue', hexCode: '' },
+    ]);
     fixture.detectChanges();
 
     spyOn(router, 'navigate');
@@ -86,7 +89,11 @@ describe('ProductsPageViewComponent', () => {
     expect(component.categoryOptions).toEqual(['clothes', 'shoes']);
     expect(component.subcategoryOptions).toEqual(['t-shirts', 'jeans']);
     expect(component.sizeOptions).toEqual(['sm', 'md']);
-    expect(component.colorOptions).toEqual(['red', 'blue']);
+    expect(component.colorOptions).toEqual([
+      { name: 'red', hexCode: '' },
+      { name: 'blue', hexCode: '' },
+    ]);
+    expect(component.colorNameOptions).toEqual(['red', 'blue']);
   });
 
   it('should navigate to category on selecting one', () => {

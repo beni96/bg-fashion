@@ -10,17 +10,19 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
 import { StateMessageComponent } from './state-message/state-message.component';
 import { SelectComponent } from './select/select.component';
 import { ProductsComponent } from './products/products.component';
+import { SizeComponent } from './size/size.component';
 
 const components = [
+  ButtonComponent,
   ColorComponent,
   PriceComponent,
-  ButtonComponent,
   ProductComponent,
   ProductsComponent,
-  TextFieldComponent,
+  SelectComponent,
+  SizeComponent,
   SnackbarComponent,
   StateMessageComponent,
-  SelectComponent,
+  TextFieldComponent,
 ];
 
 @NgModule({

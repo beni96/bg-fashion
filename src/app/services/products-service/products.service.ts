@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { Product } from 'src/app/common/interfaces/product';
+import { Color, Product } from 'src/app/common/interfaces/product';
 import { PRODUCTS } from 'src/app/common/products/products';
 
 @Injectable({
@@ -53,8 +53,9 @@ export class ProductsService {
 
       const includesCategory = product.categories.includes(category);
       const includesSubcategory = !subcategory || product.subcategories.includes(subcategory);
-      const includesColors = !colors || product.colorsWithImages.some((colorWithImages) => colors.includes(colorWithImages.color.name));
-      const includesSizes = !sizes || product.sizes?.some((size) => sizes.includes(size));
+      const includesColors =
+        !colors?.length || product.colorsWithImages.some((colorWithImages) => colors.includes(colorWithImages.color.name));
+      const includesSizes = !sizes?.length || product.sizes?.some((size) => sizes.includes(size));
 
       return includesCategory && includesSubcategory && includesColors && includesSizes;
     });
@@ -98,21 +99,21 @@ export class ProductsService {
     return subcategories;
   }
 
-  getColors(category: string, subcategory?: string, sizes?: any): string[] {
+  getColors(category: string, subcategory?: string, sizes?: any): Color[] {
     const products = this.getProducts().filter((product) => {
       const includesCategory = product.categories.includes(category);
       const includesSubcategory = !subcategory || product.subcategories.includes(subcategory);
-      const includesSizes = !sizes || product.sizes?.some((size) => sizes.includes(size));
+      const includesSizes = !sizes?.length || product.sizes?.some((size) => sizes.includes(size));
 
       return includesCategory && includesSubcategory && includesSizes;
     });
 
-    let colors: string[] = [];
+    let colors: Color[] = [];
     products.forEach((product) => {
-      product.colorsWithImages.forEach((colorWithImages) => (colors = colors.concat(colorWithImages.color.name)));
+      product.colorsWithImages.forEach((colorWithImages) => (colors = colors.concat(colorWithImages.color)));
     });
 
-    colors = colors.filter((color, index) => !colors.slice(index + 1).includes(color));
+    colors = colors.filter((color, index) => !colors.slice(index + 1).some((c) => color.name === c.name));
     return colors;
   }
 
@@ -120,7 +121,8 @@ export class ProductsService {
     const products = this.getProducts().filter((product) => {
       const includesCategory = product.categories.includes(category);
       const includesSubcategory = !subcategory || product.subcategories.includes(subcategory);
-      const includesColors = !colors || product.colorsWithImages.some((colorsWithImages) => colors.includes(colorsWithImages.color.name));
+      const includesColors =
+        !colors?.length || product.colorsWithImages.some((colorsWithImages) => colors.includes(colorsWithImages.color.name));
 
       return includesCategory && includesSubcategory && includesColors;
     });

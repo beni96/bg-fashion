@@ -8,9 +8,19 @@ import { HeaderMenuComponent } from './components/header-menu/header-menu.compon
 import { FooterComponent } from './components/footer/footer.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderMobileMenuComponent } from './components/header-mobile-menu/header-mobile-menu.component';
+import { ExpandingPanelComponent } from './components/expanding-panel/expanding-panel.component';
 
 @NgModule({
-  declarations: [MainAppTemplateComponent, HeaderComponent, HeaderMenuComponent, FooterComponent, CounterComponent],
+  declarations: [
+    MainAppTemplateComponent,
+    HeaderComponent,
+    HeaderMenuComponent,
+    FooterComponent,
+    CounterComponent,
+    HeaderMobileMenuComponent,
+    ExpandingPanelComponent,
+  ],
   imports: [BrowserModule, BrowserAnimationsModule, CommonModule, RouterModule],
   exports: [MainAppTemplateComponent],
 })

@@ -11,7 +11,7 @@ button {
   @extend %flex-center;
 
   background-color: inherit;
-  border: 1px solid transparent;
+  border: var(--button-border, 1px solid transparent);
   cursor: pointer;
   font-family: fonts.$font-montserrat;
   font-weight: 500;
@@ -38,7 +38,7 @@ button {
 
   &.secondary {
     background-color: colors.$secondary-color;
-    border: 2px solid colors.$primary-color;
+    border: var(--button-border, 2px solid colors.$primary-color);
     color: colors.$primary-color;
 
     &:hover,

@@ -1,0 +1,14 @@
+<app-expanding-panel *ngFor="let page of pages; let index = index" [title]="page.category">
+  <div class="subcategories-wrapper">
+    <a class="link" [routerLink]="getLink(page.category)" routerLinkActive="is-active" (click)="onLinkClick()"> All </a>
+    <a
+      *ngFor="let subcategory of page.menuCategories"
+      class="link"
+      [routerLink]="getLink(page.category, subcategory)"
+      routerLinkActive="is-active"
+      (click)="onLinkClick()"
+    >
+      {{ subcategory | titlecase }}
+    </a>
+  </div>
+</app-expanding-panel>

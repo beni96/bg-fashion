@@ -1,0 +1,43 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+@use 'src/assets/style/z-indexes';
+
+:host {
+  background-color: colors.$secondary-color;
+  box-sizing: border-box;
+  color: colors.$primary-color;
+  display: flex;
+  flex-direction: column;
+  font-family: fonts.$font-rubik;
+  font-weight: 400;
+  height: 100%;
+  line-height: 24px;
+  padding: 12px;
+  width: 320px;
+  z-index: z-indexes.$header-z-index;
+}
+
+.subcategories-wrapper {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+
+  .link {
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+app-expanding-panel.open {
+  background-color: colors.$secondary-color-strong;
+  border-radius: 4px;
+}

@@ -3,19 +3,40 @@
 <app-breadcrumbs [category]="category" [subcategory]="subcategory"></app-breadcrumbs>
 
 <app-filter-bar
+  *ngIf="!isMobile"
   [category]="category"
   [subcategory]="subcategory"
   [colors]="colors"
   [sizes]="sizes"
   [categoryOptions]="categoryOptions"
   [subcategoryOptions]="subcategoryOptions"
-  [colorOptions]="colorOptions"
+  [colorOptions]="colorNameOptions"
   [sizeOptions]="sizeOptions"
   (categorySelected)="onCategorySelect($event)"
   (subcategorySelected)="onSubcategorySelect($event)"
   (colorSelected)="onColorSelect($event)"
   (sizeSelected)="onSizeSelect($event)"
 ></app-filter-bar>
+
+<div *ngIf="isMobile" class="mobile-filter-dialog">
+  <app-button color="secondary" (click)="showFilterBarDialog()">
+    Filter
+    <i class="fas fa-filter"></i>
+  </app-button>
+  <app-filter-bar-dialog
+    #filterBarDialog
+    [category]="category"
+    [subcategory]="subcategory"
+    [colors]="colors"
+    [sizes]="sizes"
+    [categoryOptions]="categoryOptions"
+    [subcategoryOptions]="subcategoryOptions"
+    [colorOptions]="colorOptions"
+    [sizeOptions]="sizeOptions"
+    (filterFinished)="onFilterDialogFinish($event)"
+    (fieldChanged)="onFilterDialogFieldChange($event)"
+  ></app-filter-bar-dialog>
+</div>
 
 <app-products
   [products]="products"

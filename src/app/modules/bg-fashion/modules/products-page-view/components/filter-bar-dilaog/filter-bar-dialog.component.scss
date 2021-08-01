@@ -1,0 +1,113 @@
+@use 'src/assets/style/colors';
+@use 'src/assets/style/fonts';
+@use 'src/assets/style/layouts';
+@use 'src/assets/style/z-indexes';
+
+.dialog-wrapper {
+  background-color: colors.$white;
+  border-radius: 8px;
+  bottom: 0;
+  box-sizing: border-box;
+  color: colors.$primary-color;
+  display: flex;
+  flex-direction: column;
+  font-family: fonts.$font-rubik;
+  height: max-content;
+  left: 0;
+  margin: auto;
+  padding: 24px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 90%;
+  z-index: z-indexes.$black-overlay-dialog-z-index + 1;
+
+  .dialog-title {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 32px;
+    margin-bottom: 16px;
+  }
+
+  .section {
+    background-color: colors.$secondary-color-strong;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+    padding: 12px 16px;
+
+    .section-title {
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 16px;
+    }
+
+    .options-wrapper {
+      display: flex;
+      flex-flow: row wrap;
+
+      * {
+        margin-bottom: 8px;
+        margin-inline-end: 6px;
+      }
+
+      app-color {
+        height: 24px;
+        width: 24px;
+      }
+    }
+  }
+
+  app-button {
+    align-self: flex-end;
+    margin-top: 24px;
+    width: max-content;
+  }
+
+  .fa-times {
+    cursor: pointer;
+    position: absolute;
+    right: 16px;
+    top: 16px;
+  }
+}
+
+.category {
+  @extend %flex-center;
+
+  background-color: transparent;
+  border: 1px solid colors.$primary-color;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 4px 6px;
+  transition: 0.2s all ease-in;
+  transition-property: background-color, color;
+
+  &.selected {
+    background-color: colors.$bg-purple;
+    border-color: transparent;
+    color: colors.$secondary-color;
+  }
+}
+
+.black-overlay {
+  background-color: colors.$black;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  opacity: 0.6;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: z-indexes.$black-overlay-dialog-z-index;
+}
+
+:host-context([style*='rtl']),
+:host-context([dir='rtl']) {
+  .dialog-wrapper .fa-times {
+    left: 16px;
+    right: unset;
+  }
+}
