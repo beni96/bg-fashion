@@ -1,8 +1,6 @@
-export const CLOTHES_SUBCATEGORY_TYPES = ['t-shirts', 'shirts', 'jeans', 'shorts', 'dresses', 'jackets'] as const;
-export const SHOES_SUBCATEGORY_TYPES = ['sneakers', 'boots', 'sandals'] as const;
-export const ACCESSORIES_SUBCATEGORY_TYPES = ['sunglasses', 'hats', 'Bracelets'] as const;
+import { Color } from '../interfaces/product';
 
-export const COLOR_TYPES = [
+export const COLOR_TYPES: Color[] = [
   { name: 'black', hexCode: '#000000' },
   { name: 'white', hexCode: '#ffffff' },
   { name: 'red', hexCode: '#f10f29' },
@@ -12,13 +10,6 @@ export const COLOR_TYPES = [
   { name: 'purple', hexCode: '#c9a0ff' },
   { name: 'green', hexCode: '#02dd02' },
 ];
-
-export const CATEGORY_AND_SUBCATEGORY_TYPES = [
-  { category: 'clothes', subcategory: CLOTHES_SUBCATEGORY_TYPES },
-  { category: 'shoes', subcategory: SHOES_SUBCATEGORY_TYPES },
-  { category: 'accessories', subcategory: ACCESSORIES_SUBCATEGORY_TYPES },
-  { category: 'sale', subcategory: [...CLOTHES_SUBCATEGORY_TYPES, ...SHOES_SUBCATEGORY_TYPES, ...ACCESSORIES_SUBCATEGORY_TYPES] },
-] as const;
 
 export const SHIRTS_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'];
 export const PANTS_SIZES = [32, 34, 36, 38, 40];

@@ -16,7 +16,7 @@ describe('ProductViewComponent', () => {
   let router: Router;
   let cartMock: jasmine.SpyObj<CartService>;
   let favoritesMock: jasmine.SpyObj<FavoritesService>;
-  const paramMap = convertToParamMap({ category: 'clothes', id: '1' });
+  const paramMap = convertToParamMap({ category: 'clothes', id: '5' });
   const queryParamMap = convertToParamMap({ color: 1 });
 
   beforeEach(async(() => {
@@ -53,7 +53,7 @@ describe('ProductViewComponent', () => {
   });
 
   it('should set product', () => {
-    expect(component.product.title).toEqual('T-shirt');
+    expect(component.product.title).toEqual('Printted T-shirt');
     expect(component.product.categories).toEqual(['clothes', 'sale']);
   });
 
@@ -62,7 +62,7 @@ describe('ProductViewComponent', () => {
   });
 
   it('should set selected color', () => {
-    expect(component.selectedColor.color.hexCode).toEqual('#f10f29');
+    expect(component.selectedColor.color.hexCode).toEqual('#ffffff');
   });
 
   it('should set selectedColor on selecting color', () => {
@@ -85,11 +85,11 @@ describe('ProductViewComponent', () => {
 
   it('should navigate to the product page on clicking it', () => {
     const products = debugElement.query(By.css('app-products'));
-    products.triggerEventHandler('productClicked', { productId: 4, selectedColorIndex: 2 });
+    products.triggerEventHandler('productClicked', { productId: 1, selectedColorIndex: 1 });
     expect(router.navigate).toHaveBeenCalledWith([`../${component.moreProducts[0].id}`], {
       // @ts-ignore
       relativeTo: component.route,
-      queryParams: { color: 2 },
+      queryParams: { color: 1 },
     });
   });
 
