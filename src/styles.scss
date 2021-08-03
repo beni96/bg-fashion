@@ -22,6 +22,13 @@ a {
   text-align: center;
 }
 
+.with-backup {
+  background-color: colors.$primary-color-strong;
+  background-image: url('assets/images/icon.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
 @media only screen and (max-width: 500px) {
   .page-title {
     font-size: 36px;

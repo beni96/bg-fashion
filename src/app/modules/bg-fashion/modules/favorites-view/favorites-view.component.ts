@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import firebase from 'firebase/app';
+import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
 import { Product } from 'src/app/common/interfaces/product';
 import { QueryParam } from 'src/app/common/url-params/query-params';
 import { FavoritesService } from 'src/app/services/favorites-service/favorites.service';
+import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 
 @Component({
@@ -13,10 +16,11 @@ import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 export class FavoritesViewComponent implements OnInit {
   favoriteProducts: Product[];
 
-  constructor(private favoritesService: FavoritesService, private router: Router) {}
+  constructor(@Inject(FIREBASE_TOKEN) private firebaseService, private favoritesService: FavoritesService, private router: Router) {}
 
   ngOnInit() {
     this.getFavoriteProducts();
+    this.firebaseService.analytics().logEvent(GoogleAnalyticsEvent.FavoritesPageInit);
   }
 
   getFavoriteProducts() {

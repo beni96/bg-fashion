@@ -2,17 +2,21 @@ import { DebugElement } from '@angular/core';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FirebaseStub } from 'src/app/tokens/firebase/firebase-stub';
+import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';
 import { ProductComponent } from './product.component';
 
 describe('ProductComponent', () => {
   let fixture: ComponentFixture<ProductComponent>;
   let component: ProductComponent;
   let debugElement: DebugElement;
+  const firebaseMock = new FirebaseStub();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [ProductComponent],
+      providers: [{ provide: FIREBASE_TOKEN, useValue: firebaseMock }],
     }).compileComponents();
   }));
 

@@ -31,7 +31,7 @@ describe('EditHomePageLinkComponent', () => {
   });
 
   it('should emit the values on save', () => {
-    component.formControls.url.setValue('image');
+    component.formControls.url.setValue('http://www.image.com');
     component.formControls.title.setValue('title');
     component.formControls.category.setValue('category');
     component.formControls.subcategory.setValue('subcategory');
@@ -40,7 +40,7 @@ describe('EditHomePageLinkComponent', () => {
     component.onSave();
 
     expect(component.categoryLinkChanged.emit).toHaveBeenCalledWith({
-      imageUrl: 'image',
+      imageUrl: 'http://www.image.com',
       title: 'title',
       category: 'category',
       subcategory: 'subcategory',

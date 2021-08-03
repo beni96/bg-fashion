@@ -11,6 +11,7 @@ import { StateMessageComponent } from './state-message/state-message.component';
 import { SelectComponent } from './select/select.component';
 import { ProductsComponent } from './products/products.component';
 import { SizeComponent } from './size/size.component';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 const components = [
   ButtonComponent,
@@ -21,6 +22,7 @@ const components = [
   SelectComponent,
   SizeComponent,
   SnackbarComponent,
+  SpinnerComponent,
   StateMessageComponent,
   TextFieldComponent,
 ];

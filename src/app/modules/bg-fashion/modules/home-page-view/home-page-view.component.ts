@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import firebase from 'firebase/app';
+import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
 import { CategoryLink } from 'src/app/common/interfaces/category-link';
 import { HomePageService } from 'src/app/services/home-page-service/home-page.service';
+import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';
 import { BgFashionPath, BG_FASHION_PREFIX } from '../../router/bg-fashion.routes.names';
 
 @Component({
@@ -13,9 +16,10 @@ export class HomePageViewComponent implements OnInit {
   categories: CategoryLink[] = [];
   moreCategories: CategoryLink[] = [];
 
-  constructor(private homePageService: HomePageService) {}
+  constructor(@Inject(FIREBASE_TOKEN) private firebaseService, private homePageService: HomePageService) {}
 
   ngOnInit() {
+    this.firebaseService.analytics().logEvent(GoogleAnalyticsEvent.HomeImageChanged);
     const categoryLinks = this.homePageService.getCategoryLinks();
     this.homeImage = categoryLinks[0];
     this.categories = categoryLinks.slice(1, 5);

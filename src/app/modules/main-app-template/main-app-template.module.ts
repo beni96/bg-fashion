@@ -10,6 +10,7 @@ import { CounterComponent } from './components/counter/counter.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderMobileMenuComponent } from './components/header-mobile-menu/header-mobile-menu.component';
 import { ExpandingPanelComponent } from './components/expanding-panel/expanding-panel.component';
+import { CommonComponentsModule } from '../common-components/common-components.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { ExpandingPanelComponent } from './components/expanding-panel/expanding-
     HeaderMobileMenuComponent,
     ExpandingPanelComponent,
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, CommonModule, RouterModule],
+  imports: [BrowserModule, BrowserAnimationsModule, CommonModule, RouterModule, CommonComponentsModule],
   exports: [MainAppTemplateComponent],
 })
 export class MainAppTemplateModule {}

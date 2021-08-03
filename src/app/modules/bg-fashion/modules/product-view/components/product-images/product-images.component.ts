@@ -1,5 +1,8 @@
-import { Component, ElementRef, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostBinding, Inject, Input, OnInit } from '@angular/core';
+import firebase from 'firebase/app';
+import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
 import { getImgHeight, isEnterOrSpacePressed } from 'src/app/common/utils/utils';
+import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';
 
 const TRANSITION_DURATION = '300ms';
 
@@ -18,7 +21,7 @@ export class ProductImagesComponent implements OnInit {
 
   @HostBinding('style.height.px') imgHeight: number;
 
-  constructor(private host: ElementRef) {}
+  constructor(@Inject(FIREBASE_TOKEN) private firebaseService, private host: ElementRef) {}
 
   ngOnInit() {
     this.getImgHeight();
@@ -34,6 +37,8 @@ export class ProductImagesComponent implements OnInit {
     if (event && !isEnterOrSpacePressed(event)) {
       return;
     }
+
+    this.firebaseService.analytics().logEvent(GoogleAnalyticsEvent.ImageNextClicked);
 
     if (this.currentImgUrlIndex + 1 === this.imgUrls.length) {
       this.transitionDuration = '0ms';
@@ -53,6 +58,8 @@ export class ProductImagesComponent implements OnInit {
     if (event && !isEnterOrSpacePressed(event)) {
       return;
     }
+
+    this.firebaseService.analytics().logEvent(GoogleAnalyticsEvent.ImageBakcClicked);
 
     if (this.currentImgUrlIndex === 0) {
       this.transitionDuration = '0ms';

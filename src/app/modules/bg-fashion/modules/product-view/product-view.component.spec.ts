@@ -6,6 +6,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { FavoritesService } from 'src/app/services/favorites-service/favorites.service';
+import { FirebaseStub } from 'src/app/tokens/firebase/firebase-stub';
+import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';
 import { SHIRTS_SIZES } from '../../../../common/products/types';
 import { ProductViewComponent } from './product-view.component';
 
@@ -18,6 +20,7 @@ describe('ProductViewComponent', () => {
   let favoritesMock: jasmine.SpyObj<FavoritesService>;
   const paramMap = convertToParamMap({ category: 'clothes', id: '5' });
   const queryParamMap = convertToParamMap({ color: 1 });
+  const firebaseMock = new FirebaseStub();
 
   beforeEach(async(() => {
     cartMock = jasmine.createSpyObj('CartService', ['addCartProduct']);
@@ -30,6 +33,7 @@ describe('ProductViewComponent', () => {
         { provide: CartService, useValue: cartMock },
         { provide: FavoritesService, useValue: favoritesMock },
         { provide: ActivatedRoute, useValue: { paramMap: of(paramMap), queryParamMap: of(queryParamMap) } },
+        { provide: FIREBASE_TOKEN, useValue: firebaseMock },
       ],
     }).compileComponents();
 

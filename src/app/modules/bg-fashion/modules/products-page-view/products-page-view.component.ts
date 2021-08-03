@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Color, Product } from '../../../../common/interfaces/product';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
@@ -8,6 +8,9 @@ import { map, mergeMap } from 'rxjs/operators';
 import { Param } from 'src/app/common/url-params/params';
 import { QueryParam } from 'src/app/common/url-params/query-params';
 import { FilterBarDialogComponent } from './components/filter-bar-dilaog/filter-bar-dialog.component';
+import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
+import firebase from 'firebase/app';
+import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';
 
 const QUERY_PARAM_SEPARATOR = '_';
 const MOBILE_LAYOUT_MAX_WIDTH = 600;
@@ -33,6 +36,7 @@ export class ProductsPageViewComponent implements OnInit, AfterViewInit {
   @ViewChild('filterBarDialog') filterBarDialog: FilterBarDialogComponent;
 
   constructor(
+    @Inject(FIREBASE_TOKEN) private firebaseService,
     private route: ActivatedRoute,
     private router: Router,
     private productsService: ProductsService,
@@ -62,6 +66,7 @@ export class ProductsPageViewComponent implements OnInit, AfterViewInit {
 
     fetchData$.subscribe(() => {
       this.getFilterBarData(this.category, this.subcategory, this.colors, this.sizes);
+      this.firebaseService.analytics().logEvent(GoogleAnalyticsEvent.ProductsPageInit);
     });
   }
 

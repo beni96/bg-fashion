@@ -1,7 +1,7 @@
 <div class="products-section">
   <div *ngFor="let cartproduct of cartProducts" class="cart-product-wrapper">
     <div class="cart-product" (click)="onCartProductClick(cartproduct.product.id)">
-      <img [src]="cartproduct.colorWithImages.images[0]" />
+      <img [src]="cartproduct.colorWithImages.images[0]" class="with-backup" />
       <div class="content-wrapper">
         <span class="product title">{{ cartproduct.product.title }}</span>
         <span class="title">Color: {{ cartproduct.colorWithImages.color.name | titlecase }}</span>

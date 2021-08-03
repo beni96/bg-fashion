@@ -1,12 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import firebase from 'firebase/app';
 import { Subject } from 'rxjs';
+import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
 import { CONFIRMATION_IMAGE_URL } from 'src/app/common/images-url/images-url';
 import { CartDetails } from 'src/app/common/interfaces/cart-details';
 import { CartProductExtended } from 'src/app/common/interfaces/cart-product';
 import { SendEmailRequest, SendEmailResponse } from 'src/app/common/interfaces/send-email';
 import { ApiService } from 'src/app/services/api-service/api.service';
 import { CartService } from 'src/app/services/cart-service/cart.service';
+import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';
 import { getTotalPrice } from '../../../../common/utils/utils';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
@@ -32,10 +35,16 @@ export class CartViewComponent implements OnInit {
 
   @ViewChild('cartDetails') cartDetails: CartDetailsComponent;
 
-  constructor(private api: ApiService, private router: Router, private cartService: CartService) {}
+  constructor(
+    @Inject(FIREBASE_TOKEN) private firebaseService,
+    private api: ApiService,
+    private router: Router,
+    private cartService: CartService
+  ) {}
 
   ngOnInit() {
     this.getCartProducts();
+    this.firebaseService.analytics().logEvent(GoogleAnalyticsEvent.CartPageInit);
   }
 
   getCartProducts() {
@@ -44,6 +53,7 @@ export class CartViewComponent implements OnInit {
 
   onCancelClick() {
     this.router.navigate([BgFashionPath.Home]);
+    this.firebaseService.analytics().logEvent(GoogleAnalyticsEvent.OrderCanceled);
   }
 
   onBackClick() {
@@ -79,6 +89,7 @@ export class CartViewComponent implements OnInit {
         }
         this.cartService.resetCart();
         this.currentStep = CartStep.CONFIRMATION;
+        this.firebaseService.analytics().logEvent(GoogleAnalyticsEvent.OrderSubmittedSuccessfully);
       },
       () => this.snackbarLabelSubject$.next('Oops something went wrong')
     );

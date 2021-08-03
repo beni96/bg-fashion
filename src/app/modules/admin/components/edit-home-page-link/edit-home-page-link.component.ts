@@ -5,6 +5,8 @@ import { ProductsService } from 'src/app/services/products-service/products.serv
 
 type FIELD_NAME_TYPE = 'url' | 'title' | 'category' | 'subcategory';
 
+const URL_FORMAT = "^(?:http(s)?:\\/\\/)?[\\w-]+(?:\\.[\\w\\.-]+)+[\\w-\\._~:/?#[\\]@!%$&'\\(\\)\\*\\+,;=.]+$";
+
 const ERRORS_MESSAGES = {
   url: { required: 'Required', pattern: 'Invalid url' },
 };
@@ -40,7 +42,7 @@ export class EditHomePageLinkComponent implements OnInit, OnChanges {
 
   generateControls() {
     this.formControls = {
-      url: this.formbuilder.control(this.imageUrl, [Validators.required]),
+      url: this.formbuilder.control(this.imageUrl, [Validators.required, Validators.pattern(URL_FORMAT)]),
       title: this.formbuilder.control(this.title, []),
       category: this.formbuilder.control(this.category, []),
       subcategory: this.formbuilder.control(this.subcategory, []),

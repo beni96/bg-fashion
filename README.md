@@ -58,3 +58,9 @@ This project is hosted by [Firebase](https://firebase.google.com/) version 8.2.1
 
     Run `firebase deploy` to deploy new changes.
 
+<br/><br/>
+
+# Google Analytics
+
+This project is covered by [Google Analytics](https://analytics.google.com/analytics/web/) events
+

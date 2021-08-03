@@ -18,21 +18,21 @@
     ></app-text-field>
   </div>
   <div *ngFor="let color of getSelectedColors()" class="images-fields-wrapper">
+    <span class="color-name">{{ color }}</span>
     <div class="fields-wrapper">
-      <span class="color-name">{{ color }}</span>
       <app-text-field
         ngDefaultControl
         [formControlName]="color + '1'"
         label="First image url"
         [value]="formControls[color + '1']?.value"
-        [errorMessage]="errorMessages[color + '1']"
+        [errorMessage]="getUrlErrorMessages(color + '1')"
       ></app-text-field>
       <app-text-field
         ngDefaultControl
         [formControlName]="color + '2'"
         label="Second image url"
         [value]="formControls[color + '2']?.value"
-        [errorMessage]="errorMessages[color + '2']"
+        [errorMessage]="getUrlErrorMessages(color + '2')"
       ></app-text-field>
     </div>
   </div>

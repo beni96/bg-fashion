@@ -1,7 +1,9 @@
 <app-header></app-header>
 
-<div class="page-body">
+<div *ngIf="isImagesLoaded" class="page-body">
   <router-outlet></router-outlet>
 </div>
+
+<app-spinner *ngIf="!isImagesLoaded"></app-spinner>
 
 <app-footer></app-footer>

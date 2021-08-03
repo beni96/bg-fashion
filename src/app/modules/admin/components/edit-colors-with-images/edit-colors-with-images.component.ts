@@ -6,6 +6,12 @@ import { getFormErrorMessages } from 'src/app/common/utils/utils';
 
 type FIELD_NAME_TYPE = 'colors' | 'defaultColor';
 
+const URL_FORMAT = "^(?:http(s)?:\\/\\/)?[\\w-]+(?:\\.[\\w\\.-]+)+[\\w-\\._~:/?#[\\]@!%$&'\\(\\)\\*\\+,;=.]+$";
+
+const ERRORS_MESSAGES = {
+  url: { required: 'Required', pattern: 'Invalid url' },
+};
+
 @Component({
   selector: 'app-edit-colors-with-images',
   templateUrl: './edit-colors-with-images.component.html',
@@ -20,6 +26,7 @@ export class EditColorsWithImagesComponent implements OnInit, OnChanges {
   imageUrlFormControls: { [key: string]: FormControl };
   fieldNames: FIELD_NAME_TYPE[] = ['colors', 'defaultColor'];
   errorMessages: { [key: string]: string } = {};
+  shouldShowErrors = false;
 
   constructor(private formbuilder: FormBuilder) {}
 
@@ -41,8 +48,8 @@ export class EditColorsWithImagesComponent implements OnInit, OnChanges {
     };
 
     this.colorsWithImages.forEach((colorWithImages) => {
-      const firstImageControl = this.formbuilder.control(colorWithImages.images[0], [Validators.required]);
-      const secondImageControl = this.formbuilder.control(colorWithImages.images[1], [Validators.required]);
+      const firstImageControl = this.formbuilder.control(colorWithImages.images[0], [Validators.required, Validators.pattern(URL_FORMAT)]);
+      const secondImageControl = this.formbuilder.control(colorWithImages.images[1], [Validators.required, Validators.pattern(URL_FORMAT)]);
       this.formControls[colorWithImages.color.name + '1'] = firstImageControl;
       this.formControls[colorWithImages.color.name + '2'] = secondImageControl;
     });
@@ -78,14 +85,26 @@ export class EditColorsWithImagesComponent implements OnInit, OnChanges {
     // Color added
     if (oldValues?.length < values.length) {
       const addedColor = values[values.length - 1];
-      this.formControls[addedColor + '1'] = this.formbuilder.control('', [Validators.required]);
-      this.formControls[addedColor + '2'] = this.formbuilder.control('', [Validators.required]);
+      this.formControls[addedColor + '1'] = this.formbuilder.control('', [Validators.required, Validators.pattern(URL_FORMAT)]);
+      this.formControls[addedColor + '2'] = this.formbuilder.control('', [Validators.required, Validators.pattern(URL_FORMAT)]);
     }
 
     this.form = this.formbuilder.group(this.formControls);
   }
 
+  getUrlErrorMessages(controlName: string) {
+    const errors = this.formControls[controlName].errors;
+    if (!errors || !this.shouldShowErrors) {
+      return '';
+    }
+
+    const fieldErrorNames = Object.keys(errors);
+    const errorName = fieldErrorNames[0];
+    return ERRORS_MESSAGES.url[errorName];
+  }
+
   isFormValid(): boolean {
+    this.shouldShowErrors = true;
     this.errorMessages = getFormErrorMessages(Object.keys(this.formControls), this.formControls, {});
     return this.form.valid;
   }

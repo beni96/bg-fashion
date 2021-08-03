@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Product } from 'src/app/common/interfaces/product';
 import { FavoritesService } from 'src/app/services/favorites-service/favorites.service';
+import { FirebaseStub } from 'src/app/tokens/firebase/firebase-stub';
+import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 import { FavoritesViewComponent } from './favorites-view.component';
 
@@ -41,6 +43,7 @@ describe('FavoritesViewComponent', () => {
   let debugElement: DebugElement;
   let router: Router;
   let favoritesMock: jasmine.SpyObj<FavoritesService>;
+  const firebaseMock = new FirebaseStub();
 
   beforeEach(async(() => {
     favoritesMock = jasmine.createSpyObj('FavoritesService', ['getFavoriteProducts', 'removeFavoriteProduct']);
@@ -48,7 +51,10 @@ describe('FavoritesViewComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [FavoritesViewComponent],
-      providers: [{ provide: FavoritesService, useValue: favoritesMock }],
+      providers: [
+        { provide: FavoritesService, useValue: favoritesMock },
+        { provide: FIREBASE_TOKEN, useValue: firebaseMock },
+      ],
     }).compileComponents();
     router = TestBed.inject(Router);
   }));

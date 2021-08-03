@@ -17,6 +17,7 @@ const PRODUCTS_ROUTES: Routes = [
   { path: `${BgFashionPath.Product}/:${Param.PRODUCT_ID}`, component: ProductViewComponent },
   { path: `${BgFashionPath.Category}/:${Param.CATEGORY}/${BgFashionPath.Product}/:${Param.PRODUCT_ID}`, component: ProductViewComponent },
   {
+    // tslint:disable-next-line:max-line-length
     path: `${BgFashionPath.Category}/:${Param.CATEGORY}/${BgFashionPath.Subcategory}/:${Param.SUBCATEGORY}/${BgFashionPath.Product}/:${Param.PRODUCT_ID}`,
     component: ProductViewComponent,
   },

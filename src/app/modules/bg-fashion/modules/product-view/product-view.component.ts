@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { map, mergeMap } from 'rxjs/operators';
 import { getSizes } from '../../../../common/utils/utils';
@@ -11,6 +11,9 @@ import { Subject } from 'rxjs';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 import { Param } from 'src/app/common/url-params/params';
 import { QueryParam } from 'src/app/common/url-params/query-params';
+import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
+import firebase from 'firebase/app';
+import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';
 
 @Component({
   selector: 'app-product-view',
@@ -32,6 +35,7 @@ export class ProductViewComponent implements OnInit {
   @ViewChild('content') content: ElementRef;
 
   constructor(
+    @Inject(FIREBASE_TOKEN) private firebaseService,
     private route: ActivatedRoute,
     private router: Router,
     private productsService: ProductsService,
@@ -49,7 +53,9 @@ export class ProductViewComponent implements OnInit {
       mergeMap(() => this.getSelectedColor())
     );
 
-    fetchDataFromUrl$.subscribe(() => {});
+    fetchDataFromUrl$.subscribe(() => {
+      this.firebaseService.analytics().logEvent(GoogleAnalyticsEvent.ProductPageInit);
+    });
     this.sizes = getSizes(this.product.sizesType);
   }
 

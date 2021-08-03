@@ -1,5 +1,5 @@
 <div tabindex="0" class="clickable-section" (click)="onProductClick()" (keydown)="onProductClick($event)">
-  <img [src]="selectedColorWithImages.images[0]" [style.height.px]="imgHeight" />
+  <img [src]="selectedColorWithImages.images[0]" [style.height.px]="imgHeight" class="with-backup" />
   <div class="title-wrapper">
     <span class="title">{{ title | titlecase }}</span>
     <i *ngIf="showTrash" class="fas fa-trash-alt" (click)="onTrashClick($event)"></i>

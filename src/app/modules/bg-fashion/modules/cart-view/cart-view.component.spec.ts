@@ -8,6 +8,8 @@ import { CartProductExtended } from 'src/app/common/interfaces/cart-product';
 import { SendEmailResponse } from 'src/app/common/interfaces/send-email';
 import { ApiService } from 'src/app/services/api-service/api.service';
 import { CartService } from 'src/app/services/cart-service/cart.service';
+import { FirebaseStub } from 'src/app/tokens/firebase/firebase-stub';
+import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';
 import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 import { CartStep, CartViewComponent } from './cart-view.component';
 
@@ -42,6 +44,7 @@ describe('CartViewComponent', () => {
   let router: Router;
   let cartMock: jasmine.SpyObj<CartService>;
   let apiMock: jasmine.SpyObj<ApiService>;
+  const firebaseMock = new FirebaseStub();
 
   beforeEach(async(() => {
     cartMock = jasmine.createSpyObj('CartService', ['getExtendedCartProducts', 'removeCartProduct', 'resetCart']);
@@ -53,6 +56,7 @@ describe('CartViewComponent', () => {
       providers: [
         { provide: CartService, useValue: cartMock },
         { provide: ApiService, useValue: apiMock },
+        { provide: FIREBASE_TOKEN, useValue: firebaseMock },
       ],
     }).compileComponents();
     router = TestBed.inject(Router);

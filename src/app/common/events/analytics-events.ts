@@ -1,0 +1,18 @@
+export const GoogleAnalyticsEvent = {
+  HomePageInit: 'home_page_init',
+  ProductsPageInit: 'products_page_init',
+  ProductPageInit: 'product_page_init',
+  FavoritesPageInit: 'favorites_page_init',
+  CartPageInit: 'cart_page_init',
+  AdminPageInit: 'admin_page_init',
+  ErrorPageInit: 'error_page_init',
+  ProductColorChanged: 'product_color_changed',
+  ImageNextClicked: 'image_next_clicked',
+  ImageBakcClicked: 'image_back_clicked',
+  OrderSubmittedSuccessfully: 'order_submitted_successfully',
+  OrderCanceled: 'order_canceled',
+  HomeImageChanged: 'home_image_changed',
+  ProductRemoved: 'product_removed',
+  productEdited: 'product_edited',
+  productAdded: 'product_added',
+};

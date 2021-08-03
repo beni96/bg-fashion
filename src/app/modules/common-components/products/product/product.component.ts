@@ -1,6 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { isEnterOrSpacePressed } from '../../../../common/utils/utils';
 import { ColorWithImages } from '../../../../common/interfaces/product';
+import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
+import firebase from 'firebase/app';
+import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';
 
 @Component({
   selector: 'app-product',
@@ -24,6 +27,8 @@ export class ProductComponent implements OnInit {
 
   selectedColorWithImages: ColorWithImages;
 
+  constructor(@Inject(FIREBASE_TOKEN) private firebaseService) {}
+
   ngOnInit() {
     this.defaultColorIndex = this.defaultColorIndex || 0;
     this.selectedColorWithImages = this.colorsWithImages[this.defaultColorIndex] || this.colorsWithImages[0];
@@ -39,6 +44,7 @@ export class ProductComponent implements OnInit {
 
   onColorSelect(colorWithImages: ColorWithImages) {
     this.selectedColorWithImages = colorWithImages;
+    this.firebaseService.analytics().logEvent(GoogleAnalyticsEvent.ProductColorChanged);
   }
 
   isSelectedColor(colorWithImages: ColorWithImages) {
