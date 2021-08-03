@@ -1,3 +1,4 @@
+import { ProdcutImageUrl } from '../images-url/images-url';
 import { Product, SizesType } from '../interfaces/product';
 
 export const PRODUCTS: Product[] = [
@@ -11,11 +12,11 @@ export const PRODUCTS: Product[] = [
     colorsWithImages: [
       {
         color: { name: 'white', hexCode: '#ffffff' },
-        images: ['assets/images/products-images/t-shirt-white-1.jpg', 'assets/images/products-images/t-shirt-white-2.jpg'],
+        images: [ProdcutImageUrl.TShirtWhite1, ProdcutImageUrl.TShirtWhite2],
       },
       {
         color: { name: 'red', hexCode: '#f10f29' },
-        images: ['assets/images/products-images/t-shirt-red-basic-1.jpg', 'assets/images/products-images/t-shirt-red-basic-2.jpg'],
+        images: [ProdcutImageUrl.TShirtRedBasic1, ProdcutImageUrl.TShirtRedBasic2],
       },
     ],
     categories: ['clothes'],
@@ -32,15 +33,15 @@ export const PRODUCTS: Product[] = [
     colorsWithImages: [
       {
         color: { name: 'black', hexCode: '#000000' },
-        images: ['assets/images/products-images/t-shirt-black-1.jpg', 'assets/images/products-images/t-shirt-black-2.jpg'],
+        images: [ProdcutImageUrl.TShirtBlack1, ProdcutImageUrl.TShirtBlack2],
       },
       {
         color: { name: 'green', hexCode: '#02dd02' },
-        images: ['assets/images/products-images/t-shirt-green-1.jpg', 'assets/images/products-images/t-shirt-green-2.jpg'],
+        images: [ProdcutImageUrl.TShirtGreen1, ProdcutImageUrl.TShirtGreen2],
       },
       {
         color: { name: 'red', hexCode: '#f10f29' },
-        images: ['assets/images/products-images/t-shirt-red-1.jpg', 'assets/images/products-images/t-shirt-red-2.jpg'],
+        images: [ProdcutImageUrl.TShirtRed1, ProdcutImageUrl.TShirtRed2],
       },
     ],
     categories: ['clothes'],
@@ -56,7 +57,7 @@ export const PRODUCTS: Product[] = [
     colorsWithImages: [
       {
         color: { name: 'white', hexCode: '#ffffff' },
-        images: ['assets/images/products-images/shirt-1.jpg', 'assets/images/products-images/shirt-2.jpg'],
+        images: [ProdcutImageUrl.Shirt1, ProdcutImageUrl.Shirt2],
       },
     ],
     categories: ['clothes'],
@@ -72,7 +73,7 @@ export const PRODUCTS: Product[] = [
     colorsWithImages: [
       {
         color: { name: 'blue', hexCode: '#3333ff' },
-        images: ['assets/images/products-images/short-jeans.jpg', 'assets/images/products-images/short-jeans.jpg'],
+        images: [ProdcutImageUrl.ShortJeans, ProdcutImageUrl.ShortJeans],
       },
     ],
     categories: ['clothes'],
@@ -89,11 +90,11 @@ export const PRODUCTS: Product[] = [
     colorsWithImages: [
       {
         color: { name: 'black', hexCode: '#000000' },
-        images: ['assets/images/products-images/t-shirt-black-basic-1.jpg', 'assets/images/products-images/t-shirt-black-basic-2.jpg'],
+        images: [ProdcutImageUrl.TShirtBlackBasic1, ProdcutImageUrl.TShirtBlackBasic2],
       },
       {
         color: { name: 'white', hexCode: '#ffffff' },
-        images: ['assets/images/products-images/t-shirt-white.jpg', 'assets/images/products-images/t-shirt-white.jpg'],
+        images: [ProdcutImageUrl.TShirtWhite, ProdcutImageUrl.TShirtWhite],
       },
     ],
     categories: ['clothes', 'sale'],
@@ -109,7 +110,7 @@ export const PRODUCTS: Product[] = [
     colorsWithImages: [
       {
         color: { name: 'black', hexCode: '#000000' },
-        images: ['assets/images/products-images/sneakers-1.jpg', 'assets/images/products-images/sneakers-2.jpg'],
+        images: [ProdcutImageUrl.Sneakers1, ProdcutImageUrl.Sneakers2],
       },
     ],
     categories: ['shoes'],
@@ -125,11 +126,11 @@ export const PRODUCTS: Product[] = [
     colorsWithImages: [
       {
         color: { name: 'black', hexCode: '#000000' },
-        images: ['assets/images/products-images/sunglasses-black-1.jpg', 'assets/images/products-images/sunglasses-black-2.jpg'],
+        images: [ProdcutImageUrl.SunglassesBlack1, ProdcutImageUrl.SunglassesBlack2],
       },
       {
         color: { name: 'red', hexCode: '#f10f29' },
-        images: ['assets/images/products-images/sunglasses-red-1.jpg', 'assets/images/products-images/sunglasses-red-1.jpg'],
+        images: [ProdcutImageUrl.SunglassesRed1, ProdcutImageUrl.SunglassesRed2],
       },
     ],
     categories: ['accessories', 'sale'],
@@ -145,7 +146,7 @@ export const PRODUCTS: Product[] = [
     colorsWithImages: [
       {
         color: { name: 'red', hexCode: '#f10f29' },
-        images: ['assets/images/products-images/dress-1.jpg', 'assets/images/products-images/dress-2.jpg'],
+        images: [ProdcutImageUrl.Dress1, ProdcutImageUrl.Dress2],
       },
     ],
     categories: ['clothes'],
@@ -161,7 +162,7 @@ export const PRODUCTS: Product[] = [
     colorsWithImages: [
       {
         color: { name: 'blue', hexCode: '#3333ff' },
-        images: ['assets/images/products-images/jeans-1.jpg', 'assets/images/products-images/jeans-2.jpg'],
+        images: [ProdcutImageUrl.Jeans1, ProdcutImageUrl.Jeans2],
       },
     ],
     categories: ['clothes'],
@@ -177,7 +178,7 @@ export const PRODUCTS: Product[] = [
     colorsWithImages: [
       {
         color: { name: 'black', hexCode: '#000000' },
-        images: ['assets/images/products-images/boots-1.jpg', 'assets/images/products-images/boots-2.jpg'],
+        images: [ProdcutImageUrl.Boots1, ProdcutImageUrl.Boots2],
       },
     ],
     categories: ['shoes'],
@@ -193,11 +194,11 @@ export const PRODUCTS: Product[] = [
     colorsWithImages: [
       {
         color: { name: 'red', hexCode: '#f10f29' },
-        images: ['assets/images/products-images/hat-red-1.jpg', 'assets/images/products-images/hat-red-1.jpg'],
+        images: [ProdcutImageUrl.HatRed1, ProdcutImageUrl.HatRed2],
       },
       {
         color: { name: 'yellow', hexCode: '#fbe43a' },
-        images: ['assets/images/products-images/hat-yellow-1.jpg', 'assets/images/products-images/hat-yellow-2.jpg'],
+        images: [ProdcutImageUrl.HatYellow1, ProdcutImageUrl.HatYellow2],
       },
     ],
     categories: ['accessories', 'sale'],

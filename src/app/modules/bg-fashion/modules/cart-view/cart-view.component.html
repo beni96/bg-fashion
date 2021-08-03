@@ -26,7 +26,7 @@
 
 <app-state-message
   *ngIf="currentStep === cartStep.CONFIRMATION"
-  imgUrl="assets/images/confirmation.png"
+  [imgUrl]="confirmationImageUrl"
   [title]="'We got your order!'"
   [subtitle]="'One of our agents will contact you within 2 business days'"
 ></app-state-message>

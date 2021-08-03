@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HomePageImageUrl } from 'src/app/common/images-url/images-url';
 import { CategoryLink } from 'src/app/common/interfaces/category-link';
 
 @Injectable({
@@ -6,13 +7,13 @@ import { CategoryLink } from 'src/app/common/interfaces/category-link';
 })
 export class HomePageService {
   private categoryLinks: CategoryLink[] = [
-    { imageUrl: 'assets/images/back-to-life.jpg', title: 'Back to life', category: 'clothes' },
-    { imageUrl: 'assets/images/accessories-category.jpg', title: 'Accessories', category: 'accessories' },
-    { imageUrl: 'assets/images/shoes-category.jpg', title: 'Shoes', category: 'shoes' },
-    { imageUrl: 'assets/images/t-shirts-category.jpg', title: 'T-Shirts', category: 'clothes', subcategory: 't-shirts' },
-    { imageUrl: 'assets/images/jeans-category.jpg', title: 'Jeans', category: 'clothes', subcategory: 'jeans' },
-    { imageUrl: 'assets/images/dress-up.jpg', title: 'Dress Up.', category: 'clothes', subcategory: 'dresses' },
-    { imageUrl: 'assets/images/sale.jpg', title: 'SALE', category: 'sale' },
+    { imageUrl: HomePageImageUrl.BackToLife, title: 'Back to life', category: 'clothes' },
+    { imageUrl: HomePageImageUrl.TShirts, title: 'T-Shirts', category: 'clothes', subcategory: 't-shirts' },
+    { imageUrl: HomePageImageUrl.Shoes, title: 'Shoes', category: 'shoes' },
+    { imageUrl: HomePageImageUrl.Accessories, title: 'Accessories', category: 'accessories' },
+    { imageUrl: HomePageImageUrl.Jeans, title: 'Jeans', category: 'clothes', subcategory: 'jeans' },
+    { imageUrl: HomePageImageUrl.DressUp, title: 'Dress Up.', category: 'clothes', subcategory: 'dresses' },
+    { imageUrl: HomePageImageUrl.Sale, title: 'SALE', category: 'sale' },
   ];
 
   constructor() {

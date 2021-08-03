@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { CONFIRMATION_IMAGE_URL } from 'src/app/common/images-url/images-url';
 import { CartDetails } from 'src/app/common/interfaces/cart-details';
 import { CartProductExtended } from 'src/app/common/interfaces/cart-product';
 import { SendEmailRequest, SendEmailResponse } from 'src/app/common/interfaces/send-email';
@@ -27,6 +28,7 @@ export class CartViewComponent implements OnInit {
   cartStep = CartStep;
   cartDetailsValues: CartDetails;
   snackbarLabelSubject$ = new Subject<string>();
+  confirmationImageUrl = CONFIRMATION_IMAGE_URL;
 
   @ViewChild('cartDetails') cartDetails: CartDetailsComponent;
 
