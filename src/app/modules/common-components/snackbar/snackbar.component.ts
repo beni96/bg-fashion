@@ -1,4 +1,4 @@
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 

@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import firebase from 'firebase/app';
 import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
 import { CategoryLink } from 'src/app/common/interfaces/category-link';
 import { HomePageService } from 'src/app/services/home-page-service/home-page.service';

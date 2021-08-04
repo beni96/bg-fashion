@@ -9,7 +9,6 @@ import { Param } from 'src/app/common/url-params/params';
 import { QueryParam } from 'src/app/common/url-params/query-params';
 import { FilterBarDialogComponent } from './components/filter-bar-dilaog/filter-bar-dialog.component';
 import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
-import firebase from 'firebase/app';
 import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';
 
 const QUERY_PARAM_SEPARATOR = '_';

@@ -12,7 +12,6 @@ import { BgFashionPath } from '../../router/bg-fashion.routes.names';
 import { Param } from 'src/app/common/url-params/params';
 import { QueryParam } from 'src/app/common/url-params/query-params';
 import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
-import firebase from 'firebase/app';
 import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';
 
 @Component({

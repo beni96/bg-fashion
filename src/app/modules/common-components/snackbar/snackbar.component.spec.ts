@@ -1,4 +1,3 @@
-import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
@@ -7,7 +6,6 @@ import { SnackbarComponent } from './snackbar.component';
 describe('SnackbarComponent', () => {
   let component: SnackbarComponent;
   let fixture: ComponentFixture<SnackbarComponent>;
-  let debugElement: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -19,7 +17,6 @@ describe('SnackbarComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SnackbarComponent);
     component = fixture.componentInstance;
-    debugElement = fixture.debugElement;
     component.snackbarLabel$ = of('label');
     spyOn(component, 'dismissSnackbar');
     fixture.detectChanges();

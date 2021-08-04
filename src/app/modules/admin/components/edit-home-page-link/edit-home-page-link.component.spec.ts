@@ -1,14 +1,11 @@
-import { DebugElement } from '@angular/core';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { EditHomePageLinkComponent } from './edit-home-page-link.component';
 
 describe('EditHomePageLinkComponent', () => {
   let fixture: ComponentFixture<EditHomePageLinkComponent>;
   let component: EditHomePageLinkComponent;
-  let debugElement: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -20,7 +17,6 @@ describe('EditHomePageLinkComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(EditHomePageLinkComponent);
     component = fixture.componentInstance;
-    debugElement = fixture.debugElement;
     fixture.detectChanges();
 
     spyOn(component.categoryLinkChanged, 'emit');

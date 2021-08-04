@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import firebase from 'firebase/app';
 import { Subject } from 'rxjs';
 import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
 import { CONFIRMATION_IMAGE_URL } from 'src/app/common/images-url/images-url';

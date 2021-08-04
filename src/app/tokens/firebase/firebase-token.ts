@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
 /**
  * DI token for firebase.

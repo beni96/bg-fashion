@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Color, Product } from 'src/app/common/interfaces/product';
 import { PRODUCTS } from 'src/app/common/products/products';
 

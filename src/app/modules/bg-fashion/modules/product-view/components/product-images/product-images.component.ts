@@ -1,5 +1,4 @@
 import { Component, ElementRef, HostBinding, Inject, Input, OnInit } from '@angular/core';
-import firebase from 'firebase/app';
 import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
 import { getImgHeight, isEnterOrSpacePressed } from 'src/app/common/utils/utils';
 import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';

@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import firebase from 'firebase/app';
 import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
 import { Product } from 'src/app/common/interfaces/product';
 import { QueryParam } from 'src/app/common/url-params/query-params';

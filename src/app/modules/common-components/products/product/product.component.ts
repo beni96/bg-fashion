@@ -2,7 +2,6 @@ import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular
 import { isEnterOrSpacePressed } from '../../../../common/utils/utils';
 import { ColorWithImages } from '../../../../common/interfaces/product';
 import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
-import firebase from 'firebase/app';
 import { FIREBASE_TOKEN } from 'src/app/tokens/firebase/firebase-token';
 
 @Component({

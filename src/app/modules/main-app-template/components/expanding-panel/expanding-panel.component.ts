@@ -1,6 +1,4 @@
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
-import { BgFashionPath, BG_FASHION_PREFIX } from 'src/app/modules/bg-fashion/router/bg-fashion.routes.names';
-import { HeaderCategory } from '../../interfaces/header-category';
+import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'app-expanding-panel',
