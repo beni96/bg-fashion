@@ -7,6 +7,7 @@
 
   flex-direction: column;
   font-family: fonts.$font-rubik;
+  height: 100%;
   margin-top: 24px;
   text-align: center;
   width: 100%;
@@ -37,4 +38,14 @@ img {
 app-button {
   max-width: 160px;
   width: 100%;
+}
+
+@media only screen and (max-width: 500px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
 }

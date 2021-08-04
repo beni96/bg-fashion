@@ -11,10 +11,15 @@ export class StateMessageComponent {
   @Input() imgUrl: string;
   @Input() title: number;
   @Input() subtitle: number;
+  @Input() isReloadButton = false;
 
   constructor(private router: Router) {}
 
-  navigateHome() {
-    this.router.navigate([BgFashionPath.Home]);
+  onButtonClick() {
+    this.isReloadButton ? window.location.reload() : this.router.navigate([BgFashionPath.Home]);
+  }
+
+  getButtonText() {
+    return this.isReloadButton ? 'Try again' : 'Home';
   }
 }

@@ -15,6 +15,7 @@ const MOBILE_LAYOUT_MAX_WIDTH = 760;
 export class MainAppTemplateComponent implements OnInit, AfterViewInit, OnDestroy {
   isImagesLoaded = false;
   loadedImagesCounter = 0;
+  isLoadingError = false;
   isMobile = false;
   private destroy$ = new Subject<void>();
 
@@ -69,6 +70,7 @@ export class MainAppTemplateComponent implements OnInit, AfterViewInit, OnDestro
     imageUrls.forEach((imageUrl) => {
       const img = new Image();
       img.onload = () => this.onImageLoad(imageUrls.length);
+      img.onerror = () => (this.isLoadingError = true);
       img.src = imageUrl;
     });
   }

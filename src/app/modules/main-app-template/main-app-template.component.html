@@ -1,9 +1,16 @@
 <app-header></app-header>
 
-<div *ngIf="isImagesLoaded" class="page-body">
+<div *ngIf="isImagesLoaded && !isLoadingError" class="page-body">
   <router-outlet></router-outlet>
 </div>
 
-<app-spinner *ngIf="!isImagesLoaded"></app-spinner>
+<app-spinner *ngIf="!isImagesLoaded && !isLoadingError"></app-spinner>
+
+<app-state-message
+  *ngIf="isLoadingError"
+  title="Something went wrong"
+  subtitle="Please reload the page, or try again later."
+  [isReloadButton]="true"
+></app-state-message>
 
 <app-footer></app-footer>

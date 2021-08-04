@@ -1,4 +1,4 @@
 <img *ngIf="imgUrl" [src]="imgUrl" />
 <span class="title">{{ title }}</span>
 <span class="subtitle">{{ subtitle }}</span>
-<app-button size="lg" (click)="navigateHome()">Home</app-button>
+<app-button size="lg" (click)="onButtonClick()">{{ getButtonText() }}</app-button>
