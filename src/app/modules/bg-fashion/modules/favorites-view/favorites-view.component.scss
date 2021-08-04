@@ -1,8 +1,5 @@
-@use 'src/assets/style/layouts';
-
 :host {
-  @extend %flex-align-center;
-
+  display: flex;
   flex-direction: column;
   width: 100%;
 }

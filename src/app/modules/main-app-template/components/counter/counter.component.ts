@@ -9,6 +9,9 @@ export class CounterComponent implements OnChanges {
   @Input() count: number;
 
   @HostBinding('class.animation') animation = false;
+  @HostBinding('class.hidden') get hidden() {
+    return !this.count;
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.count && !changes.count.firstChange) {

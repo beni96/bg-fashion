@@ -30,11 +30,11 @@
   <div class="cart-wrapper">
     <a [routerLink]="getFavoritesLink()" routerLinkActive="is-active">
       <i class="fas fa-heart"></i>
-      <app-counter *ngIf="getFavoriteProductsCount()" [count]="getFavoriteProductsCount()"></app-counter>
+      <app-counter [count]="getFavoriteProductsCount()"></app-counter>
     </a>
     <a [routerLink]="getCartLink()" routerLinkActive="is-active">
       <i class="fas fa-shopping-cart"></i>
-      <app-counter *ngIf="getCartProductsCount()" [count]="getCartProductsCount()"></app-counter>
+      <app-counter [count]="getCartProductsCount()"></app-counter>
     </a>
   </div>
 </div>

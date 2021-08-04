@@ -16,6 +16,10 @@
   width: 20px;
 }
 
+:host(.hidden) {
+  display: none;
+}
+
 :host(.animation) {
   animation: 1.5s ease-in-out blink_effect;
 }
