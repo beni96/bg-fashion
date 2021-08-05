@@ -10,15 +10,17 @@ export class ButtonComponent {
   @Input() size: 'lg' | 'md' = 'md';
   @Input() type: 'button' | 'submit' = 'button';
   @Input() disabled = false;
+  @Input() isLoading = false;
 
   onClick(event: Event) {
-    if (this.disabled) {
+    if (this.disabled || this.isLoading) {
       event.preventDefault();
       event.stopPropagation();
     }
   }
 
   getButtonClasses() {
-    return `${this.color} ${this.size}`;
+    const loadingClass = this.isLoading ? 'loading' : '';
+    return `${this.color} ${this.size} ${loadingClass}`;
   }
 }

@@ -8,6 +8,7 @@ import { CartStep } from '../../cart-view.component';
 })
 export class CartTemplateComponent {
   @Input() currentStep: CartStep;
+  @Input() isLoading = false;
 
   @Output() cancelClicked = new EventEmitter<void>();
   @Output() backClicked = new EventEmitter<void>();

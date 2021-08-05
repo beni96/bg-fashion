@@ -65,6 +65,11 @@ export class EditHomePageLinkComponent implements OnInit, OnChanges {
     return this.productsService.getSubcategories(this.formControls.category.value).concat('');
   }
 
+  onOptionSelect(formControl: FormControl, value: string, resetFormControl?: FormControl) {
+    formControl.setValue(value);
+    resetFormControl?.reset();
+  }
+
   onSave() {
     if (!this.form.valid) {
       this.showErrors = true;

@@ -63,7 +63,6 @@ export class SelectComponent implements OnInit {
       this.toggleMenu();
     }
 
-    this.select.nativeElement.dispatchEvent(new Event('input', { bubbles: true, composed: false }));
     this.optionSelected.emit(this.multiple ? this.multipleValue : this.value);
   }
 }

@@ -3,9 +3,6 @@
     {{ label }}
     <span *ngIf="errorMessage"> - *{{ errorMessage }}</span>
   </label>
-  <select #select>
-    <option *ngFor="let option of options" [selected]="isOptionSelected(option)">{{ option }}</option>
-  </select>
   <div tabindex="0" class="menu-wrapper" (click)="toggleMenu()" (keydown)="toggleMenu($event)">
     <span *ngIf="value || multipleValue?.length" class="value">{{ multiple ? multipleValue.join(', ') : value }}</span>
     <span *ngIf="!value && !multipleValue?.length" class="placeholder">{{ placeholder }}</span>

@@ -1,6 +1,7 @@
 <app-cart-template
   *ngIf="cartProducts.length && currentStep !== cartStep.CONFIRMATION"
   [currentStep]="currentStep"
+  [isLoading]="isLoading"
   (nextClicked)="onNextClick()"
   (backClicked)="onBackClick()"
   (cancelClicked)="onCancelClick()"

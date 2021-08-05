@@ -68,14 +68,24 @@ button {
   }
 
   &:disabled {
-    background-color: colors.$grey-color-light;
-    color: colors.$grey-color-strong;
     cursor: unset;
 
-    &:hover,
-    &:focus,
-    &:active {
+    &:not(.loading) {
       background-color: colors.$grey-color-light;
+      color: colors.$grey-color-strong;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: colors.$grey-color-light;
+      }
     }
+  }
+
+  app-spinner {
+    --spinner-color: #{colors.$secondary-color};
+
+    pointer-events: none;
+    transform: scale(0.5);
   }
 }

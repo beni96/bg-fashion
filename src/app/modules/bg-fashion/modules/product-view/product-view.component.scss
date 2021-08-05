@@ -114,6 +114,7 @@
 .more-to-love-wrapper {
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   .title {
     color: colors.$primary-color;
@@ -169,7 +170,9 @@
   }
 
   .more-to-love-wrapper {
-    align-items: center;
+    .title {
+      text-align: center;
+    }
 
     app-products {
       margin-inline-start: unset;

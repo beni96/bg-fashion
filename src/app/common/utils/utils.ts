@@ -24,9 +24,8 @@ export const getSizes = (sizesType: SizesType) => {
   }
 };
 
-export const getImgHeight = (totalWidth: number, imagePadding: number, screenWidth?: number) => {
+export const getImgHeight = (totalWidth: number, imagePadding: number, screenWidth?: number, imageRatio = 4 / 3) => {
   const columnsNum = screenWidth ? getProdcutsColumnsCount(screenWidth) : 1;
-  const imageRatio = 4 / 3;
   const imageWidth = totalWidth / columnsNum - imagePadding;
   return imageWidth * imageRatio;
 };

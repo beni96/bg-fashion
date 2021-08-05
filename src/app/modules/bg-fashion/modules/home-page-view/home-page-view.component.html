@@ -8,7 +8,7 @@
   <span class="shop-by-category-title">SHOP BY CATEGORY</span>
   <div class="categories-wrapper">
     <a class="category" *ngFor="let category of categories" [routerLink]="getLink(category)" routerLinkActive="is-active">
-      <img [src]="category.imageUrl" />
+      <img #categoryImage [src]="category.imageUrl" [style.height.px]="categoryImgHeight" />
       <span class="category-title">{{ category.title | titlecase }}</span>
     </a>
   </div>

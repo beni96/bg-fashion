@@ -56,9 +56,8 @@ img {
 }
 
 .shop-by-category-wrapper {
-  @extend %flex-align-center;
-
   color: colors.$black;
+  display: flex;
   flex-direction: column;
   margin: 54px 0;
 

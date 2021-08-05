@@ -9,20 +9,18 @@
   ></app-text-field>
   <app-text-field ngDefaultControl formControlName="title" label="Title" [value]="title"></app-text-field>
   <app-select
-    ngDefaultControl
-    formControlName="category"
     label="Category"
-    [value]="category"
+    [value]="formControls.category.value"
     [options]="getCategoryOptions()"
     color="secondary"
+    (optionSelected)="onOptionSelect(formControls.category, $event, formControls.subcategory)"
   ></app-select>
   <app-select
-    ngDefaultControl
-    formControlName="subcategory"
     label="Subcategory"
-    [value]="subcategory"
+    [value]="formControls.subcategory.value"
     [options]="getSubcategoryOptions()"
     color="secondary"
+    (optionSelected)="onOptionSelect(formControls.subcategory, $event)"
   ></app-select>
   <app-button size="lg" type="submit">Save</app-button>
 </form>

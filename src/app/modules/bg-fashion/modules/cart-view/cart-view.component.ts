@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { GoogleAnalyticsEvent } from 'src/app/common/events/analytics-events';
 import { CONFIRMATION_IMAGE_URL } from 'src/app/common/images-url/images-url';
 import { CartDetails } from 'src/app/common/interfaces/cart-details';
@@ -31,6 +32,7 @@ export class CartViewComponent implements OnInit {
   cartDetailsValues: CartDetails;
   snackbarLabelSubject$ = new Subject<string>();
   confirmationImageUrl = CONFIRMATION_IMAGE_URL;
+  isLoading = false;
 
   @ViewChild('cartDetails') cartDetails: CartDetailsComponent;
 
@@ -75,23 +77,28 @@ export class CartViewComponent implements OnInit {
   }
 
   submitOrder() {
+    this.isLoading = true;
+
     const body: SendEmailRequest = {
       _subject: `New Order - ${this.cartDetailsValues.name}`,
       name: this.cartDetailsValues.name,
       email: this.cartDetailsValues.email,
       message: this.getEmailMessage(),
     };
-    this.api.sendOrderEmail(body).subscribe(
-      (response: SendEmailResponse) => {
-        if (!response.ok) {
-          return this.snackbarLabelSubject$.next('Oops something went wrong');
-        }
-        this.cartService.resetCart();
-        this.currentStep = CartStep.CONFIRMATION;
-        this.firebaseService.analytics().logEvent(GoogleAnalyticsEvent.OrderSubmittedSuccessfully);
-      },
-      () => this.snackbarLabelSubject$.next('Oops something went wrong')
-    );
+    this.api
+      .sendOrderEmail(body)
+      .pipe(finalize(() => this.finalizeRequest()))
+      .subscribe(
+        (response: SendEmailResponse) => {
+          if (!response.ok) {
+            return this.snackbarLabelSubject$.next('Oops something went wrong');
+          }
+          this.cartService.resetCart();
+          this.currentStep = CartStep.CONFIRMATION;
+          this.firebaseService.analytics().logEvent(GoogleAnalyticsEvent.OrderSubmittedSuccessfully);
+        },
+        () => this.snackbarLabelSubject$.next('Oops something went wrong')
+      );
   }
 
   onCartProductClick(productId: number) {
@@ -126,5 +133,9 @@ export class CartViewComponent implements OnInit {
       }\nQuantity: ${cartProduct.quantity}\n\n`;
     });
     return message;
+  }
+
+  private finalizeRequest() {
+    this.isLoading = false;
   }
 }
