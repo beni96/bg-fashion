@@ -23,8 +23,6 @@ type FIELD_NAME_TYPE =
 
 const ERRORS_MESSAGES = {
   title: { minlength: 'At least 3 characters' },
-  price: { pattern: 'Invalid price' },
-  previousPrice: { pattern: 'Invalid price' },
 };
 
 @Component({
@@ -78,8 +76,8 @@ export class EditProductComponent implements OnInit, OnChanges {
     this.formControls = {
       title: this.formbuilder.control(this.product?.title, [Validators.required, Validators.minLength(3)]),
       subtitle: this.formbuilder.control(this.product?.subtitle, [Validators.required]),
-      sizes: this.formbuilder.control(this.getControlInitValue(this.product?.sizes), []),
-      sizesType: this.formbuilder.control(this.product?.sizesType, []),
+      sizes: this.formbuilder.control(this.getControlInitValue(this.product?.sizes), [Validators.required]),
+      sizesType: this.formbuilder.control(this.product?.sizesType, [Validators.required]),
       price: this.formbuilder.control(this.product?.price, [Validators.required]),
       previousPrice: this.formbuilder.control(this.product?.previousPrice, []),
       categories: this.formbuilder.control(this.getControlInitValue(this.product?.categories), [Validators.required]),

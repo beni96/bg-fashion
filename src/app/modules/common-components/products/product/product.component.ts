@@ -38,7 +38,8 @@ export class ProductComponent implements OnInit {
   }
 
   getDiscount() {
-    return (((this.previousPrice - this.price) * 100) / this.previousPrice).toFixed();
+    const discount = ((this.previousPrice - this.price) * 100) / this.previousPrice;
+    return Math.floor(discount).toString();
   }
 
   onColorSelect(colorWithImages: ColorWithImages) {

@@ -26,6 +26,7 @@ export class ProductsService {
 
   addProduct(product: Product) {
     this.products = this.products.concat(product);
+    this.clearCache();
   }
 
   setProduct(product: Product) {

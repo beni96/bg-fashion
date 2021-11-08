@@ -24,6 +24,7 @@
       formControlName="price"
       label="Price"
       placeholder="Enter price"
+      type="number"
       [value]="formControls.price.value"
       [errorMessage]="errorMessages.price"
     ></app-text-field>
@@ -31,6 +32,7 @@
       ngDefaultControl
       formControlName="previousPrice"
       label="Previous price"
+      type="number"
       [value]="formControls.previousPrice.value"
       [errorMessage]="errorMessages.previousPrice"
     ></app-text-field>
